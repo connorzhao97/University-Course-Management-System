@@ -61,23 +61,90 @@
      <div class="container">
         <div class="row">
             <div class="col-md">
-                <!-- <h4 class="mb-3">Register</h4> -->
-                <form class="needs-validation" novalidate>
-                    <div class="form-group mb-3">
-                        <h4 class="mb-3">Character</h4>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="Character" id="CStudentID"
-                                    value="checkedValue"> Student
-                            </label>
+
+                <h4 class="mb-3">What is your character?</h4>
+                <div class="row justify-content-around mb-4">
+                    <button type="button" class="btn btn-primary col-md-4" btn-lg btn-block
+                        onclick="chooseCharacter(1)">Im a
+                        student</button>
+                    <button type="button" class="btn btn-primary col-md-4" btn-lg btn-block
+                        onclick="chooseCharacter(0)">Im a
+                        staff</button>
+                </div>
+                <form id="stuForm" class="d-none" onsubmit="return stuCheckForm()">
+                    <h4 class="mb-3">Personal Information</h4>
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="FirstName">First name</label>
+                            <input type="text" id="stuFirstName" class="form-control" placeholder="First Name" required>
+                            <div class="invalid-feedback">
+                                Your first name is required.
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="Character" id="CStaffID"
-                                    value="checkedValue"> Staff
-                            </label>
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="LastName">Last name</label>
+                            <input type="text" id="stuLastName" class="form-control" placeholder="Last Name" required>
+                            <div class="invalid-feedback">
+                                Your last name is required.
+                            </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="ID">ID</label>
+                        <input type="text" id="stuID" class="form-control" placeholder="Your ID" required>
+                        <div class="invalid-feedback">
+                            Your ID is required.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="stuEmail" class="form-control" placeholder="Your Email Address"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="stuPassword" class="form-control" placeholder=""
+                            aria-describedby="passwordHelpId"
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
+                        <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters long,
+                            contain at least 1 lowercase letter,1 uppercase letter,1 number and one of following special
+                            characters ! @ # $ % ^</small>
+                        <div class="invalid-feedback">
+                            Please enter a valid password.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword">Re-enter Password</label>
+                        <input type="password" id="stuRePassword" class="form-control" placeholder=""
+                            aria-describedby="rePasswordHelpId" required>
+                        <div class="invalid-feedback">
+                            Password does not match.
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <h4 class="mb-3">Optional Information</h4>
+                    <div class="form-group">
+                        <label for="address">Address<span class="text-muted">(Optional)</span></label>
+                        <input type="text" id="stuAddress" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="birth">Date of Birth<span class="text-muted">(Optional)</span></label>
+                        <input type="text" id="stuBirth" class="form-control" placeholder="DD/MM/YYYY"
+                            pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number<span class="text-muted">(Optional)</span></label>
+                        <input type="text" id="stuPhoneNumber" class="form-control">
+                    </div>
+                    <hr class="mb-4">
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Register as student</button>
+                </form>
+
+                <form id="staForm" class="d-none" onsubmit="return staCheckForm()">
                     <h4 class="mb-3">Personal Information</h4>
                     <div class="row">
                         <div class="form-group col-md-6 mb-3">
@@ -113,12 +180,13 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" class="form-control" placeholder=""
-                            aria-describedby="passwordHelpId" required>
+                            aria-describedby="passwordHelpId"
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
                         <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters long,
                             contain at least 1 lowercase letter,1 uppercase letter,1 number and one of following special
                             characters ! @ # $ % ^</small>
                         <div class="invalid-feedback">
-                            Passwords are required.
+                            Please enter a valid password.
                         </div>
                     </div>
                     <div class="form-group">
@@ -126,13 +194,9 @@
                         <input type="password" id="rePassword" class="form-control" placeholder=""
                             aria-describedby="rePasswordHelpId" required>
                         <div class="invalid-feedback">
-                            Passwords do not match.
+                            Password does not match.
                         </div>
                     </div>
-
-
-
-
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -141,23 +205,26 @@
 
     <!-- Optional JavaScript -->
     <script>
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
+        function chooseCharacter(student) {
+            if (student) {
+                $("#stuForm").removeClass("d-none");
+                $("#stuForm")[0].reset();
+                $("#staForm").addClass("d-none");
+
+            } else {
+                $("#staForm").removeClass("d-none");
+                $("#staForm")[0].reset();
+                $("#stuForm").addClass("d-none");
+            }
+        }
+
+
+        function stuCheckForm() {
+            if ($("#stuPassword").val() != $("#stuRePassword").val()) {
+                $("#stuRePassword").addClass('is-invalid');
+                return false;
+            }
+        }
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
