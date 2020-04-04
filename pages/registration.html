@@ -9,17 +9,19 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="../CSS/registration.css">
     <title>Registration Page - University of DoWell</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand" href="../pages/homepage.html">Home</a>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand p-0" href="../pages/home.html">
+            <img src="../imgs/logo.png" width="100" height="44">
+          </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <!-- <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Registration</a>
@@ -34,8 +36,14 @@
                     <a class="nav-link" href="#">Individual timetable</a>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </nav>
+    <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
+        <div class="container h-100">
+            <h1 class="display-4 mb-5">Registration</h1>
+            <p class="lead text-muted">Registrer to use Course Management System</p>
+        </div>
+    </div>
      <div class="container">
         <div class="row">
             <div class="col-md">
@@ -58,41 +66,36 @@
                         <form id="stuForm" onsubmit="return stuCheckForm()">
                             <h4 class="mb-3">Personal Information</h4>
                             <div class="row">
-                                <div class="form-group col-md-6 mb-3">
+                                <div class="form-group col-md-4 mb-3">
                                     <label for="FirstName">First Name</label>
                                     <input type="text" id="stuFirstName" class="form-control" placeholder="First Name"
                                         required>
-                                    <div class="invalid-feedback">
-                                        Your first name is required.
-                                    </div>
                                 </div>
-                                <div class="form-group col-md-6 mb-3">
+                                <div class="form-group col-md-4 mb-3">
+                                    <label for="MiddleName">Middle Name<span
+                                            class="text-muted">(Optional)</span></label>
+                                    <input type="text" id="stuMiddleName" class="form-control"
+                                        placeholder="Middle Name">
+                                </div>
+                                <div class="form-group col-md-4 mb-3">
                                     <label for="LastName">Last Name</label>
                                     <input type="text" id="stuLastName" class="form-control" placeholder="Last Name"
                                         required>
-                                    <div class="invalid-feedback">
-                                        Your last name is required.
-                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="ID">ID</label>
-                                <input type="text" id="stuID" class="form-control" placeholder="Your ID" required>
-                                <div class="invalid-feedback">
-                                    Your ID is required.
-                                </div>
+                                <label for="ID">Student ID</label>
+                                <input type="text" id="stuID" class="form-control" placeholder="Your Student ID"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Address</label>
                                 <input type="email" id="stuEmail" class="form-control" placeholder="Your Email Address"
                                     pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" required>
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address.
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" id="stuPassword" class="form-control" placeholder=""
+                                <input type="password" id="stuPassword" class="form-control" placeholder="Your password"
                                     aria-describedby="passwordHelpId"
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
                                 <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters
@@ -100,14 +103,11 @@
                                     contain at least 1 lowercase letter,1 uppercase letter,1 number and one of following
                                     special
                                     characters ! @ # $ % ^</small>
-                                <div class="invalid-feedback">
-                                    Please enter a valid password.
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="repassword">Re-enter Password</label>
-                                <input type="password" id="stuRePassword" class="form-control" placeholder=""
-                                    aria-describedby="rePasswordHelpId" required>
+                                <input type="password" id="stuRePassword" class="form-control"
+                                    placeholder="Re-enter your password" required>
                                 <div class="invalid-feedback">
                                     Password does not match.
                                 </div>
@@ -116,7 +116,7 @@
                             <h4 class="mb-3">Optional Information</h4>
                             <div class="form-group">
                                 <label for="address">Address<span class="text-muted">(Optional)</span></label>
-                                <input type="text" id="stuAddress" class="form-control">
+                                <input type="text" id="stuAddress" class="form-control" placeholder="Your address">
                             </div>
                             <div class="form-group">
                                 <label for="birth">Date of Birth<span class="text-muted">(Optional)</span></label>
@@ -125,7 +125,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number<span class="text-muted">(Optional)</span></label>
-                                <input type="text" id="stuPhoneNumber" class="form-control">
+                                <input type="text" id="stuPhoneNumber" class="form-control"
+                                    placeholder="Your phone number">
                             </div>
                             <hr class="mb-4">
 
@@ -135,44 +136,38 @@
                     </div>
                     <!--NOTE staff form -->
                     <div class="tab-pane fade" id="pills-staff" role="tabpanel" aria-labelledby="pills-staff-tab">
-                        <form id="staForm" class="d-none" onsubmit="return staCheckForm()">
+                        <form id="staForm" onsubmit="return staCheckForm()">
                             <h4 class="mb-3">Personal Information</h4>
                             <div class="row">
-                                <div class="form-group col-md-6 mb-3">
-                                    <label for="FirstName">First name</label>
+                                <div class="form-group col-md-4 mb-3">
+                                    <label for="FirstName">First Name</label>
                                     <input type="text" id="firstName" class="form-control" placeholder="First Name"
                                         required>
-                                    <div class="invalid-feedback">
-                                        Your first name is required.
-                                    </div>
                                 </div>
-                                <div class="form-group col-md-6 mb-3">
-                                    <label for="LastName">Last name</label>
+                                <div class="form-group col-md-4 mb-3">
+                                    <label for="MiddleName">Middle Name<span
+                                            class="text-muted">(Optional)</span></label>
+                                    <input type="text" id="staMiddleName" class="form-control"
+                                        placeholder="Middle Name">
+                                </div>
+                                <div class="form-group col-md-4 mb-3">
+                                    <label for="LastName">Last Name</label>
                                     <input type="text" id="lastName" class="form-control" placeholder="Last Name"
                                         required>
-                                    <div class="invalid-feedback">
-                                        Your last name is required.
-                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="ID">ID</label>
-                                <input type="text" id="ID" class="form-control" placeholder="Your ID" required>
-                                <div class="invalid-feedback">
-                                    Your ID is required.
-                                </div>
+                                <label for="ID">Staff ID</label>
+                                <input type="text" id="ID" class="form-control" placeholder="Your Staff ID" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Address</label>
                                 <input type="email" id="email" class="form-control" placeholder="Your Email Address"
                                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address.
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" id="password" class="form-control" placeholder=""
+                                <input type="password" id="staPassword" class="form-control" placeholder="Your password"
                                     aria-describedby="passwordHelpId"
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
                                 <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters
@@ -180,36 +175,49 @@
                                     contain at least 1 lowercase letter,1 uppercase letter,1 number and one of following
                                     special
                                     characters ! @ # $ % ^</small>
-                                <div class="invalid-feedback">
-                                    Please enter a valid password.
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="repassword">Re-enter Password</label>
-                                <input type="password" id="rePassword" class="form-control" placeholder=""
-                                    aria-describedby="rePasswordHelpId" required>
+                                <input type="password" id="staRePassword" class="form-control"
+                                    placeholder="Re-enter your password" required>
                                 <div class="invalid-feedback">
                                     Password does not match.
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="qualification">Qualification</label>
+                                    <select class="custom-select" id="quaID">
+                                        <option value="PhD">PhD</option>
+                                        <option value="Master">Master</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="expertise">Expertise</label>
+                                    <select class="custom-select" id="expID">
+                                        <option value="informationSystems">Information Systems</option>
+                                        <option value="humanComputerInteraction">Human Computer Interaction</option>
+                                        <option value="networkAdministration">Network Administration</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="text" id="staPhoneNumber" class="form-control"
+                                    placeholder="Your phone number" required>
+                            </div>
+                            <hr class="mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Register as a
+                                staff</button>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
     <!-- Optional JavaScript -->
-    <script>
-        function stuCheckForm() {
-            if ($("#stuPassword").val() != $("#stuRePassword").val()) {
-                $("#stuRePassword").addClass('is-invalid');
-                return false;
-            }
-        }
-    </script>
+    <script type="text/javascript" src="../JS/registration.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">

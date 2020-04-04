@@ -1,0 +1,6 @@
+.bg {
+    background-image: url(../imgs/reBg.jpg);
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}

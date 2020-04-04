@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "file": "${workspaceFolder}/pages/login.html",
+            "file": "${workspaceFolder}/pages/registration.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
