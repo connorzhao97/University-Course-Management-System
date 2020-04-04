@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Home Page - University of DoWell</title>
+    <title>Individual Timetable - University of DoWell</title>
 </head>
 
 <body>
+    <!-- NOTE navbar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <a class="navbar-brand p-0" href="../pages/home.html">
             <img src="../imgs/logo.png" width="100" height="44">
-          </a>
+        </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
@@ -29,7 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../pages/unitEnrolment.html">Unit Enrolment</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="../pages/individualTimetable.html">Individual Timetable</a>
                 </li>
                 <li class="nav-item">
@@ -47,7 +48,55 @@
             </form>
         </div>
     </nav>
-
+    <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
+        <div class="container h-100">
+            <h1 class="display-4 mb-5 text-white">Individual Timetable</h1>
+            <div class="row justify-content-around">
+                <a id="enrolment" class="btn btn-info btn-lg col-md-4" href="../pages/unitEnrolment.html"
+                    role="button">Manage enrolled units</a>
+                <a id="allocation" class="btn btn-warning btn-lg col-md-4" href="../pages/tutorialAllocation.html"
+                    role="button">Tutorial allocation system</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Unit Code</th>
+                    <th>Unit Name</th>
+                    <th>Lecture Time</th>
+                    <th>Tutorial Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>KIT502</td>
+                    <td>Web Development</td>
+                    <td>Wednesday 09:00 - 10:50</td>
+                    <td>Tuesday 09:00 - 10:50</td>
+                </tr>
+                <tr>
+                    <td>KIT503</td>
+                    <td>ICT Professional Practices and Project Management</td>
+                    <td>Wednesday 16:00 - 16:50</td>
+                    <td>Tuesday 13:00 - 14:50</td>
+                </tr>
+                <tr>
+                    <td>KIT707</td>
+                    <td>Knowledge and Information Management</td>
+                    <td>Friday 13:00 - 14:50</td>
+                    <td>Wednesday 15:00 - 16:50</td>
+                </tr>
+                <tr>
+                    <td>KIT710</td>
+                    <td>eLogistics</td>
+                    <td>Friday 10:00 - 11:50</td>
+                    <td>Tuesday 16:00 - 16:50</td>
+                </tr>
+            </tbody>
+    </div>
+    </table>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
