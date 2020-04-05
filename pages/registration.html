@@ -17,15 +17,15 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <a class="navbar-brand p-0" href="../pages/home.html">
             <img src="../imgs/logo.png" width="100" height="44">
-        </a>。
+        </a>
     </nav>
     <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
         <div class="container h-100">
-            <h1 class="display-4 mb-5">Registration</h1>
-            <p class="lead text-muted">Registrer to use Course Management System</p>
+            <h1 class="display-4 mb-5 text-white">Registration</h1>
+            <p class="lead text-white">Registrer to use Course Management System</p>
         </div>
     </div>
-     <div class="container">
+     <div class="container shadow-lg p-3 mb-5 bg-white rounded">
         <div class="row">
             <div class="col-md">
                 <!-- NOTE panel -->
@@ -40,6 +40,8 @@
                             aria-controls="pills-staff" aria-selected="false">I'm a staff</a>
                     </li>
                 </ul>
+                <hr class="mb-4">
+
                 <div class="tab-content" id="pills-tabContent">
                     <!--NOTE student form -->
                     <div class="tab-pane fade show active" id="pills-student" role="tabpanel"
@@ -79,11 +81,7 @@
                                 <input type="password" id="stuPassword" class="form-control" placeholder="Your password"
                                     aria-describedby="passwordHelpId"
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
-                                <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters
-                                    long,
-                                    contain at least 1 lowercase letter,1 uppercase letter,1 number and one of following
-                                    special
-                                    characters ! @ # $ % ^</small>
+                                <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters long, contain at least 1 lowercase letter,1 uppercase letter,1 number and one of following special characters ! @ # $ % ^</small>
                             </div>
                             <div class="form-group">
                                 <label for="repassword">Re-enter Password</label>
@@ -198,7 +196,6 @@
     </div>
 
     <!-- Optional JavaScript -->
-    <script type="text/javascript" src="../JS/registration.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -209,6 +206,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+        <script type="text/javascript" src="../JS/registration.js"></script>
+
 </body>
 
 </html>

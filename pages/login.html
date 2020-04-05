@@ -19,21 +19,21 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <a class="navbar-brand p-0" href="../pages/home.html">
             <img src="../imgs/logo.png" width="100" height="44">
-          </a>
+        </a>
     </nav>
     <div class="container center">
-        <form class="loginForm" onsubmit="return validate()">
+        <form class="loginForm shadow-lg p-3 mb-5 bg-white rounded">
             <h1 class="h3 mb-3">Course Management System (CMS) </h1>
             <h2 class="h4 mb-3">Login</h2>
             <div class="form-group">
-                <input type="email" id="email" class="form-control" placeholder="Email Address" required>
-                <div class="invalid-feedback">
-                    Please enter a valid email address.
-                </div>
+                <input type="email" id="email" class="form-control" placeholder="Email Address"
+                    pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" required>
             </div>
             <div class="form-group">
-                <input type="password" id="password" class="form-control" placeholder="password" required>
+                <input type="password" id="password" class="form-control" placeholder="password"
+                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
             </div>
+
             <div class="form-check mb-3">
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" id="checkbox" value="checkedValue">
@@ -48,7 +48,26 @@
     </div>
 
     <!-- Optional JavaScript -->
-    <script type="text/javascript" src="../JS/login.js"></script>
+    <!-- <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+        </script> -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -59,6 +78,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+    <!-- <script type="text/javascript" src="../JS/login.js"></script> -->
 </body>
 
 </html>

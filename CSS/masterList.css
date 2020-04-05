@@ -1,5 +1,5 @@
 .bg {
-    background-image: url(../imgs/reBg.jpg);
+    background-image: url(../imgs/masterBg.jpg);
     background-size: cover;
     background-position: center center;
     position: relative;
@@ -9,7 +9,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 0;
     left: 0;
