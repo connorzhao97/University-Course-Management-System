@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <!-- Required meta tags -->
@@ -13,7 +13,7 @@
     <title>Unit Enrolment - University of DoWell</title>
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
     <!-- NOTE navbar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <a class="navbar-brand p-0" href="../pages/home.html">
@@ -57,8 +57,8 @@
         </div>
     </div>
     <!-- NOTE  content -->
-    <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-        <form id="enrolForm" class="needs-validation" novalidate>
+    <div class="container">
+        <form id="enrolForm" class="needs-validation shadow-lg p-3 mb-5 bg-white rounded" novalidate>
             <div class="card">
                 <div class="card-header">
                     Avaliable units
@@ -155,21 +155,36 @@
             <hr class="mb-4">
             <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Enrol checked units</button>
         </form>
-        </form>
-        <!-- Optional JavaScript -->
-        <script>
+    </div>
 
-        </script>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
+  <!-- NOTE footer -->
+  <footer class="footer mt-auto py-3 bg-dark">
+    <div class="container-fluid text-white d-flex align-center justify-content-center">
+        <div class="column">
+            <div class="d-flex justify-content-center">
+                <img class="py-6" src="../imgs/logo.png">
+            </div>
+            <div class="mt-2">
+                <p class="text-muted">The University of DoWell in Wonderland (UDW) has started to build a Course
+                    Management System including a new tutorial allocation system.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+    <!-- Optional JavaScript -->
+    <script>
+
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

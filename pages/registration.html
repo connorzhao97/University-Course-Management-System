@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <!-- Required meta tags -->
@@ -13,24 +13,27 @@
     <title>Registration Page - University of DoWell</title>
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
+    <!-- NOTE navbar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <a class="navbar-brand p-0" href="../pages/home.html">
             <img src="../imgs/logo.png" width="100" height="44">
         </a>
     </nav>
+    <!-- NOTE jumbotron -->
     <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
         <div class="container h-100">
             <h1 class="display-4 mb-5 text-white">Registration</h1>
             <p class="lead text-white">Registrer to use Course Management System</p>
         </div>
     </div>
-     <div class="container shadow-lg p-3 mb-5 bg-white rounded">
+    <!-- NOTE content -->
+     <div class="container">
         <div class="row">
             <div class="col-md">
                 <!-- NOTE panel -->
-                <h4 class="mb-3">What is your character?</h4>
-                <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                <ul class="nav nav-pills nav-fill mb-3 shadow-lg p-3 mb-5 bg-white rounded" id="pills-tab"
+                    role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-student-tab" data-toggle="pill" href="#pills-student"
                             role="tab" aria-controls="pills-student" aria-selected="true">I'm a student</a>
@@ -40,9 +43,8 @@
                             aria-controls="pills-staff" aria-selected="false">I'm a staff</a>
                     </li>
                 </ul>
-                <hr class="mb-4">
 
-                <div class="tab-content" id="pills-tabContent">
+                <div class="tab-content shadow-lg p-3 mb-5 bg-white rounded" id="pills-tabContent">
                     <!--NOTE student form -->
                     <div class="tab-pane fade show active" id="pills-student" role="tabpanel"
                         aria-labelledby="pills-student-tab">
@@ -81,7 +83,9 @@
                                 <input type="password" id="stuPassword" class="form-control" placeholder="Your password"
                                     aria-describedby="passwordHelpId"
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
-                                <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters long, contain at least 1 lowercase letter,1 uppercase letter,1 number and one of following special characters ! @ # $ % ^</small>
+                                <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters
+                                    long, contain at least 1 lowercase letter,1 uppercase letter,1 number and one of
+                                    following special characters ! @ # $ % ^</small>
                             </div>
                             <div class="form-group">
                                 <label for="repassword">Re-enter Password</label>
@@ -193,8 +197,21 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </!doctype>
+    <!-- NOTE footer -->
+    <footer class="footer mt-auto py-3 bg-dark">
+        <div class="container-fluid text-white d-flex align-center justify-content-center">
+            <div class="column">
+                <div class="d-flex justify-content-center">
+                    <img class="py-6" src="../imgs/logo.png">
+                </div>
+                <div class="mt-2">
+                    <p class="text-muted">The University of DoWell in Wonderland (UDW) has started to build a Course
+                        Management System including a new tutorial allocation system.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -206,7 +223,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-        <script type="text/javascript" src="../JS/registration.js"></script>
+    <script type="text/javascript" src="../JS/registration.js"></script>
 
 </body>
 

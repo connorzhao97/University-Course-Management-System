@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <!-- Required meta tags -->
@@ -13,7 +13,7 @@
     <title>Master List - University of DoWell</title>
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
     <!-- NOTE navbar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <a class="navbar-brand p-0" href="../pages/home.html">
@@ -54,16 +54,15 @@
             <h1 class="display-4 mb-5 text-white">Staff Management</h1>
         </div>
     </div>
-    <!-- NOTE container -->
-    <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-        <div class="nav nav-pills flex-column flex-sm-row mb-2" id="pills-tab" role="tablist">
+    <!-- NOTE content -->
+    <div class="container">
+        <div class="nav nav-pills flex-column flex-sm-row mb-2 shadow-lg p-3 mb-5 bg-white rounded" id="pills-tab" role="tablist">
             <a class="flex-sm-fill text-sm-center nav-link active" id="pills-first-tab" data-toggle="pill"
                 href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">Staff Management</a>
             <a class="flex-sm-fill text-sm-center nav-link" id="pills-second-tab" data-toggle="pill"
                 href="#pills-second" role="tab" aria-controls="pills-second" aria-selected="false">Unit Management</a>
         </div>
-        <hr class="mb-3">
-        <div class="tab-content" id="pills-tabContent">
+        <div class="tab-content shadow-lg p-3 mb-5 bg-white rounded" id="pills-tabContent">
             <!-- NOTE staff management -->
             <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
                 <form>
@@ -281,7 +280,20 @@
         </div>
     </div>
 
-
+  <!-- NOTE footer -->
+  <footer class="footer mt-auto py-3 bg-dark">
+    <div class="container-fluid text-white d-flex align-center justify-content-center">
+        <div class="column">
+            <div class="d-flex justify-content-center">
+                <img class="py-6" src="../imgs/logo.png">
+            </div>
+            <div class="mt-2">
+                <p class="text-muted">The University of DoWell in Wonderland (UDW) has started to build a Course
+                    Management System including a new tutorial allocation system.</p>
+            </div>
+        </div>
+    </div>
+</footer>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

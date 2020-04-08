@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <!-- Required meta tags -->
@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/tutorialAllocation.css">
-    <title>Home Page - University of DoWell</title>
+    <title>Tutorial Allocation - University of DoWell</title>
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
     <!-- NOTE navbar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <a class="navbar-brand p-0" href="../pages/home.html">
@@ -48,13 +48,15 @@
             </form>
         </div>
     </nav>
+    <!-- NOTE jumbotron -->
     <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
         <div class="container h-100">
             <h1 class="display-4 mb-5 text-white">Tutorial Allocation System</h1>
         </div>
     </div>
-    <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-        <div class="nav nav-pills flex-column flex-sm-row mb-2" id="pills-tab" role="tablist">
+    <!-- NOTE content -->
+    <div class="container">
+        <div class="nav nav-pills flex-column flex-sm-row mb-2 shadow-lg p-3 mb-5 bg-white rounded" id="pills-tab" role="tablist">
             <a class="flex-sm-fill text-sm-center nav-link active" id="pills-first-tab" data-toggle="pill"
                 href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">KIT502</a>
             <a class="flex-sm-fill text-sm-center nav-link" id="pills-second-tab" data-toggle="pill"
@@ -64,8 +66,7 @@
             <a class="flex-sm-fill text-sm-center nav-link" id="pills-forth-tab" data-toggle="pill" href="#pills-forth"
                 role="tab" aria-controls="pills-forth" aria-selected="false">KIT710</a>
         </div>
-        <hr class="mb-3">
-        <div class="tab-content" id="pills-tabContent">
+        <div class="tab-content shadow-lg p-3 mb-5 bg-white rounded" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
                 <h1 class="h3 mb-2 text-center">Web Development</h1>
                 <table class="table table-striped table-bordered table-responsive-sm text-nowrap">
@@ -341,6 +342,20 @@
             </div>
         </div>
     </div>
+      <!-- NOTE footer -->
+      <footer class="footer mt-auto py-3 bg-dark">
+        <div class="container-fluid text-white d-flex align-center justify-content-center">
+            <div class="column">
+                <div class="d-flex justify-content-center">
+                    <img class="py-6" src="../imgs/logo.png">
+                </div>
+                <div class="mt-2">
+                    <p class="text-muted">The University of DoWell in Wonderland (UDW) has started to build a Course
+                        Management System including a new tutorial allocation system.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
