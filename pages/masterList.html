@@ -66,160 +66,170 @@
         <div class="tab-content shadow-lg p-3 mb-5 bg-white rounded" id="pills-tabContent">
             <!-- NOTE staff management -->
             <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
-                <form>
-                    <button type="button" class="btn btn-primary mb-3" id="btnCreate" data-toggle="modal"
-                        data-target="#createNewStaff">Create New Staff</button>
-                    <table class="table table-striped table-bordered table-responsive-lg">
-                        <thead>
-                            <tr>
-                                <th scope="col">Staff ID</th>
-                                <th scope="col">Staff Name</th>
-                                <th scope="col">Qualification</th>
-                                <th scope="col">Expertise</th>
-                                <th scope="col">Preferred days of teaching</th>
-                                <th scope="col">Consultation hours</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- NOTE one of staffs -->
-                            <tr id="staffID_0">
-                                <td scope="row" class="align-middle">
-                                    123456
-                                </td>
-                                <td class="align-middle">
-                                    Jack
-                                </td>
-                                <td class="align-middle">
-                                    Master
-                                </td>
-                                <td class="align-middle">
-                                    Human Computer Interaction
-                                </td>
-                                <td class="align-middle">
-                                    <span>Mon.</span>,<span>Tue.</span>
-                                </td>
-                                <td class="align-middle">
-                                    <p>Mon.</p>9:00 - 10:00
-                                </td>
-                                <td class="align-middle">
-                                    <div class="form-group mb-0">
-                                        <button type="button" name="" id="btnEdit"
-                                            class="btn btn-primary btn-lg btn-block" data-toggle="modal"
-                                            data-target="#manageStaff" onclick="editStaff(this);">Edit</button>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <button type="button" name="" id="" class="btn btn-danger btn-lg btn-block"
-                                        onclick="removeStaff(this)">Remove</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
+                <button type="button" class="btn btn-primary mb-3" id="btnCreate" data-toggle="modal"
+                    data-target="#createNewStaff">Create New Staff</button>
+                <table class="table table-striped table-bordered table-responsive-lg">
+                    <thead>
+                        <tr>
+                            <th scope="col">Staff ID</th>
+                            <th scope="col">Staff Name</th>
+                            <th scope="col">Qualification</th>
+                            <th scope="col">Expertise</th>
+                            <th scope="col">Preferred days of teaching</th>
+                            <th scope="col">Consultation hours</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- NOTE one of staffs -->
+                        <tr id="staffID_0">
+                            <td scope="row" class="align-middle">
+                                123456
+                            </td>
+                            <td class="align-middle">
+                                Jack
+                            </td>
+                            <td class="align-middle">
+                                Master
+                            </td>
+                            <td class="align-middle">
+                                Human Computer Interaction
+                            </td>
+                            <td class="align-middle">
+                                <span>Mon.</span>,<span>Tue.</span>
+                            </td>
+                            <td class="align-middle">
+                                <p>Mon.</p>9:00 - 10:00
+                            </td>
+                            <td class="align-middle">
+                                <button type="button" name="" id="btnEdit" class="btn btn-primary btn-lg btn-block"
+                                    data-toggle="modal" data-target="#manageStaff"
+                                    onclick="editStaff(this);">Edit</button>
+                            </td>
+                            <td class="align-middle">
+                                <button type="button" name="" id="btnRemove" class="btn btn-danger btn-lg btn-block"
+                                    onclick="removeStaff(this)">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <!-- NOTE unit management -->
             <div class="tab-pane fade" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
                 <div class="tab-pane fade show active" id="pills-first" role="tabpanel"
                     aria-labelledby="pills-first-tab">
-                    <table class="table table-striped table-bordered table-responsive-md">
-                        <thead>
-                            <tr>
-                                <th scope="col">Unit Name</th>
-                                <th scope="col">Lecturer</th>
-                                <th scope="col">Campus</th>
-                                <th scope="col">Semester</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td scope="row" class="align-middle">
-                                    <p class="mb-0">KIT502 Web Development</p>
-                                </td>
-                                <td class="align-middle">
-                                    <div class="form-group mb-0">
-                                        <select class="custom-select selLec" name="" id="KIT502Lec" disabled required>
-                                            <option value="" selected>Select Lecturer</option>
-                                            <option value="">Ackerley</option>
-                                            <option value="">Adamaris</option>
-                                            <option value="">Adney</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <div class="form-group mb-0">
-                                        <select class="custom-select selCam" name="" id="KIT502Cam" disabled required>
-                                            <option value="" selected>Select Campus</option>
-                                            <option value="">Pandora</option>
-                                            <option value="">Rivendell</option>
-                                            <option value="">Neverland</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <div class="form-group mb-0">
-                                        <select class="custom-select selSem" name="" id="KIT502Sem" disabled required>
-                                            <option value="" selected>Select Semester</option>
-                                            <option value="">Semester 1</option>
-                                            <option value="">Semester 1</option>
-                                            <option value="">Winter School</option>
-                                            <option value="">Spring School</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <button type="button" name="" id="502Edit"
-                                        class="btn btn-primary btn-lg btn-block" onclick="editUnit(this)">Edit</button>
+                    <!-- NOTE method="post" -->
+                    <form name="unitManagementForm" id="unitManagementForm" method="" action="" onsubmit="return unitManagementFormSubmit(this)">
+                        <!-- <button type="submit" class="btn btn-primary"></button> -->
+                        <table class="table table-striped table-bordered table-responsive-md">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Unit Name</th>
+                                    <th scope="col">Lecturer</th>
+                                    <th scope="col">Campus</th>
+                                    <th scope="col">Semester</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row" class="align-middle">
+                                        <p class="mb-0">KIT502 Web Development</p>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="form-group mb-0">
+                                            <select class="custom-select selLec" name="kit502Lec" id="kit502Lec"
+                                                disabled required>
+                                                <option value="" selected>Select Lecturer</option>
+                                                <option value="Ackerley">Ackerley</option>
+                                                <option value="Adamaris">Adamaris</option>
+                                                <option value="Adney">Adney</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="form-group mb-0">
+                                            <select class="custom-select selCam" name="kit502Cam" id="kit502Cam"
+                                                disabled required>
+                                                <option value="" selected>Select Campus</option>
+                                                <option value="Pandora">Pandora</option>
+                                                <option value="Rivendell">Rivendell</option>
+                                                <option value="Neverland">Neverland</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="form-group mb-0">
+                                            <select class="custom-select selSem" name="kit502Sem" id="kit502Sem" disabled
+                                                required>
+                                                <option value="" selected>Select Semester</option>
+                                                <option value="Semester 1">Semester 1</option>
+                                                <option value="Semester 2">Semester 2</option>
+                                                <option value="Winter School">Winter School</option>
+                                                <option value="Spring School">Spring School</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <button type="button" name="" id="502Edit"
+                                            class="btn btn-primary btn-lg btn-block"
+                                            onclick="editUnit(this)">Edit</button>
                                         <button type="button" name="" id="502Confirm"
-                                        class="btn btn-success btn-lg btn-block d-none" onclick="confirmUnit(this)">Confirm</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row" class="align-middle">
-                                    <p class="mb-0">KIT503 ICT Professional Practices and Project Management</p>
-                                </td>
-                                <td class="align-middle">
-                                    <div class="form-group mb-0">
-                                        <select class="custom-select selLec" name="" id="KIT502Lec" disabled required>
-                                            <option value="" selected>Select Lecturer</option>
-                                            <option value="">Ackerley</option>
-                                            <option value="">Adamaris</option>
-                                            <option value="">Adney</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <div class="form-group mb-0">
-                                        <select class="custom-select selCam" name="" id="KIT502Cam" disabled required>
-                                            <option value="" selected>Select Campus</option>
-                                            <option value="">Pandora</option>
-                                            <option value="">Rivendell</option>
-                                            <option value="">Neverland</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <div class="form-group mb-0">
-                                        <select class="custom-select selSem" name="" id="KIT502Sem" disabled required>
-                                            <option value="" selected>Select Semester</option>
-                                            <option value="">Semester 1</option>
-                                            <option value="">Semester 1</option>
-                                            <option value="">Winter School</option>
-                                            <option value="">Spring School</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <button type="button" name="" id="502Edit"
-                                        class="btn btn-primary btn-lg btn-block" onclick="editUnit(this)">Edit</button>
-                                        <button type="button" name="" id="502Confirm"
-                                        class="btn btn-success btn-lg btn-block d-none" onclick="confirmUnit(this)">Confirm</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                            class="btn btn-success btn-lg btn-block d-none"
+                                            onclick="confirmUnit(this)">Confirm</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="align-middle">
+                                        <p class="mb-0">KIT503 ICT Professional Practices and Project Management</p>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="form-group mb-0">
+                                            <select class="custom-select selLec" name="kit503Lec" id="kit503Lec"
+                                                disabled required>
+                                                <option value="" selected>Select Lecturer</option>
+                                                <option value="Ackerley">Ackerley</option>
+                                                <option value="Adamaris">Adamaris</option>
+                                                <option value="Adney">Adney</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="form-group mb-0">
+                                            <select class="custom-select selCam" name="kit503Cam" id="kit503Cam"
+                                                disabled required>
+                                                <option value="" selected>Select Campus</option>
+                                                <option value="Pandora">Pandora</option>
+                                                <option value="Rivendell">Rivendell</option>
+                                                <option value="Neverland">Neverland</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="form-group mb-0">
+                                            <select class="custom-select selSem" name="kit503Sem" id="kit503Sem"
+                                                disabled required>
+                                                <option value="" selected>Select Semester</option>
+                                                <option value="Semester 1">Semester 1</option>
+                                                <option value="Semester 2">Semester 2</option>
+                                                <option value="Winter School">Winter School</option>
+                                                <option value="Spring School">Spring School</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <button type="button" name="" id="503Edit"
+                                            class="btn btn-primary btn-lg btn-block"
+                                            onclick="editUnit(this)">Edit</button>
+                                        <button type="button" name="" id="503Confirm"
+                                            class="btn btn-success btn-lg btn-block d-none"
+                                            onclick="confirmUnit(this)">Confirm</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
 
@@ -238,7 +248,8 @@
                             <form id="fCNSta" onsubmit="return validate();">
                                 <div class="form-group">
                                     <label for="staID">Staff ID</label>
-                                    <input type="text" class="form-control" name="" id="" placeholder="" required>
+                                    <input type="text" class="form-control" name="staffID" id="" placeholder=""
+                                        required>
                                 </div>
                                 <div class="form-group">
                                     <label for="staName">Staff Name</label>

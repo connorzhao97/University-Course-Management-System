@@ -48,40 +48,42 @@
                     <!--NOTE student form -->
                     <div class="tab-pane fade show active" id="pills-student" role="tabpanel"
                         aria-labelledby="pills-student-tab">
-                        <form id="stuForm" onsubmit="return stuCheckForm()">
+                        <!-- NOET method="POST" -->
+                        <form id="stuForm" name="stuForm" method="" action="" onsubmit="return stuFormSubmit(this)">
                             <h4 class="mb-3">Personal Information</h4>
                             <div class="row">
                                 <div class="form-group col-md-4 mb-3">
                                     <label for="FirstName">First Name</label>
-                                    <input type="text" id="stuFirstName" class="form-control" placeholder="First Name"
-                                        required>
+                                    <input type="text" id="stuFirstName" name="stuFirstName" class="form-control"
+                                        placeholder="First Name" required>
                                 </div>
                                 <div class="form-group col-md-4 mb-3">
                                     <label for="MiddleName">Middle Name<span
                                             class="text-muted">(Optional)</span></label>
-                                    <input type="text" id="stuMiddleName" class="form-control"
+                                    <input type="text" id="stuMiddleName" name="stuMiddleName" class="form-control"
                                         placeholder="Middle Name">
                                 </div>
                                 <div class="form-group col-md-4 mb-3">
                                     <label for="LastName">Last Name</label>
-                                    <input type="text" id="stuLastName" class="form-control" placeholder="Last Name"
-                                        required>
+                                    <input type="text" id="stuLastName" name="stuLastName" class="form-control"
+                                        placeholder="Last Name" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="ID">Student ID</label>
-                                <input type="text" id="stuID" class="form-control" placeholder="Your Student ID"
-                                    required>
+                                <input type="text" id="stuID" name="stuID" class="form-control"
+                                    placeholder="Your Student ID" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Address</label>
-                                <input type="email" id="stuEmail" class="form-control" placeholder="Your Email Address"
+                                <input type="email" id="stuEmail" name="stuEmail" class="form-control"
+                                    placeholder="Your Email Address"
                                     pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" required>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" id="stuPassword" class="form-control" placeholder="Your password"
-                                    aria-describedby="passwordHelpId"
+                                <input type="password" id="stuPassword" name="stuPassword" class="form-control"
+                                    placeholder="Your password" aria-describedby="passwordHelpId"
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
                                 <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters
                                     long, contain at least 1 lowercase letter,1 uppercase letter,1 number and one of
@@ -89,7 +91,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="repassword">Re-enter Password</label>
-                                <input type="password" id="stuRePassword" class="form-control"
+                                <input type="password" id="stuRePassword" name="stuRePassword" class="form-control"
                                     placeholder="Re-enter your password" required>
                                 <div class="invalid-feedback">
                                     Password does not match.
@@ -99,59 +101,66 @@
                             <h4 class="mb-3">Optional Information</h4>
                             <div class="form-group">
                                 <label for="address">Address<span class="text-muted">(Optional)</span></label>
-                                <input type="text" id="stuAddress" class="form-control" placeholder="Your address">
+                                <input type="text" id="stuAddress" name="stuAddress" class="form-control"
+                                    placeholder="Your address">
                             </div>
                             <div class="form-group">
                                 <label for="birth">Date of Birth<span class="text-muted">(Optional)</span></label>
-                                <input type="text" id="stuBirth" class="form-control" placeholder="DD/MM/YYYY"
+                                <input type="date" id="stuBirth" name="stuBirth" class="form-control"
+                                    placeholder="DD/MM/YYYY"
                                     pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$">
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number<span class="text-muted">(Optional)</span></label>
-                                <input type="text" id="stuPhoneNumber" class="form-control"
+                                <input type="tel" id="stuPhoneNumber" name="stuPhoneNumber" class="form-control"
                                     placeholder="Your phone number">
+                                    <div class="invalid-feedback">
+                                        Please match the format requested.
+                                    </div>
                             </div>
                             <hr class="mb-4">
-
                             <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Register as a
                                 student</button>
                         </form>
                     </div>
                     <!--NOTE staff form -->
                     <div class="tab-pane fade" id="pills-staff" role="tabpanel" aria-labelledby="pills-staff-tab">
-                        <form id="staForm" onsubmit="return staCheckForm()">
+                        <!-- NOTE method="post" -->
+                        <form id="staForm" name="staForm" method="" action="" onsubmit="return staFormSubmit(this)">
                             <h4 class="mb-3">Personal Information</h4>
                             <div class="row">
                                 <div class="form-group col-md-4 mb-3">
                                     <label for="FirstName">First Name</label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="First Name"
-                                        required>
+                                    <input type="text" id="staFirstName" name="staFirstName" class="form-control"
+                                        placeholder="First Name" required>
                                 </div>
                                 <div class="form-group col-md-4 mb-3">
                                     <label for="MiddleName">Middle Name<span
                                             class="text-muted">(Optional)</span></label>
-                                    <input type="text" id="staMiddleName" class="form-control"
+                                    <input type="text" id="staMiddleName" name="staMiddleName" class="form-control"
                                         placeholder="Middle Name">
                                 </div>
                                 <div class="form-group col-md-4 mb-3">
                                     <label for="LastName">Last Name</label>
-                                    <input type="text" id="lastName" class="form-control" placeholder="Last Name"
-                                        required>
+                                    <input type="text" id="staLastName" name="staLastName" class="form-control"
+                                        placeholder="Last Name" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="ID">Staff ID</label>
-                                <input type="text" id="ID" class="form-control" placeholder="Your Staff ID" required>
+                                <input type="text" id="staID" name="staID" class="form-control"
+                                    placeholder="Your Staff ID" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Address</label>
-                                <input type="email" id="email" class="form-control" placeholder="Your Email Address"
-                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                                <input type="email" id="staEmail" name="staEmail" class="form-control"
+                                    placeholder="Your Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" id="staPassword" class="form-control" placeholder="Your password"
-                                    aria-describedby="passwordHelpId"
+                                <input type="password" id="staPassword" name="staPassword" class="form-control"
+                                    placeholder="Your password" aria-describedby="passwordHelpId"
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
                                 <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters
                                     long, contain at least 1 lowercase letter,1 uppercase letter,1 number and one of
@@ -159,7 +168,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="repassword">Re-enter Password</label>
-                                <input type="password" id="staRePassword" class="form-control"
+                                <input type="password" id="staRePassword" name="staRePassword" class="form-control"
                                     placeholder="Re-enter your password" required>
                                 <div class="invalid-feedback">
                                     Password does not match.
@@ -168,24 +177,29 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="qualification">Qualification</label>
-                                    <select class="custom-select" id="quaID">
+                                    <select class="custom-select" id="staQualification" name="staQualification"
+                                        required>
+                                        <option value="" selected>Select Qualification</option>
                                         <option value="PhD">PhD</option>
                                         <option value="Master">Master</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="expertise">Expertise</label>
-                                    <select class="custom-select" id="expID">
-                                        <option value="informationSystems">Information Systems</option>
-                                        <option value="humanComputerInteraction">Human Computer Interaction</option>
-                                        <option value="networkAdministration">Network Administration</option>
+                                    <select class="custom-select" id="staExpertise" name="staExpertise" required>
+                                        <option value="" selected>Select Expertise</option>
+                                        <option value="Information Systems">Information Systems</option>
+                                        <option value="Human Computer Interaction">Human Computer Interaction</option>
+                                        <option value="Network Administration">Network Administration</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="text" id="staPhoneNumber" class="form-control"
-                                    placeholder="Your phone number" required>
+                                <input type="tel" id="staPhoneNumber" name="staPhoneNumber" class="form-control"
+                                    placeholder="Your phone number"
+                                    pattern="^(?:\+?61|0)4 ?(?:(?:[01] ?[0-9]|2 ?[0-57-9]|3 ?[1-9]|4 ?[7-9]|5 ?[018]) ?[0-9]|3 ?0 ?[0-5])(?: ?[0-9]){5}$"
+                                    required>
                             </div>
                             <hr class="mb-4">
                             <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Register as a

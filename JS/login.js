@@ -38,3 +38,7 @@
 //         });
 //     }, false);
 // })();
+function loginFormSubmit(form){
+    console.log($(form).serializeArray());
+    return false;
+}

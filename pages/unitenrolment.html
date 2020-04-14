@@ -58,7 +58,9 @@
     </div>
     <!-- NOTE  content -->
     <div class="container">
-        <form id="enrolForm" class="needs-validation shadow-lg p-3 mb-5 bg-white rounded" novalidate>
+        <!-- NOTE method="POST"  -->
+        <form name="enrolForm" id="enrolForm" method="" class="needs-validation shadow-lg p-3 mb-5 bg-white rounded"
+            onsubmit="return enrolFormSubmit(this)" novalidate>
             <div class="card">
                 <div class="card-header">
                     Avaliable units
@@ -67,18 +69,20 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="card-body">
+                                <!-- NOTE name: unitcodeEnrolTime -->
                                 <h5 class="card-title">KIT502 - Web Development </h5>
-                                <select class="custom-select">
-                                    <option selected>Please select</option>
-                                    <option value="1">Semester1, Pandora</option>
-                                    <option value="2">Winter School, Rivendell</option>
+                                <select name="kit502EnrolTime" id="kit502EnrolTime" class="custom-select">
+                                    <option value="" selected>Please select</option>
+                                    <option value="Semester1, Pandora">Semester1, Pandora</option>
+                                    <option value="Winter School, Rivendell">Winter School, Rivendell</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 d-flex justify-content-center align-self-center">
                             <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                                <input class="form-check-input" type="checkbox" value="checked" name="kit502EnrolCheck"
+                                    id="kit502EnrolCheck">
+                                <label class="form-check-label" for="kit502EnrolCheck">
                                     Enrol
                                 </label>
                             </div>
@@ -89,18 +93,20 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="card-body">
+                                <!-- NOTE name: unitcodeEnrolTime -->
                                 <h5 class="card-title">KIT503 - ICT Professional Practices and Project Management</h5>
-                                <select class="custom-select">
-                                    <option selected>Please select</option>
-                                    <option value="1">Semester1, Pandora</option>
-                                    <option value="2">Winter School, Rivendell</option>
+                                <select name="kit503EnrolTime" class="custom-select">
+                                    <option value="" selected>Please select</option>
+                                    <option value="Semester1, Pandora">Semester1, Pandora</option>
+                                    <option value="Winter School, Rivendell">Winter School, Rivendell</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 d-flex justify-content-center align-self-center">
                             <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                                <input class="form-check-input" type="checkbox" value="checked" name="kit503EnrolCheck"
+                                    id="kit503EnrolCheck">
+                                <label class="form-check-label" for="kit503EnrolCheck">
                                     Enrol
                                 </label>
                             </div>
@@ -112,17 +118,19 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">KIT707 - Knowledge and Information Management</h5>
-                                <select class="custom-select">
-                                    <option selected>Please select</option>
-                                    <option value="1">Semester1, Pandora</option>
-                                    <option value="2">Winter School, Rivendell</option>
+                                <!-- NOTE name: unitcodeEnrolTime -->
+                                <select name="kit707EnrolTime" class="custom-select">
+                                    <option value="" selected>Please select</option>
+                                    <option value="Semester1, Pandora">Semester1, Pandora</option>
+                                    <option value="Winter School, Rivendell">Winter School, Rivendell</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 d-flex justify-content-center align-self-center">
                             <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                                <input class="form-check-input" type="checkbox" value="checked" name="kit707EnrolCheck"
+                                    id="kit707EnrolCheck">
+                                <label class="form-check-label" for="kit707EnrolCheck">
                                     Enrol
                                 </label>
                             </div>
@@ -134,17 +142,19 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">KIT710 - eLogistics</h5>
-                                <select class="custom-select">
-                                    <option selected>Please select</option>
-                                    <option value="1">Semester1, Pandora</option>
-                                    <option value="2">Winter School, Rivendell</option>
+                                <!-- NOTE name: unitcodeEnrolTime -->
+                                <select name="kit710EnrolTime" class="custom-select">
+                                    <option value="" selected>Please select</option>
+                                    <option value="Semester1, Pandora">Semester1, Pandora</option>
+                                    <option value="Winter School, Rivendell">Winter School, Rivendell</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 d-flex justify-content-center align-self-center">
                             <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                                <input class="form-check-input" type="checkbox" value="checked" name="kit710EnrolCheck"
+                                    id="kit710EnrolCheck">
+                                <label class="form-check-label" for="kit710EnrolCheck">
                                     Enrol
                                 </label>
                             </div>
@@ -157,24 +167,22 @@
         </form>
     </div>
 
-  <!-- NOTE footer -->
-  <footer class="footer mt-auto py-3 bg-dark">
-    <div class="container-fluid text-white d-flex align-center justify-content-center">
-        <div class="column">
-            <div class="d-flex justify-content-center">
-                <img class="py-6" src="../imgs/logo.png">
-            </div>
-            <div class="mt-2">
-                <p class="text-muted">The University of DoWell in Wonderland (UDW) has started to build a Course
-                    Management System including a new tutorial allocation system.</p>
+    <!-- NOTE footer -->
+    <footer class="footer mt-auto py-3 bg-dark">
+        <div class="container-fluid text-white d-flex align-center justify-content-center">
+            <div class="column">
+                <div class="d-flex justify-content-center">
+                    <img class="py-6" src="../imgs/logo.png">
+                </div>
+                <div class="mt-2">
+                    <p class="text-muted">The University of DoWell in Wonderland (UDW) has started to build a Course
+                        Management System including a new tutorial allocation system.</p>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
     <!-- Optional JavaScript -->
-    <script>
 
-    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -185,6 +193,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+    <script type="text/javascript" src="../JS/unitEnrolment.js"></script>
 </body>
 
 </html>

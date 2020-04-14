@@ -22,21 +22,22 @@
         </a>
     </nav>
     <div class="container center">
-        <form class="loginForm shadow-lg p-3 bg-white rounded text-nowrap">
+        <!-- NOTE method="post" -->
+        <form class="loginForm shadow-lg p-3 bg-white rounded text-nowrap" name="loginForm" id="loginForm" method="" action="" onsubmit="return loginFormSubmit(this)">
             <h1 class="h3 mb-3">Course Management System (CMS) </h1>
             <h2 class="h4 mb-3">Login</h2>
             <div class="form-group">
-                <input type="email" id="email" class="form-control" placeholder="Email Address"
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email Address"
                     pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" required>
             </div>
             <div class="form-group">
-                <input type="password" id="password" class="form-control" placeholder="password"
+                <input type="password" id="password" name="password" class="form-control" placeholder="password"
                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
             </div>
 
             <div class="form-check mb-3">
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="checkbox" value="checkedValue">
+                    <input type="checkbox" name="remember" id="remember"class="form-check-input" id="checkbox" value="checked">
                     Remember me
                 </label>
             </div>
@@ -72,7 +73,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-    <!-- <script type="text/javascript" src="../JS/login.js"></script> -->
+    <script type="text/javascript" src="../JS/login.js"></script>
 </body>
 
 </html>

@@ -28,7 +28,9 @@ function confirmUnit(e) {
     })
     $(e).addClass('d-none');
     $(e).parents('tr').find('.btn-primary').removeClass('d-none');
-
+   
+    $("#unitManagementForm").submit();
+    
 }
 
 //remove staff from database and tables
@@ -46,4 +48,11 @@ function validate() {
         $('.checkboxGroup').removeClass('is-invalid');
         return true;
     }
+}
+
+//before submit remove select disabled attr
+function unitManagementFormSubmit(unit) {
+console.log($(unit).serializeArray());
+
+return false;
 }
