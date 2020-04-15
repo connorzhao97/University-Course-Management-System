@@ -4,6 +4,7 @@
     background-position: center center;
     position: relative;
 }
+/* jumbotron image shadow */
 .jumbotron:after {
     content: "";
     display: block;

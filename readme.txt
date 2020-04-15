@@ -14,13 +14,13 @@ Because we cannot log in, every role can access all the pages and show all funct
 //In home.html
 After login, users could click on different unit cards and link to that unitDetail.html.
 e.g.: If users click on KIT502 unit, and then will redirect to unitDetail.html?kit502. According to different unit code, there will be different information in unit detail pages.
-After logging in, the button will change to log out.
+After logging in, the login/register button will change to log out.
 
 //In login.html
 Users can fill the blanks and click login button to login.
 Users can click register button and redirect to registration.html.
 
-//In register.html
+//In registration.html
 If user is a student, student can fill the blanks and click register as a student button.
 If user is a staff, student can click I'm a staff panel button, and fill the blanks and click register as a staff button.
 
@@ -43,6 +43,12 @@ If users don't log in, they can only view the time lists of each unit.
 If users are logged in, there will have an allocation button with three states(Select, Allocated, Full) in the first column.
 
 //In masterList.html
+In staff management panel:
+Click create new staff button and there is a form which you should fill in the modal.
+Click edit button of each line will have a form which you want to change in the modal.
+Click remove button of each line will remove the line.
+In unit management panel:
+Click edit button UC can change the information and click confirm button to save these changes.
 DC can manage staff details in the staff management panel.
 UC can allocates lecturer for each unit in the unit management panel.
 

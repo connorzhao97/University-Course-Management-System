@@ -44,7 +44,7 @@
                 </li>
             </ul>
             <form class="form-inline">
-                <a class="btn btn-success" href="../pages/login.html" role="button">Login / Logout</a>
+                <a class="btn btn-success" href="../pages/login.html" role="button">Login / Register</a>
             </form>
         </div>
     </nav>
@@ -68,7 +68,7 @@
             <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
                 <button type="button" class="btn btn-primary mb-3" id="btnCreate" data-toggle="modal"
                     data-target="#createNewStaff">Create New Staff</button>
-                <table class="table table-striped table-bordered table-responsive-lg">
+                <table class="table table-striped table-bordered table-responsive-lg" id="staManagementTable">
                     <thead>
                         <tr>
                             <th scope="col">Staff ID</th>
@@ -83,7 +83,7 @@
                     </thead>
                     <tbody>
                         <!-- NOTE one of staffs -->
-                        <tr id="staffID_0">
+                        <tr>
                             <td scope="row" class="align-middle">
                                 123456
                             </td>
@@ -97,7 +97,7 @@
                                 Human Computer Interaction
                             </td>
                             <td class="align-middle">
-                                <span>Mon.</span>,<span>Tue.</span>
+                                Mon. Thu.
                             </td>
                             <td class="align-middle">
                                 <p>Mon.</p>9:00 - 10:00
@@ -112,6 +112,7 @@
                                     onclick="removeStaff(this)">Remove</button>
                             </td>
                         </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -120,7 +121,8 @@
                 <div class="tab-pane fade show active" id="pills-first" role="tabpanel"
                     aria-labelledby="pills-first-tab">
                     <!-- NOTE method="post" -->
-                    <form name="unitManagementForm" id="unitManagementForm" method="" action="" onsubmit="return unitManagementFormSubmit(this)">
+                    <form name="unitManagementForm" id="unitManagementForm" method="" action=""
+                        onsubmit="return unitManagementFormSubmit(this)">
                         <!-- <button type="submit" class="btn btn-primary"></button> -->
                         <table class="table table-striped table-bordered table-responsive-md">
                             <thead>
@@ -161,8 +163,8 @@
                                     </td>
                                     <td class="align-middle">
                                         <div class="form-group mb-0">
-                                            <select class="custom-select selSem" name="kit502Sem" id="kit502Sem" disabled
-                                                required>
+                                            <select class="custom-select selSem" name="kit502Sem" id="kit502Sem"
+                                                disabled required>
                                                 <option value="" selected>Select Semester</option>
                                                 <option value="Semester 1">Semester 1</option>
                                                 <option value="Semester 2">Semester 2</option>
@@ -245,31 +247,32 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="fCNSta" onsubmit="return validate();">
+                            <form id="fCNSta" name="fCNSta" onsubmit="return createNewStaffForm(this);">
                                 <div class="form-group">
-                                    <label for="staID">Staff ID</label>
-                                    <input type="text" class="form-control" name="staffID" id="" placeholder=""
+                                    <label for="staNewID">Staff ID</label>
+                                    <input type="text" class="form-control" name="staNewID" id="staNewID" placeholder=""
                                         required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="staName">Staff Name</label>
-                                    <input type="text" class="form-control" name="" id="" placeholder="" required>
+                                    <label for="staNewName">Staff Name</label>
+                                    <input type="text" class="form-control" name="staNewName" id="staNewName"
+                                        placeholder="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="staQua">Qualification</label>
-                                    <select class="custom-select" name="" id="" required>
+                                    <label for="staNewQua">Qualification</label>
+                                    <select class="custom-select" name="staNewQua" id="staNewQua" required>
                                         <option value="" selected>Select Qualification</option>
                                         <option value="PhD">PhD</option>
                                         <option value="Master">Master</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="staExp">Expertise</label>
-                                    <select class="custom-select" name="" id="" required>
+                                    <label for="staNewExp">Expertise</label>
+                                    <select class="custom-select" name="staNewExp" id="staNewExp" required>
                                         <option value="" selected>Select Expertise</option>
-                                        <option value="informationSystems">Information Systems</option>
-                                        <option value="humanComputerInteraction">Human Computer Interaction</option>
-                                        <option value="networkAdministration">Network Administration</option>
+                                        <option value="Information Systems">Information Systems</option>
+                                        <option value="Human Computer Interaction">Human Computer Interaction</option>
+                                        <option value="Network Administration">Network Administration</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -277,34 +280,29 @@
                                         <label for="staPreDyas">Preferred days of teaching</label>
                                         <div class="checkboxGroup" required>
                                             <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineMon"
-                                                    name="customCheckboxInlineMon" class="custom-control-input">
-                                                <label class="custom-control-label"
-                                                    for="customCheckboxInlineMon">Mon.</label>
+                                                <input type="checkbox" id="staNewPreMon" name="staNewPreMon"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="staNewPreMon">Mon.</label>
                                             </div>
                                             <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineTue"
-                                                    name="customCheckboxInlineTue" class="custom-control-input">
-                                                <label class="custom-control-label"
-                                                    for="customCheckboxInlineTue">Tue.</label>
+                                                <input type="checkbox" id="staNewPreTue" name="staNewPreTue"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="staNewPreTue">Tue.</label>
                                             </div>
                                             <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineWed"
-                                                    name="customCheckboxInlineWed" class="custom-control-input">
-                                                <label class="custom-control-label"
-                                                    for="customCheckboxInlineWed">Wed.</label>
+                                                <input type="checkbox" id="staNewPreWed" name="staNewPreWed"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="staNewPreWed">Wed.</label>
                                             </div>
                                             <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineThu"
-                                                    name="customCheckboxInlineThu" class="custom-control-input">
-                                                <label class="custom-control-label"
-                                                    for="customCheckboxInlineThu">Thu.</label>
+                                                <input type="checkbox" id="staNewPreThu" name="staNewPreThu"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="staNewPreThu">Thu.</label>
                                             </div>
                                             <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineFri"
-                                                    name="customCheckboxInlineFri" class="custom-control-input">
-                                                <label class="custom-control-label"
-                                                    for="customCheckboxInlineFri">Fri.</label>
+                                                <input type="checkbox" id="staNewPreFri" name="staNewPreFri"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="staNewPreFri">Fri.</label>
                                             </div>
                                         </div>
                                         <div class="invalid-feedback">
@@ -314,12 +312,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="staCon">Consultation hours</label>
-                                    <input type="text" class="form-control" name="" id="" placeholder="" required>
+                                    <input type="text" class="form-control" name="staNewCon" id="staNewCon"
+                                        placeholder="" required>
                                 </div>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" onsubmit="createNewStaff()">Create</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                         </form>
                     </div>
