@@ -54,3 +54,12 @@ UC can allocates lecturer for each unit in the unit management panel.
 
 //unitManagement.html
 Only DC can access to it.
+
+
+//Role Description
+Access Level: 
+Degree Coordinator(DC):4,
+Unit Coordinator(UC):3,
+Lecturer:2,
+Tutor:1,
+Student:0.

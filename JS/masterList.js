@@ -100,5 +100,5 @@ function createNewStaffForm(form) {
 function unitManagementFormSubmit(unit) {
     console.log($(unit).serializeArray());
 
-    return false;
+    // return false;
 }
