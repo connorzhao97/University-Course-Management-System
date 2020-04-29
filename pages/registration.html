@@ -49,7 +49,7 @@
                     <div class="tab-pane fade show active" id="pills-student" role="tabpanel"
                         aria-labelledby="pills-student-tab">
                         <!-- NOET method="POST" -->
-                        <form id="stuForm" name="stuForm" method="" action="" onsubmit="return stuFormSubmit(this)">
+                        <form id="stuForm" name="stuForm" method="post" onsubmit="return stuFormSubmit();">
                             <h4 class="mb-3">Personal Information</h4>
                             <div class="row">
                                 <div class="form-group col-md-4 mb-3">
@@ -114,19 +114,23 @@
                                 <label for="phone">Phone Number<span class="text-muted">(Optional)</span></label>
                                 <input type="tel" id="stuPhoneNumber" name="stuPhoneNumber" class="form-control"
                                     placeholder="Your phone number">
-                                    <div class="invalid-feedback">
-                                        Please match the format requested.
-                                    </div>
+                                <div class="invalid-feedback">
+                                    Please match the format requested.
+                                </div>
                             </div>
                             <hr class="mb-4">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Register as a
-                                student</button>
+                            <button type="submit" id="stuSubmitBtn"
+                                class="btn btn-primary btn-lg btn-block mb-5 d-flex align-items-center justify-content-center">
+                                <span id="stuSpinner" class="spinner-border spinner-border-sm d-none" role="status"
+                                    aria-hidden="true"></span>
+                                Register as a student
+                            </button>
                         </form>
                     </div>
                     <!--NOTE staff form -->
                     <div class="tab-pane fade" id="pills-staff" role="tabpanel" aria-labelledby="pills-staff-tab">
                         <!-- NOTE method="post" -->
-                        <form id="staForm" name="staForm" method="" action="" onsubmit="return staFormSubmit(this)">
+                        <form id="staForm" name="staForm" method="post" onsubmit="return staFormSubmit();">
                             <h4 class="mb-3">Personal Information</h4>
                             <div class="row">
                                 <div class="form-group col-md-4 mb-3">
@@ -202,8 +206,10 @@
                                     required>
                             </div>
                             <hr class="mb-4">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Register as a
-                                staff</button>
+                            <button type="submit" id="staSubmitBtn" class="btn btn-primary btn-lg btn-block mb-5 d-flex align-items-center justify-content-center">
+                                <span id="staSpinner" class="spinner-border spinner-border-sm d-none" role="status"
+                                    aria-hidden="true"></span>
+                                Register as a staff</button>
                         </form>
                     </div>
                 </div>
@@ -224,11 +230,9 @@
             </div>
         </div>
     </footer>
-    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
