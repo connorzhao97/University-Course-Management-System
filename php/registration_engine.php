@@ -1,13 +1,13 @@
 <?php
 
-include("db_conn.php");
+include("../php/db_conn.php");
 if ($_POST['student']) {
     $firstName = $_POST['firstName'];
     $middleName = $_POST['middleName'];
     $lastName = $_POST['lastName'];
     $stuID = $_POST['stuID'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = crypt($_POST['password']);
     $address = $_POST['address'];
     $birth = $_POST['birth'];
     $phone = $_POST['phone'];
@@ -37,7 +37,7 @@ if ($_POST['student']) {
     $lastName = $_POST['lastName'];
     $staID = $_POST['staID'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = crypt($_POST['password']);
     $qualification = $_POST['qualification'];
     $expertise = $_POST['expertise'];
     $phone = $_POST['phone'];

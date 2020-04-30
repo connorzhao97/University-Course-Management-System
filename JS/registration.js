@@ -33,7 +33,7 @@ function stuFormSubmit() {
         } else {
             if (data.insert) {
                 alert("Register successfully");
-                window.location.href = "../pages/login.html";
+                window.location.href = "../pages/login.php";
             }
         }
     }, 'json');
@@ -69,7 +69,7 @@ function staFormSubmit() {
         } else {
             if (data.insert) {
                 alert("Register successfully");
-                window.location.href = "../pages/login.html";
+                window.location.href = "../pages/login.php";
             }
         }
     }, 'json');

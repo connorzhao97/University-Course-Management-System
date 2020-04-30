@@ -1,5 +1,18 @@
 //get form information
-function loginFormSubmit(form){
-    console.log($(form).serializeArray());
-    // return false;
+function loginFormSubmit() {
+    $.post('../php/login_engine.php', {
+        stID: $("#stID").val().trim(),
+        password: $("#password").val().trim()
+    }, function (data) {
+        if (data.exist) {
+            if(data.login){
+               window.location.href="../pages/home.php";
+            }else{
+                alert("Password incorrect.");
+            }
+        } else {
+            alert("User does not exist.");
+        }
+    }, 'json');
+    return false;
 }

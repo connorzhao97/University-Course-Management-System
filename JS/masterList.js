@@ -102,3 +102,27 @@ function unitManagementFormSubmit(unit) {
 
     // return false;
 }
+
+$(function(){
+    $("#staManagementTable").tabledit({
+        url: "",
+        toolbarClass:'d-inline',
+        buttons:{
+            edit: {
+                class: 'btn btn-sm btn-light',
+                html: '<span class="fas fa-pencil-alt"></span>',
+                action: 'edit'
+            },
+            delete: {
+                class: 'btn btn-sm btn-light',
+                html: '<span class="fas fa-trash-alt"></span>',
+                action: 'delete'
+            }
+        },columns: {
+            identifier:[0,'staffID'],
+            editable:[
+                [1,""]
+            ]
+        }
+    })
+})

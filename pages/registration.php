@@ -16,7 +16,7 @@
 <body class="d-flex flex-column h-100">
     <!-- NOTE navbar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-        <a class="navbar-brand p-0" href="../pages/home.html">
+        <a class="navbar-brand p-0" href="../pages/home.php">
             <img src="../imgs/logo.png" width="100" height="44">
         </a>
     </nav>
@@ -206,7 +206,8 @@
                                     required>
                             </div>
                             <hr class="mb-4">
-                            <button type="submit" id="staSubmitBtn" class="btn btn-primary btn-lg btn-block mb-5 d-flex align-items-center justify-content-center">
+                            <button type="submit" id="staSubmitBtn"
+                                class="btn btn-primary btn-lg btn-block mb-5 d-flex align-items-center justify-content-center">
                                 <span id="staSpinner" class="spinner-border spinner-border-sm d-none" role="status"
                                     aria-hidden="true"></span>
                                 Register as a staff</button>
@@ -232,7 +233,8 @@
     </footer>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
