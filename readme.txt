@@ -63,3 +63,14 @@ Unit Coordinator(UC):3,
 Lecturer:2,
 Tutor:1,
 Student:0.
+
+//campuses
+Randora:0,
+Rivendell:1,
+Neverland:2
+
+//semester
+Semester 1:0,
+Semester 2:1,
+Winter School:3,
+Spring School:4

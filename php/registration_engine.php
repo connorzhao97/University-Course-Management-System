@@ -2,9 +2,7 @@
 
 include("../php/db_conn.php");
 if ($_POST['student']) {
-    $firstName = $_POST['firstName'];
-    $middleName = $_POST['middleName'];
-    $lastName = $_POST['lastName'];
+    $name = $_POST['name'];
     $stuID = $_POST['stuID'];
     $email = $_POST['email'];
     $password = crypt($_POST['password']);
@@ -20,10 +18,16 @@ if ($_POST['student']) {
     } else {
         //not exist
         $res->exist = false;
-        $query = "INSERT INTO assignment_users (first_name, middle_name, last_name, st_id, email, password, qualification, expertise, address, birth, phone, access) VALUES ('$firstName','$middleName','$lastName','$stuID','$email','$password','','','$address','$birth','$phone','0')";
-        $result = $mysqli->query($query);
-        if ($result) {
-            $res->insert = true;
+        $quertUser = "INSERT INTO assignment_users (st_id, access) VALUES ('$stuID','0')";
+        $resultUser = $mysqli->query($quertUser);
+        if ($resultUser) {
+            $query = "INSERT INTO assignment_students (st_id, name, email, password, address, birth, phone) VALUES ('$stuID','$name','$email','$password','$address','$birth','$phone')";
+            $result = $mysqli->query($query);
+            if ($result) {
+                $res->insert = true;
+            } else {
+                $res->insert = false;
+            }
         } else {
             $res->insert = false;
         }
@@ -32,9 +36,7 @@ if ($_POST['student']) {
     $existResult->close();
     $mysqli->close();
 } else if ($_POST['staff']) {
-    $firstName = $_POST['firstName'];
-    $middleName = $_POST['middleName'];
-    $lastName = $_POST['lastName'];
+    $name = $_POST['name'];
     $staID = $_POST['staID'];
     $email = $_POST['email'];
     $password = crypt($_POST['password']);
@@ -49,10 +51,16 @@ if ($_POST['student']) {
     } else {
         //not exist
         $res->exist = false;
-        $query = "INSERT INTO assignment_users (first_name, middle_name, last_name, st_id, email, password, qualification, expertise, address, birth, phone, access) VALUES ('$firstName','$middleName','$lastName','$staID','$email','$password','$qualification','$expertise','','','$phone','1')";
-        $result = $mysqli->query($query);
-        if ($result) {
-            $res->insert = true;
+        $quertUser = "INSERT INTO assignment_users (st_id, access) VALUES ('$staID','1')";
+        $resultUser = $mysqli->query($quertUser);
+        if ($resultUser) {
+            $query = "INSERT INTO assignment_staffs (st_id, name, email, password, qualification, expertise, phone) VALUES ('$staID','$name','$email','$password','$qualification','$expertise','$phone')";
+            $result = $mysqli->query($query);
+            if ($result) {
+                $res->insert = true;
+            } else {
+                $res->insert = false;
+            }
         } else {
             $res->insert = false;
         }

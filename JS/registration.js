@@ -16,9 +16,7 @@ function stuFormSubmit() {
     $("#stuSpinner").removeClass('d-none');
     $.post("../php/registration_engine.php", {
         student: true,
-        firstName: $("#stuFirstName").val().trim(),
-        middleName: $("#stuMiddleName").val().trim(),
-        lastName: $("#stuLastName").val().trim(),
+        name: $("#stuName").val().trim(),
         stuID: $("#stuID").val().trim(),
         email: $("#stuEmail").val().trim(),
         password: $("#stuPassword").val().trim(),
@@ -37,7 +35,6 @@ function stuFormSubmit() {
             }
         }
     }, 'json');
-
     return false;
 }
 //staff form submit
@@ -52,9 +49,7 @@ function staFormSubmit() {
     $("#staSpinner").removeClass('d-none');
     $.post('../php/registration_engine.php', {
         staff: true,
-        firstName: $("#staFirstName").val().trim(),
-        middleName: $("#staMiddleName").val().trim(),
-        lastName: $("#staLastName").val().trim(),
+        name: $("#staName").val().trim(),
         staID: $("#staID").val().trim(),
         email: $("#staEmail").val().trim(),
         password: $("#staPassword").val().trim(),

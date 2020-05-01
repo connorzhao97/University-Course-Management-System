@@ -79,7 +79,6 @@ if ($_SESSION['session_user'] != "") {
                     ";
                 }
                 ?>
-
             </ul>
             <form class="form-inline mb-0">
                 <?php

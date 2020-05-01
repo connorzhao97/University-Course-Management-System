@@ -1,3 +1,6 @@
+<?php
+include("../php/db_conn.php");
+?>
 <!doctype html>
 <html lang="en" class="h-100">
 
@@ -53,14 +56,14 @@
     </div>
     <!-- NOTE content -->
     <div class="container">
-        <div class="nav nav-pills flex-column flex-sm-row mb-2 shadow-lg p-3 mb-5 bg-white rounded" id="pills-tab" role="tablist">
+        <div class="nav nav-pills flex-column flex-sm-row mb-2 shadow p-3 mb-5 bg-white rounded" id="pills-tab" role="tablist">
             <a class="flex-sm-fill text-sm-center nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">Staff Management</a>
             <a class="flex-sm-fill text-sm-center nav-link" id="pills-second-tab" data-toggle="pill" href="#pills-second" role="tab" aria-controls="pills-second" aria-selected="false">Unit Management</a>
         </div>
         <div class="tab-content shadow-lg p-3 mb-5 bg-white rounded" id="pills-tabContent">
             <!-- NOTE staff management -->
             <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
-                <button type="button" class="btn btn-primary mb-3" id="btnCreate" data-toggle="modal" data-target="#createNewStaff">Create New Staff</button>
+                <button type="button" class="btn btn-primary mb-3" id="btnCreateStaff" data-toggle="modal" data-target="#createNewStaff">Create New Staff</button>
                 <table class="table table-striped table-bordered table-responsive-lg" id="staManagementTable">
                     <thead>
                         <tr>
@@ -70,139 +73,73 @@
                             <th scope="col">Expertise</th>
                             <th scope="col">Preferred days of teaching</th>
                             <th scope="col">Consultation hours</th>
-                            <!-- <th scope="col">Edit</th>
-                            <th scope="col">Remove</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <!-- NOTE one of staffs -->
                         <tr>
-                            <td scope="row" class="align-middle">
-                                123456
-                            </td>
-                            <td class="align-middle">
-                                Jack
-                            </td>
-                            <td class="align-middle">
-                                Master
-                            </td>
-                            <td class="align-middle">
-                                Human Computer Interaction
-                            </td>
-                            <td class="align-middle">
-                                Mon. Thu.
-                            </td>
-                            <td class="align-middle">
-                                <p>Mon.</p>9:00 - 10:00
-                            </td>
-                            <td class="align-middle">
-                                <button type="button" name="" id="btnEdit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#manageStaff" onclick="editStaff(this);">Edit</button>
-                            </td>
-                            <td class="align-middle">
-                                <button type="button" name="" id="btnRemove" class="btn btn-danger btn-lg btn-block" onclick="removeStaff(this)">Remove</button>
-                            </td>
+                            <td>123456</td>
+                            <td>Jack</td>
+                            <td>Master</td>
+                            <td>Human Computer Interaction</td>
+                            <td>Mon. Thu.</td>
+                            <td>Mon. 9:00 - 10:00</td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>
             <!-- NOTE unit management -->
             <div class="tab-pane fade" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
                 <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
+                    <button type="button" class="btn btn-primary mb-3" id="btnCreateUnit" data-toggle="modal" data-target="#createNewUnit">Create New Unit</button>
                     <!-- NOTE method="post" -->
                     <form name="unitManagementForm" id="unitManagementForm" method="" action="" onsubmit="return unitManagementFormSubmit(this)">
-                        <!-- <button type="submit" class="btn btn-primary"></button> -->
-                        <table class="table table-striped table-bordered table-responsive-md">
+                        <table class="table table-striped table-bordered table-responsive-xl">
                             <thead>
                                 <tr>
+                                    <th scope="col">Unit Code</th>
                                     <th scope="col">Unit Name</th>
-                                    <th scope="col">Lecturer</th>
-                                    <th scope="col">Campus</th>
                                     <th scope="col">Semester</th>
+                                    <th scope="col">Campus</th>
+                                    <th scope="col">Description</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td scope="row" class="align-middle">
-                                        <p class="mb-0">KIT502 Web Development</p>
-                                    </td>
+                                <?php
+                                $quert = "SELECT unit_code, unit_name, semester, campus, description FROM assignment_units_details";
+                                $result = $mysqli->query($quert);
+                                if ($result) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        foreach ($row as $key => $value) {
+                                            if ($key == "description") {
+                                                echo "<td class='align-middle text-truncate' style='max-width: 400px;'>$value</td>";
+                                            } else {
+                                                echo "<td class='align-middle'>$value</td>";
+                                            }
+                                        }
+                                        echo "
+                                        <td class='align-middle'>
+                                        <button type='button' class='btn btn-primary btn-block' onclick='editUnit(this)'>Edit</button>
+                                        <button type='button' class='btn btn-danger btn-block' onclick='removeUnit(this)'>Remove</button>
+                                        </td>
+                                        ";
+                                        echo "</tr>";
+                                    }
+                                }
+                                ?>
+                                <!-- <tr id="KIT502">
+                                    <td scope="row" class="align-middle">KIT502</td>
+                                    <td class="align-middle">Web Development</td>
+                                    <td class="align-middle">Semester 1, Semester 2</td>
+                                    <td class="align-middle">Pandora, Neverland</td>
+                                    <td class="align-middle text-truncate" style="max-width: 400px;">This unit will explain the relationship between data, information and knowledge and introduce a number of different tools for managing, storing, securing, modelling, visualizing and analysing data.</td>
                                     <td class="align-middle">
-                                        <div class="form-group mb-0">
-                                            <select class="custom-select selLec" name="kit502Lec" id="kit502Lec" disabled required>
-                                                <option value="" selected>Select Lecturer</option>
-                                                <option value="Ackerley">Ackerley</option>
-                                                <option value="Adamaris">Adamaris</option>
-                                                <option value="Adney">Adney</option>
-                                            </select>
-                                        </div>
+                                        <button type="button" name="" id="" class="btn btn-primary btn-block" onclick="editUnit(this)">Edit</button>
+                                        <button type="button" name="" id="" class="btn btn-danger btn-block" onclick="removeUnit(this)">Remove</button>
                                     </td>
-                                    <td class="align-middle">
-                                        <div class="form-group mb-0">
-                                            <select class="custom-select selCam" name="kit502Cam" id="kit502Cam" disabled required>
-                                                <option value="" selected>Select Campus</option>
-                                                <option value="Pandora">Pandora</option>
-                                                <option value="Rivendell">Rivendell</option>
-                                                <option value="Neverland">Neverland</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="form-group mb-0">
-                                            <select class="custom-select selSem" name="kit502Sem" id="kit502Sem" disabled required>
-                                                <option value="" selected>Select Semester</option>
-                                                <option value="Semester 1">Semester 1</option>
-                                                <option value="Semester 2">Semester 2</option>
-                                                <option value="Winter School">Winter School</option>
-                                                <option value="Spring School">Spring School</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button type="button" name="" id="502Edit" class="btn btn-primary btn-lg btn-block" onclick="editUnit(this)">Edit</button>
-                                        <button type="button" name="" id="502Confirm" class="btn btn-success btn-lg btn-block d-none" onclick="confirmUnit(this)">Confirm</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" class="align-middle">
-                                        <p class="mb-0">KIT503 ICT Professional Practices and Project Management</p>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="form-group mb-0">
-                                            <select class="custom-select selLec" name="kit503Lec" id="kit503Lec" disabled required>
-                                                <option value="" selected>Select Lecturer</option>
-                                                <option value="Ackerley">Ackerley</option>
-                                                <option value="Adamaris">Adamaris</option>
-                                                <option value="Adney">Adney</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="form-group mb-0">
-                                            <select class="custom-select selCam" name="kit503Cam" id="kit503Cam" disabled required>
-                                                <option value="" selected>Select Campus</option>
-                                                <option value="Pandora">Pandora</option>
-                                                <option value="Rivendell">Rivendell</option>
-                                                <option value="Neverland">Neverland</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="form-group mb-0">
-                                            <select class="custom-select selSem" name="kit503Sem" id="kit503Sem" disabled required>
-                                                <option value="" selected>Select Semester</option>
-                                                <option value="Semester 1">Semester 1</option>
-                                                <option value="Semester 2">Semester 2</option>
-                                                <option value="Winter School">Winter School</option>
-                                                <option value="Spring School">Spring School</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button type="button" name="" id="503Edit" class="btn btn-primary btn-lg btn-block" onclick="editUnit(this)">Edit</button>
-                                        <button type="button" name="" id="503Confirm" class="btn btn-success btn-lg btn-block d-none" onclick="confirmUnit(this)">Confirm</button>
-                                    </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </form>
@@ -365,8 +302,152 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" onsubmit="manageStaff()">Save
-                                changes</button>
+                            <button type="submit" class="btn btn-primary" onsubmit="manageStaff()">Save</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- NOTE crete unit modal -->
+            <div class="modal fade" id="createNewUnit" tabindex="-1" role="dialog" aria-labelledby="createNewUnitLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Create New Unit</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="fCNUnit" name="fCNUnit" onsubmit="return createNewUnitForm(this);">
+                                <div class="form-group">
+                                    <label for="unitCode">Unit Code</label>
+                                    <input type="text" class="form-control" name="unitCode" id="unitCode" placeholder="Unit Code" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unitName">Unit Name</label>
+                                    <input type="text" class="form-control" name="unitName" id="unitName" placeholder="Unit Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unitSemester">Semesters</label>
+                                    <div id="semesterCheckboxGroup" required>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitSem1" name="unitSem1" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitSem1">Semester 1</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitSem2" name="unitSem2" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitSem2">Semester 2</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitWinter" name="unitWinter" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitWinter">Winter School</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitSpring" name="unitSpring" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitSpring">Spring School</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unitCampus">Campuses</label>
+                                    <div id="campusCheckboxGroup" required>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitPandora" name="unitPandora" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitPandora">Pandora</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitRivendell" name="unitRivendell" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitRivendell">Rivendell</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitNeverland" name="unitNeverland" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitNeverland">Neverland</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Unit Description</label>
+                                    <textarea class="form-control" name="unitDescription" id="unitDescription" rows="3" required></textarea>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOTE manage unit modal -->
+            <div class="modal fade" id="manageUnit" tabindex="-1" role="dialog" aria-labelledby="manageUnitLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Manage Unit</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="fMUnit" name="fMUnit" onsubmit="return manageUnitForm(this);">
+                                <div class="form-group">
+                                    <label for="unitCode">Unit Code</label>
+                                    <input type="text" class="form-control" name="unitCode" id="unitCodeMan" placeholder="Unit Code" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unitName">Unit Name</label>
+                                    <input type="text" class="form-control" name="unitName" id="unitNameMan" placeholder="Unit Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unitSemester">Semesters</label>
+                                    <div id="semesterCheckboxGroupMan" required>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitSem1Man" name="unitSem1" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitSem1Man">Semester 1</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitSem2Man" name="unitSem2" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitSem2Man">Semester 2</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitWinterMan" name="unitWinter" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitWinterMan">Winter School</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitSpringMan" name="unitSpring" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitSpringMan">Spring School</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unitCampusMan">Campuses</label>
+                                    <div id="campusCheckboxGroupMan" required>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitPandoraMan" name="unitPandora" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitPandoraMan">Pandora</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitRivendellMan" name="unitRivendell" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitRivendellMan">Rivendell</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="unitNeverlandMan" name="unitNeverland" class="custom-control-input">
+                                            <label class="custom-control-label" for="unitNeverlandMan">Neverland</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Unit Description</label>
+                                    <textarea class="form-control" name="unitDescription" id="unitDescriptionMan" rows="3" required></textarea>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Save</button>
                         </div>
                         </form>
                     </div>

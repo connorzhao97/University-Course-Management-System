@@ -8,7 +8,7 @@ function loginFormSubmit() {
             if(data.login){
                window.location.href="../pages/home.php";
             }else{
-                alert("Password incorrect.");
+                alert("ID or Password incorrect.");
             }
         } else {
             alert("User does not exist.");
