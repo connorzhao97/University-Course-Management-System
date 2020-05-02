@@ -51,8 +51,14 @@ include("../php/session.php");
                     <a class="nav-link" href="../pages/unitManagement.html">Unit Management</a>
                 </li>
             </ul>
-            <form class="form-inline">
-                <a class="btn btn-success" href="../pages/login.html" role="button">Login / Register</a>
+            <form class="form-inline mb-0">
+                <?php
+                if ($session_user != "") {
+                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
+                } else {
+                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
+                }
+                ?>
             </form>
         </div>
     </nav>

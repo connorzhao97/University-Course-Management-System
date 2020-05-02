@@ -36,7 +36,7 @@ if ($_SESSION['session_user'] != "") {
                 if ($_SESSION['session_access'] == "0") {
                     echo "
                     <li class='nav-item'>
-                    <a class='nav-link' href='../pages/unitEnrolment.html'>Unit Enrolment</a>
+                    <a class='nav-link' href='../pages/unitEnrolment.php'>Unit Enrolment</a>
                     </li>
                     ";
                 }
@@ -45,7 +45,7 @@ if ($_SESSION['session_user'] != "") {
                 if ($_SESSION['session_access'] == "0") {
                     echo "
                     <li class='nav-item'>
-                    <a class='nav-link' href='../pages/individualTimetable.html'>Individual Timetable</a>
+                    <a class='nav-link' href='../pages/individualTimetable.php'>Individual Timetable</a>
                     </li>
                     ";
                 }
@@ -54,7 +54,7 @@ if ($_SESSION['session_user'] != "") {
                 if ($_SESSION['session_access'] == "0") {
                     echo "
                     <li class='nav-item'>
-                    <a class='nav-link' href='../pages/tutorialAllocation.html'>Tutorial Allocation</a>
+                    <a class='nav-link' href='../pages/tutorialAllocation.php'>Tutorial Allocation</a>
                     </li>
                     ";
                 }
@@ -74,7 +74,7 @@ if ($_SESSION['session_user'] != "") {
                 if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3") {
                     echo "
                     <li class='nav-item'>
-                    <a class='nav-link' href='../pages/unitManagement.html'>Unit Management</a>
+                    <a class='nav-link' href='../pages/unitManagement.php'>Unit Management</a>
                     </li>
                     ";
                 }
