@@ -1,5 +1,13 @@
 <?php
 include("../php/db_conn.php");
+include("../php/session.php");
+// if ($_SESSION['session_user'] != "") {
+//     if ($_SESSION['session_access'] != '4') {
+//         echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
+//     }
+// } else {
+//     echo "<script>alert('Login is required'); window.location.href='../pages/login.php'</script>";
+// }
 ?>
 <!doctype html>
 <html lang="en" class="h-100">
@@ -88,12 +96,13 @@ include("../php/db_conn.php");
                     </tbody>
                 </table>
             </div>
+
             <!-- NOTE unit management -->
             <div class="tab-pane fade" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
                 <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
                     <button type="button" class="btn btn-primary mb-3" id="btnCreateUnit" data-toggle="modal" data-target="#createNewUnit">Create New Unit</button>
                     <!-- NOTE method="post" -->
-                    <form name="unitManagementForm" id="unitManagementForm" method="" action="" onsubmit="return unitManagementFormSubmit(this)">
+                    <form name="unitManagementForm" id="unitManagementForm" onsubmit="return unitManagementFormSubmit(this)">
                         <table class="table table-striped table-bordered table-responsive-xl">
                             <thead>
                                 <tr>
@@ -120,9 +129,12 @@ include("../php/db_conn.php");
                                             }
                                         }
                                         echo "
-                                        <td class='align-middle'>
-                                        <button type='button' class='btn btn-primary btn-block' onclick='editUnit(this)'>Edit</button>
-                                        <button type='button' class='btn btn-danger btn-block' onclick='removeUnit(this)'>Remove</button>
+                                        <td class='action'>
+                                        <div class='btn-group btn-group-sm'>
+                                        <button type='button' class='btn btn-sm btn-light d-inline' onclick='editUnit(this)'><span class='fas fa-pencil-alt'></span></button>
+                                        <button type='button' class='btn btn-sm btn-light d-inline' onclick='showRemove(this)'><span class='fas fa-trash-alt'></span></button>
+                                        <button type='button' class='btn btn-danger d-none' onclick='removeUnit(this)'>Confirm</button>
+                                        </div>
                                         </td>
                                         ";
                                         echo "</tr>";

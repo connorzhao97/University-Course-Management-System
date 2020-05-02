@@ -253,7 +253,7 @@ function editUnit(e) {
     var semesters = td_content.eq(2).text();
     var campuses = td_content.eq(3).text();
     var description = td_content.eq(4).text();
-    // alert(unitCode + unitName + semesters + campus + description);
+    //  alert(unitCode + unitName + semesters + campuses + description);
     $("#unitCodeMan").val(unitCode);
     $("#unitNameMan").val(unitName);
     var semester = semesters.split(",");
@@ -283,6 +283,7 @@ function editUnit(e) {
         switch (element) {
             case "Pandora":
                 $("#unitPandoraMan").prop("checked", true);
+                break;
             case "Rivendell":
                 $("#unitRivendellMan").prop("checked", true);
                 break;
@@ -294,15 +295,106 @@ function editUnit(e) {
         }
     }
     $("#unitDescriptionMan").val(description);
-
     $("#manageUnit").modal('show');
-
 }
 //save unit changes
-function manageUnitForm(e) {
-    var formdata = $(e).serializeArray();
-    console.log(formdata);
-   return false;
+function manageUnitForm(form) {
+    if ($("#semesterCheckboxGroupMan").find("input.custom-control-input:checked").length <= 0) {
+        alert("Please select at least one semester.");
+        return false;
+    } else if ($("#campusCheckboxGroupMan").find("input.custom-control-input:checked").length <= 0) {
+        alert("Please select at least one campus.");
+        return false;
+    } else {
+        var formdata = $(form).serializeArray();
+        console.log(formdata);
+        unit = new Object();
+        unit.code = "";
+        unit.name = "";
+        unit.semesters = "";
+        unit.campuses = "";
+        unit.description = "";
+        for (let index = 0; index < formdata.length; index++) {
+            const element = formdata[index];
+            switch (element.name) {
+                case "unitCode":
+                    unit.code = element.value;
+                    break;
+                case "unitName":
+                    unit.name = element.value;
+                    break;
+                case "unitSem1":
+                    unit.semesters += "Semester 1,";
+                    break;
+                case "unitSem2":
+                    unit.semesters += "Semester 2,";
+                    break;
+                case "unitWinter":
+                    unit.semesters += "Winter School,";
+                    break;
+                case "unitSpring":
+                    unit.semesters += "Spring School,";
+                    break;
+                case "unitPandora":
+                    unit.campuses += "Pandora,";
+                    break;
+                case "unitRivendell":
+                    unit.campuses += "Rivendell,";
+                    break;
+                case "unitNeverland":
+                    unit.campuses += "Neverland,";
+                    break;
+                case "unitDescription":
+                    unit.description = element.value;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        console.log(unit);
+        $.post('../php/master_list_engine.php', {
+            editUnit: true,
+            unitCode: unit.code,
+            unitName: unit.name,
+            unitSemesters: unit.semesters,
+            unitCampuses: unit.campuses,
+            unitDescription: unit.description
+        }, function (data) {
+            if (data.updateDetails) {
+                if (data.updateList) {
+                    alert('Change successfully.');
+                    window.location.href = "../pages/masterList.php?state=1";
+                }
+            }
+        }, 'json');
+
+    }
+    return false;
+}
+//toggle remove button
+function showRemove(e) {
+    // $(e).button('toggle');
+    var removeBtn = $(e).next();
+    if (removeBtn.attr('class').includes('d-none')) {
+        removeBtn.removeClass('d-none');
+    } else {
+        removeBtn.addClass('d-none');
+    }
+}
+//remove unit
+function removeUnit(e) {
+    var td_content = $(e).parents('tr').children('td');
+    var unitCode = td_content.eq(0).text();
+    $.post('../php/master_list_engine.php', {
+        unitRemove: true,
+        unitCode: unitCode
+    }, function (data) {
+        if (data.deleteDetail && data.deleteList) {
+            alert('Remove successfully.');
+            $(e).parents('tr').remove();
+        }
+    }, 'json');
 }
 
 //before submiting remove select disabled attr

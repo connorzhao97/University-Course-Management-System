@@ -64,7 +64,7 @@ if ($_SESSION['session_user'] != "") {
                 if ($_SESSION['session_access'] == "4") {
                     echo "
                     <li class='nav-item'>
-                    <a class='nav-link' href='../pages/masterList.html'>Master List</a>
+                    <a class='nav-link' href='../pages/masterList.php'>Master List</a>
                     </li>
                     ";
                 }
