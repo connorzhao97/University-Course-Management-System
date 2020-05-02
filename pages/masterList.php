@@ -163,312 +163,311 @@ include("../php/session.php");
                     </form>
                 </div>
             </div>
-
-            <!-- NOTE crete staff modal -->
-            <div class="modal fade" id="createNewStaff" tabindex="-1" role="dialog" aria-labelledby="createNewStaffLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Create New Staff</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="fCNSta" name="fCNSta" onsubmit="return createNewStaffForm(this);">
-                                <div class="form-group">
-                                    <label for="staNewID">Staff ID</label>
-                                    <input type="text" class="form-control" name="staNewID" id="staNewID" placeholder="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="staNewName">Staff Name</label>
-                                    <input type="text" class="form-control" name="staNewName" id="staNewName" placeholder="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="staNewQua">Qualification</label>
-                                    <select class="custom-select" name="staNewQua" id="staNewQua" required>
-                                        <option value="" selected>Select Qualification</option>
-                                        <option value="PhD">PhD</option>
-                                        <option value="Master">Master</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="staNewExp">Expertise</label>
-                                    <select class="custom-select" name="staNewExp" id="staNewExp" required>
-                                        <option value="" selected>Select Expertise</option>
-                                        <option value="Information Systems">Information Systems</option>
-                                        <option value="Human Computer Interaction">Human Computer Interaction</option>
-                                        <option value="Network Administration">Network Administration</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <div class="column">
-                                        <label for="staPreDyas">Preferred days of teaching</label>
-                                        <div class="checkboxGroup" required>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="staNewPreMon" name="staNewPreMon" class="custom-control-input">
-                                                <label class="custom-control-label" for="staNewPreMon">Mon.</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="staNewPreTue" name="staNewPreTue" class="custom-control-input">
-                                                <label class="custom-control-label" for="staNewPreTue">Tue.</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="staNewPreWed" name="staNewPreWed" class="custom-control-input">
-                                                <label class="custom-control-label" for="staNewPreWed">Wed.</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="staNewPreThu" name="staNewPreThu" class="custom-control-input">
-                                                <label class="custom-control-label" for="staNewPreThu">Thu.</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="staNewPreFri" name="staNewPreFri" class="custom-control-input">
-                                                <label class="custom-control-label" for="staNewPreFri">Fri.</label>
-                                            </div>
+        </div>
+        <!-- NOTE crete staff modal -->
+        <div class="modal fade" id="createNewStaff" tabindex="-1" role="dialog" aria-labelledby="createNewStaffLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Create New Staff</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="fCNSta" name="fCNSta" onsubmit="return createNewStaffForm(this);">
+                            <div class="form-group">
+                                <label for="staNewID">Staff ID</label>
+                                <input type="text" class="form-control" name="staNewID" id="staNewID" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="staNewName">Staff Name</label>
+                                <input type="text" class="form-control" name="staNewName" id="staNewName" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="staNewQua">Qualification</label>
+                                <select class="custom-select" name="staNewQua" id="staNewQua" required>
+                                    <option value="" selected>Select Qualification</option>
+                                    <option value="PhD">PhD</option>
+                                    <option value="Master">Master</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="staNewExp">Expertise</label>
+                                <select class="custom-select" name="staNewExp" id="staNewExp" required>
+                                    <option value="" selected>Select Expertise</option>
+                                    <option value="Information Systems">Information Systems</option>
+                                    <option value="Human Computer Interaction">Human Computer Interaction</option>
+                                    <option value="Network Administration">Network Administration</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="column">
+                                    <label for="staPreDyas">Preferred days of teaching</label>
+                                    <div class="checkboxGroup" required>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="staNewPreMon" name="staNewPreMon" class="custom-control-input">
+                                            <label class="custom-control-label" for="staNewPreMon">Mon.</label>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            Please select one preferred of teaching day at least.
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="staNewPreTue" name="staNewPreTue" class="custom-control-input">
+                                            <label class="custom-control-label" for="staNewPreTue">Tue.</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="staNewPreWed" name="staNewPreWed" class="custom-control-input">
+                                            <label class="custom-control-label" for="staNewPreWed">Wed.</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="staNewPreThu" name="staNewPreThu" class="custom-control-input">
+                                            <label class="custom-control-label" for="staNewPreThu">Thu.</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="staNewPreFri" name="staNewPreFri" class="custom-control-input">
+                                            <label class="custom-control-label" for="staNewPreFri">Fri.</label>
                                         </div>
                                     </div>
+                                    <div class="invalid-feedback">
+                                        Please select one preferred of teaching day at least.
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="staCon">Consultation hours</label>
-                                    <input type="text" class="form-control" name="staNewCon" id="staNewCon" placeholder="" required>
-                                </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                        </form>
+                            </div>
+                            <div class="form-group">
+                                <label for="staCon">Consultation hours</label>
+                                <input type="text" class="form-control" name="staNewCon" id="staNewCon" placeholder="" required>
+                            </div>
                     </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
 
-            <!-- NOTE manage staff modal -->
-            <div class="modal fade" id="manageStaff" tabindex="-1" role="dialog" aria-labelledby="manageStaffLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Manage Staff</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="fMSta" onsubmit="return validate();">
-                                <div class="form-group">
-                                    <label for="staID">Staff ID</label>
-                                    <input type="text" class="form-control" name="" id="" placeholder="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="staName">Staff Name</label>
-                                    <input type="text" class="form-control" name="" id="" placeholder="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="staQua">Qualification</label>
-                                    <select class="custom-select" name="" id="" required>
-                                        <option value="" selected>Select Qualification</option>
-                                        <option value="PhD">PhD</option>
-                                        <option value="Master">Master</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="staExp">Expertise</label>
-                                    <select class="custom-select" name="" id="" required>
-                                        <option value="" selected>Select Expertise</option>
-                                        <option value="informationSystems">Information Systems</option>
-                                        <option value="humanComputerInteraction">Human Computer Interaction</option>
-                                        <option value="networkAdministration">Network Administration</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <div class="column">
-                                        <label for="staPreDyas">Preferred days of teaching</label>
-                                        <div class="checkboxGroup" required>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineMon" name="customCheckboxInlineMon" class="custom-control-input">
-                                                <label class="custom-control-label" for="customCheckboxInlineMon">Mon.</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineTue" name="customCheckboxInlineTue" class="custom-control-input">
-                                                <label class="custom-control-label" for="customCheckboxInlineTue">Tue.</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineWed" name="customCheckboxInlineWed" class="custom-control-input">
-                                                <label class="custom-control-label" for="customCheckboxInlineWed">Wed.</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineThu" name="customCheckboxInlineThu" class="custom-control-input">
-                                                <label class="custom-control-label" for="customCheckboxInlineThu">Thu.</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input type="checkbox" id="customCheckboxInlineFri" name="customCheckboxInlineFri" class="custom-control-input">
-                                                <label class="custom-control-label" for="customCheckboxInlineFri">Fri.</label>
-                                            </div>
+        <!-- NOTE manage staff modal -->
+        <div class="modal fade" id="manageStaff" tabindex="-1" role="dialog" aria-labelledby="manageStaffLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Manage Staff</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="fMSta" onsubmit="return validate();">
+                            <div class="form-group">
+                                <label for="staID">Staff ID</label>
+                                <input type="text" class="form-control" name="" id="" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="staName">Staff Name</label>
+                                <input type="text" class="form-control" name="" id="" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="staQua">Qualification</label>
+                                <select class="custom-select" name="" id="" required>
+                                    <option value="" selected>Select Qualification</option>
+                                    <option value="PhD">PhD</option>
+                                    <option value="Master">Master</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="staExp">Expertise</label>
+                                <select class="custom-select" name="" id="" required>
+                                    <option value="" selected>Select Expertise</option>
+                                    <option value="informationSystems">Information Systems</option>
+                                    <option value="humanComputerInteraction">Human Computer Interaction</option>
+                                    <option value="networkAdministration">Network Administration</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="column">
+                                    <label for="staPreDyas">Preferred days of teaching</label>
+                                    <div class="checkboxGroup" required>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="customCheckboxInlineMon" name="customCheckboxInlineMon" class="custom-control-input">
+                                            <label class="custom-control-label" for="customCheckboxInlineMon">Mon.</label>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            Please select one preferred of teaching day at least.
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="customCheckboxInlineTue" name="customCheckboxInlineTue" class="custom-control-input">
+                                            <label class="custom-control-label" for="customCheckboxInlineTue">Tue.</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="customCheckboxInlineWed" name="customCheckboxInlineWed" class="custom-control-input">
+                                            <label class="custom-control-label" for="customCheckboxInlineWed">Wed.</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="customCheckboxInlineThu" name="customCheckboxInlineThu" class="custom-control-input">
+                                            <label class="custom-control-label" for="customCheckboxInlineThu">Thu.</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" id="customCheckboxInlineFri" name="customCheckboxInlineFri" class="custom-control-input">
+                                            <label class="custom-control-label" for="customCheckboxInlineFri">Fri.</label>
                                         </div>
                                     </div>
+                                    <div class="invalid-feedback">
+                                        Please select one preferred of teaching day at least.
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="staCon">Consultation hours</label>
-                                    <input type="text" class="form-control" name="" id="" placeholder="" required>
-                                </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" onsubmit="manageStaff()">Save</button>
-                        </div>
-                        </form>
+                            </div>
+                            <div class="form-group">
+                                <label for="staCon">Consultation hours</label>
+                                <input type="text" class="form-control" name="" id="" placeholder="" required>
+                            </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" onsubmit="manageStaff()">Save</button>
+                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
 
 
-            <!-- NOTE crete unit modal -->
-            <div class="modal fade" id="createNewUnit" tabindex="-1" role="dialog" aria-labelledby="createNewUnitLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Create New Unit</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="fCNUnit" name="fCNUnit" onsubmit="return createNewUnitForm(this);">
-                                <div class="form-group">
-                                    <label for="unitCode">Unit Code</label>
-                                    <input type="text" class="form-control" name="unitCode" id="unitCode" placeholder="Unit Code" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="unitName">Unit Name</label>
-                                    <input type="text" class="form-control" name="unitName" id="unitName" placeholder="Unit Name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="unitSemester">Semesters</label>
-                                    <div id="semesterCheckboxGroup" required>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitSem1" name="unitSem1" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitSem1">Semester 1</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitSem2" name="unitSem2" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitSem2">Semester 2</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitWinter" name="unitWinter" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitWinter">Winter School</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitSpring" name="unitSpring" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitSpring">Spring School</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="unitCampus">Campuses</label>
-                                    <div id="campusCheckboxGroup" required>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitPandora" name="unitPandora" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitPandora">Pandora</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitRivendell" name="unitRivendell" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitRivendell">Rivendell</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitNeverland" name="unitNeverland" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitNeverland">Neverland</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Unit Description</label>
-                                    <textarea class="form-control" name="unitDescription" id="unitDescription" rows="3" required></textarea>
-                                </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                        </form>
+        <!-- NOTE crete unit modal -->
+        <div class="modal fade" id="createNewUnit" tabindex="-1" role="dialog" aria-labelledby="createNewUnitLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Create New Unit</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <div class="modal-body">
+                        <form id="fCNUnit" name="fCNUnit" onsubmit="return createNewUnitForm(this);">
+                            <div class="form-group">
+                                <label for="unitCode">Unit Code</label>
+                                <input type="text" class="form-control" name="unitCode" id="unitCode" placeholder="Unit Code" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="unitName">Unit Name</label>
+                                <input type="text" class="form-control" name="unitName" id="unitName" placeholder="Unit Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="unitSemester">Semesters</label>
+                                <div id="semesterCheckboxGroup" required>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitSem1" name="unitSem1" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitSem1">Semester 1</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitSem2" name="unitSem2" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitSem2">Semester 2</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitWinter" name="unitWinter" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitWinter">Winter School</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitSpring" name="unitSpring" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitSpring">Spring School</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="unitCampus">Campuses</label>
+                                <div id="campusCheckboxGroup" required>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitPandora" name="unitPandora" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitPandora">Pandora</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitRivendell" name="unitRivendell" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitRivendell">Rivendell</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitNeverland" name="unitNeverland" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitNeverland">Neverland</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Unit Description</label>
+                                <textarea class="form-control" name="unitDescription" id="unitDescription" rows="3" required></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
 
-            <!-- NOTE manage unit modal -->
-            <div class="modal fade" id="manageUnit" tabindex="-1" role="dialog" aria-labelledby="manageUnitLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Manage Unit</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="fMUnit" name="fMUnit" onsubmit="return manageUnitForm(this);">
-                                <div class="form-group">
-                                    <label for="unitCode">Unit Code</label>
-                                    <input type="text" class="form-control" name="unitCode" id="unitCodeMan" placeholder="Unit Code" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="unitName">Unit Name</label>
-                                    <input type="text" class="form-control" name="unitName" id="unitNameMan" placeholder="Unit Name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="unitSemester">Semesters</label>
-                                    <div id="semesterCheckboxGroupMan" required>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitSem1Man" name="unitSem1" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitSem1Man">Semester 1</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitSem2Man" name="unitSem2" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitSem2Man">Semester 2</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitWinterMan" name="unitWinter" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitWinterMan">Winter School</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitSpringMan" name="unitSpring" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitSpringMan">Spring School</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="unitCampusMan">Campuses</label>
-                                    <div id="campusCheckboxGroupMan" required>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitPandoraMan" name="unitPandora" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitPandoraMan">Pandora</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitRivendellMan" name="unitRivendell" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitRivendellMan">Rivendell</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="unitNeverlandMan" name="unitNeverland" class="custom-control-input">
-                                            <label class="custom-control-label" for="unitNeverlandMan">Neverland</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Unit Description</label>
-                                    <textarea class="form-control" name="unitDescription" id="unitDescriptionMan" rows="3" required></textarea>
-                                </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Save</button>
-                        </div>
-                        </form>
+        <!-- NOTE manage unit modal -->
+        <div class="modal fade" id="manageUnit" tabindex="-1" role="dialog" aria-labelledby="manageUnitLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Manage Unit</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <div class="modal-body">
+                        <form id="fMUnit" name="fMUnit" onsubmit="return manageUnitForm(this);">
+                            <div class="form-group">
+                                <label for="unitCode">Unit Code</label>
+                                <input type="text" class="form-control" name="unitCode" id="unitCodeMan" placeholder="Unit Code" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="unitName">Unit Name</label>
+                                <input type="text" class="form-control" name="unitName" id="unitNameMan" placeholder="Unit Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="unitSemester">Semesters</label>
+                                <div id="semesterCheckboxGroupMan" required>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitSem1Man" name="unitSem1" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitSem1Man">Semester 1</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitSem2Man" name="unitSem2" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitSem2Man">Semester 2</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitWinterMan" name="unitWinter" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitWinterMan">Winter School</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitSpringMan" name="unitSpring" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitSpringMan">Spring School</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="unitCampusMan">Campuses</label>
+                                <div id="campusCheckboxGroupMan" required>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitPandoraMan" name="unitPandora" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitPandoraMan">Pandora</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitRivendellMan" name="unitRivendell" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitRivendellMan">Rivendell</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" id="unitNeverlandMan" name="unitNeverland" class="custom-control-input">
+                                        <label class="custom-control-label" for="unitNeverlandMan">Neverland</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Unit Description</label>
+                                <textarea class="form-control" name="unitDescription" id="unitDescriptionMan" rows="3" required></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>

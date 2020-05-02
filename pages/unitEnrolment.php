@@ -31,7 +31,7 @@ include("../php/session.php");
         </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="../pages/unitDetail.html">Unit Detail</a>
                 </li>
@@ -104,24 +104,27 @@ include("../php/session.php");
     </div>
     <!-- NOTE  content -->
     <div class="container">
-        <!-- NOTE method="POST"  -->
-        <form name="enrolForm" id="enrolForm" method="" class="needs-validation shadow-lg p-3 mb-5 bg-white rounded" onsubmit="return enrolFormSubmit(this)" novalidate>
-            <div class="card">
-                <div class="card-header">
-                    Avaliable units
-                </div>
-                <?php
-                $availableUnitsQuery = "SELECT id, unit_code, unit_name FROM assignment_units_details ORDER BY unit_code";
-                $availableUnitsResult = $mysqli->query($availableUnitsQuery);
-
-                if ($availableUnitsResult->num_rows > 0) {
-                    while ($row = $availableUnitsResult->fetch_assoc()) {
-                        // echo print_r($row);
-                        $unitListQuery = "SELECT * FROM assignment_units_lists WHERE details_id = '" . $row['id'] . "'";
-                        $unitListResult = $mysqli->query($unitListQuery);
-                        $rowList = $unitListResult->fetch_all(MYSQLI_ASSOC);
-                        // echo print_r($rowList);
-                        $output = "
+        <div class="nav nav-pills flex-column flex-sm-row mb-2 shadow p-3 mb-5 bg-white rounded" id="pills-tab" role="tablist">
+            <a class="flex-sm-fill text-sm-center nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">Current Enrolment</a>
+            <a class="flex-sm-fill text-sm-center nav-link" id="pills-second-tab" data-toggle="pill" href="#pills-second" role="tab" aria-controls="pills-second" aria-selected="false">Available Units</a>
+        </div>
+        <div class="tab-content shadow-lg p-3 mb-5 bg-white rounded" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
+            </div>
+            <div class="tab-pane fade" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
+                <!-- NOTE method="POST"  -->
+                <form name="enrolForm" id="enrolForm" method="" class="" onsubmit="return enrolFormSubmit(this)" novalidate>
+                    <?php
+                    $availableUnitsQuery = "SELECT id, unit_code, unit_name FROM assignment_units_details ORDER BY unit_code";
+                    $availableUnitsResult = $mysqli->query($availableUnitsQuery);
+                    if ($availableUnitsResult->num_rows > 0) {
+                        while ($row = $availableUnitsResult->fetch_assoc()) {
+                            // echo print_r($row);
+                            $unitListQuery = "SELECT * FROM assignment_units_lists WHERE details_id = '" . $row['id'] . "'";
+                            $unitListResult = $mysqli->query($unitListQuery);
+                            $rowList = $unitListResult->fetch_all(MYSQLI_ASSOC);
+                            //  echo print_r($rowList);
+                            $output = "
                         <div class='card' id=" . $row["id"] . ">
                             <div class='row'>
                                 <div class='col-md-8'>
@@ -129,12 +132,12 @@ include("../php/session.php");
                                         <h5 class='card-title'>" . $row['unit_code'] . " - " . $row['unit_name'] . " </h5>
                                         <select name='" . $row['unit_code'] . "EnrolTime' id='" . $row['unit_code'] . "EnrolTime' class='custom-select'>
                                             <option value='' selected>Please select</option>";
-                        for ($i = 0; $i < count($rowList); $i++) {
-                            $output .= "
-                            <option value='" . $rowList[$i]['semester'] . ", " . $rowList[$i]['campus'] . "'>" . $rowList[$i]['semester'] . ", " . $rowList[$i]['campus'] . "</option>
+                            for ($i = 0; $i < count($rowList); $i++) {
+                                $output .= "
+                            <option value='" . $rowList[$i]['id'] . "'>" . $rowList[$i]['semester'] . ", " . $rowList[$i]['campus'] . "</option>
                             ";
-                        }
-                        $output .= "
+                            }
+                            $output .= "
                                         </select>
                                     </div>
                                 </div>
@@ -148,11 +151,11 @@ include("../php/session.php");
                                 </div>
                             </div>
                         </div>";
-                        echo $output;
+                            echo $output;
+                        }
                     }
-                }
-                ?>
-                <!-- <div class="card">
+                    ?>
+                    <!-- <div class="card">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="card-body">
@@ -174,10 +177,12 @@ include("../php/session.php");
                         </div>
                     </div>
                 </div> -->
+
+                    <hr class="mb-4">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Enrol checked units</button>
+                </form>
             </div>
-            <hr class="mb-4">
-            <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Enrol checked units</button>
-        </form>
+        </div>
     </div>
 
     <!-- NOTE footer -->
