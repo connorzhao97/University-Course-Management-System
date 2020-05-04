@@ -1,8 +1,11 @@
 <?php
-include('../php/session.php');
 include('../php/db_conn.php');
+include('../php/session.php');
 if ($_SESSION['session_user'] != "") {
-    //   header("Location:../pages/home.php");
+    if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3") {
+    } else {
+        echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
+    }
 } else {
     echo "<script>alert('Login is required'); window.location.href='../pages/login.php'</script>";
 }
@@ -17,8 +20,8 @@ if ($_SESSION['session_user'] != "") {
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/home.css">
-    <title>Home - University of DoWell</title>
+    <link rel="stylesheet" href="../CSS/unitdetail.css">
+    <title>Unit Management - University of DoWell</title>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -74,7 +77,7 @@ if ($_SESSION['session_user'] != "") {
                 <?php
                 if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3") {
                     echo "
-                    <li class='nav-item'>
+                    <li class='nav-item active'>
                     <a class='nav-link' href='../pages/unitManagement.php'>Unit Management</a>
                     </li>
                     ";
@@ -104,85 +107,46 @@ if ($_SESSION['session_user'] != "") {
             </form>
         </div>
     </nav>
-    <!-- NOTE content -->
-    <div class="container">
-        <div class="row">
-            <!-- NOTE left content -->
-            <div class="col-md-6">
-                <div class="column shadow-lg p-3 mb-5 bg-white rounded mt-5">
-                    <h1 class="h3">My units</h1>
-                    <hr class="mb-3">
-                    <div class="row row-cols-1 row-cols-lg-2">
-                        <div class="col mb-4">
-                            <div class="card h-100">
-                                <!-- NOTE  img could be differnet because of different units. -->
-                                <img src="../imgs/502.jpg" class="card-img-top">
-                                <!-- NOTE link to different units e.g. ../pages/unitDetail.html?kit502 -->
-                                <a class="unitLink" href="../pages/unitDetail.html"></a>
-                                <div class="card-body">
-                                    <!-- NOTE different information according to different units -->
-                                    <h5 class="card-title">KIT502 Web Development</h5>
-                                    <p class="card-text text-muted">2020 Sem1</p>
-                                    <p class="card-text text-muted">Ends July 31,2020 at 00:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card h-100">
-                                <img src="../imgs/503.jpg" class="card-img-top">
-                                <a class="unitLink" href="../pages/unitDetail.html"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title">KIT503 ICT Professional Practices and Project Management</h5>
-                                    <p class="card-text text-muted">2020 Sem1</p>
-                                    <p class="card-text text-muted">Ends July 31,2020 at 00:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card h-100">
-                                <img src="../imgs/707.jpg" class="card-img-top">
-                                <a class="unitLink" href="../pages/unitDetail.html"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title">KIT707 Knowledge and Information Management</h5>
-                                    <p class="card-text text-muted">2020 Sem1</p>
-                                    <p class="card-text text-muted">Ends July 31,2020 at 00:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card h-100">
-                                <img src="../imgs/710.jpg" class="card-img-top">
-                                <a class="unitLink" href="../pages/unitDetail.html"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title">KIT710 eLogistics</h5>
-                                    <p class="card-text text-muted">2020 Sem1</p>
-                                    <p class="card-text text-muted">Ends July 31,2020 at 00:00</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- NOTE right content -->
-            <div class="col-md-6 mt-5">
-                <div class="column">
-                    <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                        <h1 class="h3">My Timetable</h1>
-                        <hr class="mb-3">
-                        <div class="d-flex justify-content-center">
-                            <a name="" id="" class="btn btn-primary" href="../pages/individualTimetable.html" role="button">View My Timetable</a></div>
-                    </div>
-                    <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                        <h1 class="h3">Unit Enrolment</h1>
-                        <hr class="mb-3">
-                        <div class="d-flex justify-content-center">
-                            <a name="" id="" class="btn btn-primary" href="../pages/unitEnrolment.html" role="button">View My Enrolment</a></div>
-                    </div>
-                </div>
-            </div>
+    <!-- NOTE jumbotron -->
+    <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
+        <div class="container h-100">
+            <h1 class="display-4 mb-5 text-white">Unit Management</h1>
         </div>
     </div>
-
+    <!-- NOTE content -->
+    <div class="container">
+        <table class="table table-striped table-responsive table-bordered text-nowrap shadow-lg mb-5 bg-white rounded">
+            <thead>
+                <tr>
+                    <th scope="col">Unit Name</th>
+                    <th scope="col">Unit Description</th>
+                    <th scope="col">Offering Semester</th>
+                    <th scope="col">Campus</th>
+                    <th scope="col">Unit Coordinator</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">KIT502<br>Web Development</td>
+                    <td>
+                        <p class="text-wrap">
+                            This unit will explain the relationship between data, information and knowledge and
+                            introduce a number of different tools for managing, storing, securing, modelling,
+                            visualizing and analysing data. </p>
+                    </td>
+                    <td>
+                        Semester 1
+                    </td>
+                    <td>
+                        Pandora
+                    </td>
+                    <td>
+                        Ackerley
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <!-- NOTE footer -->
     <footer class="footer mt-auto py-3 bg-dark">
         <div class="container-fluid text-white d-flex align-center justify-content-center">

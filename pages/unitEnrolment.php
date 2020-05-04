@@ -1,13 +1,13 @@
 <?php
 include("../php/db_conn.php");
 include("../php/session.php");
-// if ($_SESSION['session_user'] != "") {
-//     if ($_SESSION['session_access'] != '4') {
-//         echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
-//     }
-// } else {
-//     echo "<script>alert('Login is required'); window.location.href='../pages/login.php'</script>";
-// }
+if ($_SESSION['session_user'] != "") {
+    if ($_SESSION['session_access'] != '0') {
+        echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
+    }
+} else {
+    echo "<script>alert('Login is required'); window.location.href='../pages/login.php'</script>";
+}
 ?>
 <!doctype html>
 <html lang="en" class="h-100">
@@ -33,12 +33,12 @@ include("../php/session.php");
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="../pages/unitDetail.html">Unit Detail</a>
+                    <a class="nav-link" href="../pages/unitDetail.php">Unit Detail</a>
                 </li>
                 <?php
                 if ($_SESSION['session_access'] == "0") {
                     echo "
-                    <li class='nav-item'>
+                    <li class='nav-item active'>
                     <a class='nav-link' href='../pages/unitEnrolment.php'>Unit Enrolment</a>
                     </li>
                     ";
@@ -82,6 +82,18 @@ include("../php/session.php");
                     ";
                 }
                 ?>
+                <?php
+                if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2" || $_SESSION['session_access'] == "1") {
+                    echo "
+                    <li class='nav-item'>
+                    <a class='nav-link' href='../pages/enrolledDetails.php'>Enrolled Student Details</a>
+                    </li>
+                    ";
+                }
+                ?>
+                <li class='nav-item'>
+                    <a class='nav-link' href='../pages/userAccount.php'>User Account</a>
+                </li>
             </ul>
             <form class="form-inline mb-0">
                 <?php

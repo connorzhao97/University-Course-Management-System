@@ -1,7 +1,7 @@
 <?php
 include('../php/session.php');
 if ($session_user != "") {
-    header("Location:../pages/home.php");
+    // header("Location:../pages/home.php");
 }
 ?>
 <!doctype html>
