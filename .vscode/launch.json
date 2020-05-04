@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "https://alacritas.cis.utas.edu.au/~yucongz/yucongz/pages/login.php",
+            "url": "https://alacritas.cis.utas.edu.au/~yucongz/yucongz/pages/unitEnrolment.php",
             "webRoot": "${workspaceFolder}"
         }
     ]

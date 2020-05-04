@@ -122,7 +122,7 @@ include("../php/session.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $quert = "SELECT unit_code, unit_name, semester, campus, description FROM assignment_units_details";
+                                $quert = "SELECT unit_code, unit_name, semester, campus, description FROM assignment_units_details ORDER BY unit_code";
                                 $result = $mysqli->query($quert);
                                 if ($result) {
                                     while ($row = $result->fetch_assoc()) {
@@ -164,7 +164,7 @@ include("../php/session.php");
                 </div>
             </div>
         </div>
-        <!-- NOTE crete staff modal -->
+        <!-- NOTE create staff modal -->
         <div class="modal fade" id="createNewStaff" tabindex="-1" role="dialog" aria-labelledby="createNewStaffLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -328,7 +328,7 @@ include("../php/session.php");
         </div>
 
 
-        <!-- NOTE crete unit modal -->
+        <!-- NOTE create unit modal -->
         <div class="modal fade" id="createNewUnit" tabindex="-1" role="dialog" aria-labelledby="createNewUnitLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">

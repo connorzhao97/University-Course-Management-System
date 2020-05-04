@@ -108,29 +108,91 @@ include("../php/session.php");
             <a class="flex-sm-fill text-sm-center nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">Current Enrolment</a>
             <a class="flex-sm-fill text-sm-center nav-link" id="pills-second-tab" data-toggle="pill" href="#pills-second" role="tab" aria-controls="pills-second" aria-selected="false">Available Units</a>
         </div>
-        <div class="tab-content shadow-lg p-3 mb-5 bg-white rounded" id="pills-tabContent">
+        <div class="tab-content shadow p-3 mb-5 bg-white rounded" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
+                <div>
+                    <?php
+                    $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE st_id = '" . $_SESSION['session_user'] . "'";
+                    $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
+                    if ($selectEnrolmentResult->num_rows > 0) {
+                        while ($row = $selectEnrolmentResult->fetch_assoc()) {
+                            // echo print_r($row);
+                            $unitDetailQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id = '" . $row['unit_id'] . "'";
+                            $unitDetailResult = $mysqli->query($unitDetailQuery);
+                            if ($unitDetailResult->num_rows > 0) {
+                                $rowDetails = $unitDetailResult->fetch_assoc();
+
+                                $unitListQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id = '" . $row['unit_list_id'] . "'";
+                                $unitListResult = $mysqli->query($unitListQuery);
+                                if ($unitListResult->num_rows > 0) {
+                                    $rowUnitList = $unitListResult->fetch_assoc();
+                                    $output = "
+                                    <div class='card' id=" . $row['id'] . ">
+                                       <form onsubmit='return withdrawUnit(this);'>
+                                           <div class='row'>
+                                               <div class='col-md-8'>
+                                                   <div class='card-body'>
+                                                       <h5 class='card-title'>" . $rowDetails['unit_code'] . " - " . $rowDetails['unit_name'] . " </h5>
+                                                     " . $rowUnitList['semester'] . ", " . $rowUnitList['campus'] . "
+                                                   </div>
+                                               </div>
+                                               <div class='col-md-4 px-5 pb-2 d-flex justify-content-center align-self-center'>
+                                               <button type='submit' name='" . $rowDetails['unit_code'] . "Withdraw' id='" . $rowDetails['unit_code'] . "Withdraw'class='btn btn-danger btn-lg btn-block'>Withdraw this unit</button>
+                                               </div>
+                                           </div>
+                                        </form>
+                                     </div>";
+                                    echo $output;
+                                }
+                            }
+                        }
+                    } else {
+                        echo "You don't have any enrolments yet.";
+                    }
+                    ?>
+                </div>
             </div>
             <div class="tab-pane fade" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
                 <!-- NOTE method="POST"  -->
-                <form name="enrolForm" id="enrolForm" method="" class="" onsubmit="return enrolFormSubmit(this)" novalidate>
-                    <?php
-                    $availableUnitsQuery = "SELECT id, unit_code, unit_name FROM assignment_units_details ORDER BY unit_code";
-                    $availableUnitsResult = $mysqli->query($availableUnitsQuery);
-                    if ($availableUnitsResult->num_rows > 0) {
-                        while ($row = $availableUnitsResult->fetch_assoc()) {
-                            // echo print_r($row);
-                            $unitListQuery = "SELECT * FROM assignment_units_lists WHERE details_id = '" . $row['id'] . "'";
-                            $unitListResult = $mysqli->query($unitListQuery);
-                            $rowList = $unitListResult->fetch_all(MYSQLI_ASSOC);
-                            //  echo print_r($rowList);
+                <?php
+                $availableUnitsQuery = "SELECT id, unit_code, unit_name FROM assignment_units_details ORDER BY unit_code";
+                $availableUnitsResult = $mysqli->query($availableUnitsQuery);
+                if ($availableUnitsResult->num_rows > 0) {
+                    while ($row = $availableUnitsResult->fetch_assoc()) {
+                        // echo print_r($row);
+                        $unitListQuery = "SELECT * FROM assignment_units_lists WHERE details_id = '" . $row['id'] . "'";
+                        $unitListResult = $mysqli->query($unitListQuery);
+                        $rowList = $unitListResult->fetch_all(MYSQLI_ASSOC);
+                        // echo print_r($rowList);
+
+                        $checkEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE unit_id = '" . $row['id'] . "'";
+                        $checkEnrolmentRusult = $mysqli->query($checkEnrolmentQuery);
+                        if ($checkEnrolmentRusult->num_rows > 0) {
                             $output = "
                         <div class='card' id=" . $row["id"] . ">
+                        <form onsubmit='return enrolUnit(this," . $_SESSION['session_user'] . ");'>
                             <div class='row'>
                                 <div class='col-md-8'>
                                     <div class='card-body'>
                                         <h5 class='card-title'>" . $row['unit_code'] . " - " . $row['unit_name'] . " </h5>
-                                        <select name='" . $row['unit_code'] . "EnrolTime' id='" . $row['unit_code'] . "EnrolTime' class='custom-select'>
+                                        Enrolled
+                                    </div>
+                                </div>
+                                <div class='col-md-4 px-5 pb-2 d-flex justify-content-center align-self-center'>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                        ";
+                        } else {
+                            $output = "
+                     <div class='card' id=" . $row["id"] . ">
+                        <form onsubmit='return enrolUnit(this," . $_SESSION['session_user'] . ");'>
+                            <div class='row'>
+                                <div class='col-md-8'>
+                                    <div class='card-body'>
+                                        <h5 class='card-title'>" . $row['unit_code'] . " - " . $row['unit_name'] . " </h5>
+                                        <select name='" . $row['unit_code'] . "' id='" . $row['unit_code'] . "EnrolTime' class='custom-select' required>
                                             <option value='' selected>Please select</option>";
                             for ($i = 0; $i < count($rowList); $i++) {
                                 $output .= "
@@ -141,21 +203,19 @@ include("../php/session.php");
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-md-4 d-flex justify-content-center align-self-center'>
-                                    <div class='form-check'>
-                                        <input class='form-check-input' type='checkbox' value='checked' name='" . $row['unit_code'] . "EnrolCheck' id='" . $row['unit_code'] . "EnrolCheck'>
-                                        <label class='form-check-label' for='" . $row['unit_code'] . "EnrolCheck'>
-                                            Enrol
-                                        </label>
-                                    </div>
+                                <div class='col-md-4 px-5 pb-2 d-flex justify-content-center align-self-center'>
+                                <button type='submit' name='" . $row['unit_code'] . "Enrol' id='" . $row['unit_code'] . "Enrol'class='btn btn-primary btn-lg btn-block'>Enrol this unit</button>
                                 </div>
                             </div>
-                        </div>";
-                            echo $output;
+                         </form>
+                      </div>";
                         }
+                        echo $output;
                     }
-                    ?>
-                    <!-- <div class="card">
+                }
+                ?>
+
+                <!-- <div class="card">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="card-body">
@@ -177,10 +237,6 @@ include("../php/session.php");
                         </div>
                     </div>
                 </div> -->
-
-                    <hr class="mb-4">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-5">Enrol checked units</button>
-                </form>
             </div>
         </div>
     </div>
@@ -202,7 +258,7 @@ include("../php/session.php");
     <!-- Optional JavaScript -->
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>

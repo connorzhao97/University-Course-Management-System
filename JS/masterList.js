@@ -18,7 +18,7 @@ $("#manageUnit").on('hidden.bs.modal', function (e) {
     $('#fMUnit')[0].reset();
 })
 
-
+//get parameter from url
 function getQuery(e) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -33,15 +33,9 @@ function getQuery(e) {
 
 $(function () {
     if (getQuery("state") == "0") {
-        $("#pills-first-tab").addClass("active");
-        $("#pills-second-tab").removeClass("active");
-        $('#pills-first').addClass('active show');
-        $("#pills-second").removeClass('active show');
+        $('#pills-first-tab').tab('show');
     } else if (getQuery("state") == "1") {
-        $("#pills-second-tab").addClass("active");
-        $("#pills-first-tab").removeClass("active");
-        $('#pills-second').addClass('active show');
-        $("#pills-first").removeClass('active show');
+        $('#pills-second-tab').tab('show');
     }
 })
 
