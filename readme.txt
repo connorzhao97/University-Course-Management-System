@@ -58,10 +58,11 @@ Only DC can access to it.
 
 //Role Description
 Access Level: 
-Degree Coordinator(DC):4,
-Unit Coordinator(UC):3,
-Lecturer:2,
-Tutor:1,
+Degree Coordinator(DC):5,
+Unit Coordinator(UC):4,
+Lecturer:3,
+Tutor:2,
+Staff member:1,
 Student:0.
 
 //campuses

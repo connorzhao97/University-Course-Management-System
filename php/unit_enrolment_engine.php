@@ -7,7 +7,7 @@ if ($_POST['enrol']) {
     $unitID = $_POST['unitID'];
     $unitListID = $_POST['unitListID'];
 
-    $insertQuery = "INSERT INTO assignment_students_enrolments (st_id, unit_id, unit_list_id) VALUES ('$stID', '$unitID', '$unitListID')";
+    $insertQuery = "INSERT INTO assignment_students_enrolments (stu_id, unit_id, unit_list_id) VALUES ('$stID', '$unitID', '$unitListID')";
     $insertResult = $mysqli->query($insertQuery);
 
     if ($insertResult) {

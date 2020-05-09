@@ -54,7 +54,7 @@ if ($_POST['student']) {
         $quertUser = "INSERT INTO assignment_users (st_id, access) VALUES ('$staID','1')";
         $resultUser = $mysqli->query($quertUser);
         if ($resultUser) {
-            $query = "INSERT INTO assignment_staffs (st_id, name, email, password, qualification, expertise, phone) VALUES ('$staID','$name','$email','$password','$qualification','$expertise','$phone')";
+            $query = "INSERT INTO assignment_staffs (st_id, name, email, password, qualification, expertise, phone, availability) VALUES ('$staID','$name','$email','$password','$qualification','$expertise','$phone','')";
             $result = $mysqli->query($query);
             if ($result) {
                 $res->insert = true;

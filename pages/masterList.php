@@ -2,7 +2,7 @@
 include("../php/db_conn.php");
 include("../php/session.php");
 if ($_SESSION['session_user'] != "") {
-    if ($_SESSION['session_access'] != '4') {
+    if ($_SESSION['session_access'] != '5') {
         echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
     }
 } else {
@@ -31,7 +31,7 @@ if ($_SESSION['session_user'] != "") {
         </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="../pages/unitDetail.php">Unit Detail</a>
                 </li>
@@ -64,7 +64,7 @@ if ($_SESSION['session_user'] != "") {
                 ?>
 
                 <?php
-                if ($_SESSION['session_access'] == "4") {
+                if ($_SESSION['session_access'] == "5") {
                     echo "
                     <li class='nav-item active'>
                     <a class='nav-link' href='../pages/masterList.php'>Master List</a>
@@ -74,7 +74,7 @@ if ($_SESSION['session_user'] != "") {
                 ?>
 
                 <?php
-                if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/unitManagement.php'>Unit Management</a>
@@ -83,7 +83,7 @@ if ($_SESSION['session_user'] != "") {
                 }
                 ?>
                 <?php
-                if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2" || $_SESSION['session_access'] == "1") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/enrolledDetails.php'>Enrolled Student Details</a>

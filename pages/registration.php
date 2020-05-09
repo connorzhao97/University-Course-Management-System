@@ -39,7 +39,7 @@ if ($_SESSION['session_user'] != "") {
         <div class="row">
             <div class="col-md">
                 <!-- NOTE panel -->
-                <ul class="nav nav-pills nav-fill mb-3 shadow-lg p-3 mb-5 bg-white rounded" id="pills-tab" role="tablist">
+                <ul class="nav nav-pills nav-fill mb-3 shadow p-3 mb-5 bg-white rounded" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-student-tab" data-toggle="pill" href="#pills-student" role="tab" aria-controls="pills-student" aria-selected="true">I'm a student</a>
                     </li>
@@ -48,7 +48,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                 </ul>
 
-                <div class="tab-content shadow-lg p-3 mb-5 bg-white rounded" id="pills-tabContent">
+                <div class="tab-content shadow p-3 mb-5 bg-white rounded" id="pills-tabContent">
                     <!--NOTE student form -->
                     <div class="tab-pane fade show active" id="pills-student" role="tabpanel" aria-labelledby="pills-student-tab">
                         <!-- NOET method="POST" -->

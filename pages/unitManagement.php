@@ -2,7 +2,7 @@
 include('../php/db_conn.php');
 include('../php/session.php');
 if ($_SESSION['session_user'] != "") {
-    if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3") {
+    if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4") {
     } else {
         echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
     }
@@ -64,8 +64,8 @@ if ($_SESSION['session_user'] != "") {
                 }
                 ?>
 
-                <?php
-                if ($_SESSION['session_access'] == "4") {
+<?php
+                if ($_SESSION['session_access'] == "5") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/masterList.php'>Master List</a>
@@ -75,7 +75,7 @@ if ($_SESSION['session_user'] != "") {
                 ?>
 
                 <?php
-                if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4") {
                     echo "
                     <li class='nav-item active'>
                     <a class='nav-link' href='../pages/unitManagement.php'>Unit Management</a>
@@ -84,7 +84,7 @@ if ($_SESSION['session_user'] != "") {
                 }
                 ?>
                 <?php
-                if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2" || $_SESSION['session_access'] == "1") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "3") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/enrolledDetails.php'>Enrolled Student Details</a>

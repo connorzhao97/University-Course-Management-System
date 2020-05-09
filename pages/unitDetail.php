@@ -15,8 +15,7 @@ if ($_SESSION['session_user'] != "") {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/unitdetail.css">
     <title>Unit Detail - University of DoWell</title>
 </head>
@@ -27,11 +26,9 @@ if ($_SESSION['session_user'] != "") {
         <a class="navbar-brand p-0" href="../pages/home.php">
             <img src="../imgs/logo.png" width="100" height="44">
         </a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><span
-                class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="../pages/unitDetail.php">Unit Detail</a>
                 </li>
@@ -62,9 +59,8 @@ if ($_SESSION['session_user'] != "") {
                     ";
                 }
                 ?>
-
                 <?php
-                if ($_SESSION['session_access'] == "4") {
+                if ($_SESSION['session_access'] == "5") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/masterList.php'>Master List</a>
@@ -74,7 +70,7 @@ if ($_SESSION['session_user'] != "") {
                 ?>
 
                 <?php
-                if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/unitManagement.php'>Unit Management</a>
@@ -83,7 +79,7 @@ if ($_SESSION['session_user'] != "") {
                 }
                 ?>
                 <?php
-                if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2" || $_SESSION['session_access'] == "1") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "3") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/enrolledDetails.php'>Enrolled Student Details</a>
@@ -112,8 +108,7 @@ if ($_SESSION['session_user'] != "") {
             <!-- NOTE different information according to different units -->
             <h1 class="display-4 mb-5 text-white">Web Development</h1>
             <p class="display-4  text-white">KIT502</p>
-            <a id="enrolment" class="btn btn-danger btn-lg btn-block" href="../pages/unitEnrolment.html"
-                role="button">Enrol units</a>
+            <a id="enrolment" class="btn btn-danger btn-lg btn-block" href="../pages/unitEnrolment.html" role="button">Enrol units</a>
         </div>
     </div>
     <!-- NOTE  content -->
@@ -170,30 +165,27 @@ if ($_SESSION['session_user'] != "") {
             </div>
         </div>
     </div>
-  <!-- NOTE footer -->
-  <footer class="footer mt-auto py-3 bg-dark">
-    <div class="container-fluid text-white d-flex align-center justify-content-center">
-        <div class="column">
-            <div class="d-flex justify-content-center">
-                <img class="py-6" src="../imgs/logo.png">
-            </div>
-            <div class="mt-2">
-                <p class="text-muted">The University of DoWell in Wonderland (UDW) has started to build a Course
-                    Management System including a new tutorial allocation system.</p>
+    <!-- NOTE footer -->
+    <footer class="footer mt-auto py-3 bg-dark">
+        <div class="container-fluid text-white d-flex align-center justify-content-center">
+            <div class="column">
+                <div class="d-flex justify-content-center">
+                    <img class="py-6" src="../imgs/logo.png">
+                </div>
+                <div class="mt-2">
+                    <p class="text-muted">The University of DoWell in Wonderland (UDW) has started to build a Course
+                        Management System including a new tutorial allocation system.</p>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
 </body>
 

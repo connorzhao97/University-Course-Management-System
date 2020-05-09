@@ -62,9 +62,8 @@ if ($_SESSION['session_user'] != "") {
                     ";
                 }
                 ?>
-
                 <?php
-                if ($_SESSION['session_access'] == "4") {
+                if ($_SESSION['session_access'] == "5") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/masterList.php'>Master List</a>
@@ -74,7 +73,7 @@ if ($_SESSION['session_user'] != "") {
                 ?>
 
                 <?php
-                if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/unitManagement.php'>Unit Management</a>
@@ -83,7 +82,7 @@ if ($_SESSION['session_user'] != "") {
                 }
                 ?>
                 <?php
-                if ($_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2" || $_SESSION['session_access'] == "1") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "3") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/enrolledDetails.php'>Enrolled Student Details</a>
@@ -124,7 +123,7 @@ if ($_SESSION['session_user'] != "") {
             <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
                 <div>
                     <?php
-                    $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE st_id = '" . $_SESSION['session_user'] . "'";
+                    $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id = '" . $_SESSION['session_user'] . "'";
                     $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
                     if ($selectEnrolmentResult->num_rows > 0) {
                         while ($row = $selectEnrolmentResult->fetch_assoc()) {
@@ -172,7 +171,7 @@ if ($_SESSION['session_user'] != "") {
                 if ($availableUnitsResult->num_rows > 0) {
                     while ($row = $availableUnitsResult->fetch_assoc()) {
                         // echo print_r($row);
-                        $unitListQuery = "SELECT * FROM assignment_units_lists WHERE details_id = '" . $row['id'] . "'";
+                        $unitListQuery = "SELECT * FROM assignment_units_lists WHERE details_id = '" . $row['id'] . "' and availability = '1'";
                         $unitListResult = $mysqli->query($unitListQuery);
                         $rowList = $unitListResult->fetch_all(MYSQLI_ASSOC);
                         // echo print_r($rowList);
