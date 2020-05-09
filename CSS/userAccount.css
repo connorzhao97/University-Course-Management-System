@@ -1,0 +1,23 @@
+.bg {
+    background-image: url(../imgs/reBg.jpg);
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+/* jumbotron image shadow */
+.jumbotron:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1
+}
+
+.jumbotron>* {
+    position: relative;
+    z-index: 2;
+}

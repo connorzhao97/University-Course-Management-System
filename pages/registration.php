@@ -67,14 +67,14 @@ if ($_SESSION['session_user'] != "") {
                                 <input type="email" id="stuEmail" name="stuEmail" class="form-control" placeholder="Your Email Address" pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
+                                <label for="stuPassword">Password</label>
                                 <input type="password" id="stuPassword" name="stuPassword" class="form-control" placeholder="Your password" aria-describedby="passwordHelpId" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
                                 <small id="passWordHelpId" class="text-muted">Your password must be 6-12 characters
                                     long, contain at least 1 lowercase letter,1 uppercase letter,1 number and one of
                                     following special characters ! @ # $ % ^</small>
                             </div>
                             <div class="form-group">
-                                <label for="repassword">Re-enter Password</label>
+                                <label for="stuRePassword">Re-enter Password</label>
                                 <input type="password" id="stuRePassword" name="stuRePassword" class="form-control" placeholder="Re-enter your password" required>
                                 <div class="invalid-feedback">
                                     Password does not match.
@@ -146,14 +146,8 @@ if ($_SESSION['session_user'] != "") {
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="expertise">Expertise</label>
-                                    <select class="custom-select" id="staExpertise" name="staExpertise" required>
-                                        <option value="" selected>Select Expertise</option>
-                                        <option value="Information Systems">Information Systems</option>
-                                        <option value="Human Computer Interaction">Human Computer Interaction</option>
-                                        <option value="Network Administration">Network Administration</option>
-                                        <option value="others">Others</option>
-                                    </select>
+                                    <label for="staExpertise">Expertise</label>
+                                    <input type="text" id="staExpertise" name="staExpertise" class="form-control" placeholder="e.g. Information Systems" required>
                                 </div>
                             </div>
                             <div class="form-group">
