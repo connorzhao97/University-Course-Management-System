@@ -5,8 +5,6 @@ function stuFormSubmit() {
             return false;
         }
     }
-
-
     $("#submitBtn").attr('disabled', 'true');
     $("#stSpinner").removeClass('d-none');
 
@@ -24,7 +22,7 @@ function stuFormSubmit() {
         $("#stSpinner").addClass('d-none');
         if (data.update) {
             alert("Save changes successfully");
-        }else{
+        } else {
             alert("Save changes failed");
         }
     }, 'json');
@@ -34,5 +32,34 @@ function stuFormSubmit() {
 
 
 function staFormSubmit() {
+    if ($("#staPassword").val().trim() != "") {
+        if ($("#staRePassword").val().trim() != $("#staPassword").val().trim()) {
+            alert("Password does not match");
+            return false;
+        }
+    }
+    $("#submitBtn").attr('disabled', 'true');
+    $("#stSpinner").removeClass('d-none');
+
+
+    $.post('../php/user_account_engine.php', {
+        staff: true,
+        name: $("#staName").val().trim(),
+        staID: $("#staID").val().trim(),
+        email: $("#staEmail").val().trim(),
+        password: $("#staPassword").val().trim(),
+        qualification: $("#staQualification").val().trim(),
+        expertise: $("#staExpertise").val().trim(),
+        phone: $("#staPhoneNumber").val().trim(),
+        unavailability: $("#staUnavailability").val().trim()
+    }, function (data) {
+        $("#submitBtn").removeAttr('disabled');
+        $("#stSpinner").addClass('d-none');
+        if (data.update) {
+            alert("Save changes successfully");
+        } else {
+            alert("Save changes failed");
+        }
+    }, 'json');
     return false;
 }

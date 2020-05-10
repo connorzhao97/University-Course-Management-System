@@ -162,7 +162,7 @@ if ($_SESSION['session_user'] != "") {
                </div>
                <div class='form-group'>
                <label for='stuPhoneNumber'>Phone Number<span class='text-muted'>(Optional)</span></label>
-                    <input type='tel' id='stuPhoneNumber' name='stuPhoneNumber' class='form-control' placeholder='Your phone number' value='" . $GLOBALS['user']['phone'] . "' pattern='^(?:\+?61|0)4 ?(?:(?:[01] ?[0-9]|2 ?[0-57-9]|3 ?[1-9]|4 ?[7-9]|5 ?[018]) ?[0-9]|3 ?0 ?[0-5])(?: ?[0-9]){5}$'>
+                    <input type='tel' id='stuPhoneNumber' name='stuPhoneNumber' class='form-control' placeholder='e.g.(+61)/(0)xxxxxxxxx' value='" . $GLOBALS['user']['phone'] . "' pattern='^(?:\+?61|0)4 ?(?:(?:[01] ?[0-9]|2 ?[0-57-9]|3 ?[1-9]|4 ?[7-9]|5 ?[018]) ?[0-9]|3 ?0 ?[0-5])(?: ?[0-9]){5}$'>
                 </div>
                 ";
             } else {
@@ -233,11 +233,11 @@ if ($_SESSION['session_user'] != "") {
                 $output .= "
                 <div class='form-group'>
                  <label for='staPhoneNumber'>Phone Number</label>
-                    <input type='tel' id='staPhoneNumber' name='staPhoneNumber' class='form-control' placeholder='Your phone number' value='" . $GLOBALS['user']['phone'] . "' pattern='^(?:\+?61|0)4 ?(?:(?:[01] ?[0-9]|2 ?[0-57-9]|3 ?[1-9]|4 ?[7-9]|5 ?[018]) ?[0-9]|3 ?0 ?[0-5])(?: ?[0-9]){5}$' required>
+                    <input type='tel' id='staPhoneNumber' name='staPhoneNumber' class='form-control' placeholder='e.g.(+61)/(0)xxxxxxxxx' value='" . $GLOBALS['user']['phone'] . "' pattern='^(?:\+?61|0)4 ?(?:(?:[01] ?[0-9]|2 ?[0-57-9]|3 ?[1-9]|4 ?[7-9]|5 ?[018]) ?[0-9]|3 ?0 ?[0-5])(?: ?[0-9]){5}$' required>
                 </div>
                 <div class='form-group'>
                  <label for='staUnavailability'>Unavailability<span class='text-muted'>(Optional)</span></label>
-                    <input type='text' id='staUnavailability' name='staUnavailability' class='form-control' placeholder='Your Unavailability Date or Time'>
+                    <input type='text' id='staUnavailability' name='staUnavailability' class='form-control' value='".$GLOBALS['user']['unavailability']."' placeholder='Your Unavailability Date or Time'>
                 </div>
                 ";
             }

@@ -92,7 +92,7 @@ if ($_SESSION['session_user'] != "") {
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number<span class="text-muted">(Optional)</span></label>
-                                <input type="tel" id="stuPhoneNumber" name="stuPhoneNumber" class="form-control" placeholder="Your phone number">
+                                <input type="tel" id="stuPhoneNumber" name="stuPhoneNumber" class="form-control" placeholder="e.g.(+61)/(0)xxxxxxxxx">
                                 <div class="invalid-feedback">
                                     Please match the format requested.
                                 </div>
@@ -152,7 +152,7 @@ if ($_SESSION['session_user'] != "") {
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="tel" id="staPhoneNumber" name="staPhoneNumber" class="form-control" placeholder="Your phone number" pattern="^(?:\+?61|0)4 ?(?:(?:[01] ?[0-9]|2 ?[0-57-9]|3 ?[1-9]|4 ?[7-9]|5 ?[018]) ?[0-9]|3 ?0 ?[0-5])(?: ?[0-9]){5}$" required>
+                                <input type="tel" id="staPhoneNumber" name="staPhoneNumber" class="form-control" placeholder="e.g.(+61)/(0)xxxxxxxxx" pattern="^(?:\+?61|0)4 ?(?:(?:[01] ?[0-9]|2 ?[0-57-9]|3 ?[1-9]|4 ?[7-9]|5 ?[018]) ?[0-9]|3 ?0 ?[0-5])(?: ?[0-9]){5}$" required>
                             </div>
                             <hr class="mb-4">
                             <button type="submit" id="staSubmitBtn" class="btn btn-primary btn-lg btn-block mb-5 d-flex align-items-center justify-content-center">

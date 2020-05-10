@@ -23,7 +23,28 @@ if ($_POST['student']) {
         $res->update = false;
     }
 } else if ($_POST['staff']) {
+    $name = $_POST['name'];
+    $staID = $_POST['staID'];
+    $email = $_POST['email'];
+    if (!empty($_POST['password'])) {
+        $password = crypt($_POST['password']);
+    }
+    $qualification = $_POST['qualification'];
+    $expertise = $_POST['expertise'];
+    $phone = $_POST['phone'];
+    $unavailability = $_POST['unavailability'];
+
+    $updateStaQuery = "UPDATE assignment_staffs SET name='" . $name . "', email='" . $email . "'";
+    if (!empty($_POST['password'])) {
+        $updateStaQuery .= ", password = '" . $password . "'";
+    }
+    $updateStaQuery .= ", qualification = '" . $qualification . "', expertise = '" . $expertise . "', phone = '" . $phone . "', unavailability = '" . $unavailability . "' WHERE st_id = '" . $staID . "'";
+    $updateStaResult = $mysqli->query($updateStaQuery);
+    if ($updateStaResult) {
+        $res->update = true;
+    } else {
+        $res->update = false;
+    }
 }
 echo json_encode($res);
 $mysqli->close();
-?>
