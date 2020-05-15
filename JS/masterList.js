@@ -62,66 +62,71 @@ function removeStaff(e) {
 
 //create new staff
 function createNewStaffForm(form) {
-    if ($('.checkboxGroup').find("input.custom-control-input:checked").length <= 0) {
-        $('.checkboxGroup').addClass('is-invalid');
+    if ($("#staNewPassword").val().trim() != $("#staRePassword").val().trim()) {
+        alert("Password does not match");
         return false;
-    } else {
-        $('.checkboxGroup').removeClass('is-invalid');
     }
-    var staID = "",
-        staName = "",
-        staQua = "",
-        staExp = "",
-        staPre = "",
-        staCon = "";
-    console.log(staPre);
+    sta = new Object();
+    sta.ID = "";
+    sta.name = "";
+    sta.password = "";
+    sta.qualification = "";
+    sta.expertise = "";
+    sta.role = "";
     var formdata = $(form).serializeArray();
+    console.log(formdata);
     for (let index = 0; index < formdata.length; index++) {
         const element = formdata[index];
-        if (element.name === "staNewID") {
-            staID = element.value;
-        } else if (element.name === "staNewName") {
-            staName = element.value;
-        } else if (element.name === "staNewQua") {
-            staQua = element.value;
-        } else if (element.name === "staNewExp") {
-            staExp = element.value;
-        } else if (element.name === "staNewPreMon") {
-            staPre += "Mon. ";
-        } else if (element.name === "staNewPreTue") {
-            staPre += "Tue. ";
-        } else if (element.name === "staNewPreWed") {
-            staPre += "Wed. ";
-        } else if (element.name === "staNewPreThu") {
-            staPre += "Thu. ";
-        } else if (element.name === "staNewPreFri") {
-            staPre += "Fri. ";
-        } else if (element.name === "staNewCon") {
-            staCon = element.value;
+        switch (element.name) {
+            case "staNewID":
+                sta.ID = element.value.trim();
+                break;
+            case "staNewName":
+                sta.name = element.value.trim();
+                break;
+            case "staNewPassword":
+                sta.password = element.value.trim();
+                break;
+            case "staNewQua":
+                sta.qualification = element.value.trim();
+                break;
+            case "staNewExp":
+                sta.expertise = element.value.trim();
+                break;
+            case "staNewRole":
+                sta.role = element.value.trim();
+            default:
+                break;
         }
-        console.log(element);
     }
-    console.log(staID, staName, staQua, staExp, staPre, staCon);
-    console.log(formdata);
-    var tr = $("<tr></tr>");
-    tr.html("<td scope= 'row' class = 'align-middle'>" + staID + "</td>" +
-        "<td class = 'align-middle'>" + staName + "</td>" +
-        "<td class = 'align-middle'>" + staQua + "</td>" +
-        "<td class = 'align-middle'>" + staExp + "</td>" +
-        "<td class = 'align-middle'>" + staPre + "</td>" +
-        "<td class = 'align-middle'>" + staCon + "</td>" +
-        "<td class = 'align-middle'>" + "<button type='button' id='btnEdit' class='btn btn-primary btn-lg btn-block' data-toggle='modal' data-target='#manageStaff' onclick='editStaff(this)'>Edit</button></td>" +
-        "<td class = 'align-middle'>" + "<button type='button' id='btnRemove' class='btn btn-danger btn-lg btn-block' onclick='removeStaff(this)'>Remove</button></td>"
-    );
-    $("#staManagementTable").find("tr").last().after(tr);
-    $("#createNewStaff").modal('hide');
+    console.log(sta);
+    $.post('../php/master_list_staff_engine.php', {
+        insertStaff: true,
+        staffID: sta.ID,
+        staffName: sta.name,
+        staffPassword: sta.password,
+        staffQualification: sta.qualification,
+        staffExpertise: sta.expertise,
+        staffRole: sta.role
+    }, function (data) {
+        if (data.exist) {
+            alert("Staff Exists.");
+        } else {
+            if (data.insert) {
+                alert("Create New Staff Successfully.");
+                window.location.href = "../pages/masterList.php?state=0";
+            }
+        }
+    }, 'json');
+
+    // $("#createNewStaff").modal('hide');
     return false;
 }
 
 //edit staff table
 $(function () {
     $("#staManagementTable").Tabledit({
-        url: "../php/master_list_engine.php",
+        url: "../php/master_list_staff_engine.php",
         toolbarClass: 'd-inline',
         buttons: {
             edit: {
@@ -139,23 +144,26 @@ $(function () {
             identifier: [0, 'staffID'],
             editable: [
                 [1, "name"],
-                [2, "qualification"],
+                [2, "qualification", '{"Bachelor":"Bachelor", "Master":"Master", "PhD":"PhD"}'],
                 [3, "expertise"],
-                [4, "preferred"],
-                [5, "consulation", '{"1":"1pm","2":"2pm"}']
+                [5, "role", '{"1":"Staff", "2":"Tutor", "3":"Lecturer", "4":"Unit Coordinator", "5":"Degree Coordinator"}']
             ]
         },
         restoreButton: false,
         autoFocus: true,
         onSuccess: function (data, textStatus, jqXHR) {
             console.log(data);
-            if (data.action === 'delete') {
+            if (data.action === 'edit') {
+                if (data.update) {
+                    alert("Update Staff Successfully");
+                }
+            } else if (data.action === 'delete') {
+                alert("Remove Staff Successfully");
                 $('#' + data.id).remove();
             }
         }
     });
 })
-
 
 /*
 NOTE UNIT
@@ -177,15 +185,16 @@ function createNewUnitForm(form) {
         unit.name = "";
         unit.semesters = "";
         unit.campuses = "";
+        unit.unitCoordinatorID = "";
         unit.description = "";
         for (let index = 0; index < formdata.length; index++) {
             const element = formdata[index];
             switch (element.name) {
                 case "unitCode":
-                    unit.code = element.value;
+                    unit.code = element.value.trim();
                     break;
                 case "unitName":
-                    unit.name = element.value;
+                    unit.name = element.value.trim();
                     break;
                 case "unitSem1":
                     unit.semesters += "Semester 1,";
@@ -208,8 +217,11 @@ function createNewUnitForm(form) {
                 case "unitNeverland":
                     unit.campuses += "Neverland,";
                     break;
+                case "unitCoordinatorID":
+                    unit.unitCoordinatorID = element.value.trim();
+                    break;
                 case "unitDescription":
-                    unit.description = element.value;
+                    unit.description = element.value.trim();
                     break;
                 default:
                     break;
@@ -217,22 +229,29 @@ function createNewUnitForm(form) {
 
         }
         console.log(unit);
-        $.post('../php/master_list_engine.php', {
+        $.post('../php/master_list_unit_engine.php', {
             insertUnit: true,
             unitCode: unit.code,
             unitName: unit.name,
             unitSemesters: unit.semesters,
             unitCampuses: unit.campuses,
+            unitCoordinatorID: unit.unitCoordinatorID,
             unitDescription: unit.description
         }, function (data) {
             console.log(data);
             if (data.exist) {
-                alert('Unit exists.');
+                alert('Unit Exists.');
             } else {
-                if (data.insertDetail && data.insertList) {
-                    alert('Add new unit successfully.');
-                    window.location.href = "../pages/masterList.php?state=1";
+                if (data.UC) {
+                    if (data.insertDetail && data.insertList) {
+                        alert('Add New Unit successfully.');
+                        window.location.href = "../pages/masterList.php?state=1";
+                    }
+
+                } else {
+                    alert('Staff ID not exist or incorrect, Please check.');
                 }
+
             }
         }, 'json');
     }
@@ -246,7 +265,8 @@ function editUnit(e) {
     var unitName = td_content.eq(1).text();
     var semesters = td_content.eq(2).text();
     var campuses = td_content.eq(3).text();
-    var description = td_content.eq(4).text();
+    var unitCoordinatorID = td_content.eq(4).text();
+    var description = td_content.eq(6).text();
     //  alert(unitCode + unitName + semesters + campuses + description);
     $("#unitCodeMan").val(unitCode);
     $("#unitNameMan").val(unitName);
@@ -288,6 +308,7 @@ function editUnit(e) {
                 break;
         }
     }
+    $('#unitCoordinatorIDMan').val(unitCoordinatorID);
     $("#unitDescriptionMan").val(description);
     $("#manageUnit").modal('show');
 }
@@ -307,15 +328,16 @@ function manageUnitForm(form) {
         unit.name = "";
         unit.semesters = "";
         unit.campuses = "";
+        unit.unitCoordinatorID = "";
         unit.description = "";
         for (let index = 0; index < formdata.length; index++) {
             const element = formdata[index];
             switch (element.name) {
                 case "unitCode":
-                    unit.code = element.value;
+                    unit.code = element.value.trim();
                     break;
                 case "unitName":
-                    unit.name = element.value;
+                    unit.name = element.value.trim();
                     break;
                 case "unitSem1":
                     unit.semesters += "Semester 1,";
@@ -338,8 +360,11 @@ function manageUnitForm(form) {
                 case "unitNeverland":
                     unit.campuses += "Neverland,";
                     break;
+                case "unitCoordinatorIDMan":
+                    unit.unitCoordinatorID = element.value.trim();
+                    break;
                 case "unitDescription":
-                    unit.description = element.value;
+                    unit.description = element.value.trim();
                     break;
                 default:
                     break;
@@ -347,20 +372,26 @@ function manageUnitForm(form) {
 
         }
         console.log(unit);
-        $.post('../php/master_list_engine.php', {
+        $.post('../php/master_list_unit_engine.php', {
             editUnit: true,
             unitCode: unit.code,
             unitName: unit.name,
             unitSemesters: unit.semesters,
             unitCampuses: unit.campuses,
+            unitCoordinatorID: unit.unitCoordinatorID,
             unitDescription: unit.description
         }, function (data) {
-            if (data.updateDetails) {
-                if (data.updateList) {
-                    alert('Change successfully.');
-                    window.location.href = "../pages/masterList.php?state=1";
+            if (data.UC) {
+                if (data.updateDetails) {
+                    if (data.updateList) {
+                        alert('Change successfully.');
+                        window.location.href = "../pages/masterList.php?state=1";
+                    }
                 }
+            } else {
+                alert('Staff ID not exist or incorrect, Please check.');
             }
+
         }, 'json');
 
     }
@@ -380,7 +411,7 @@ function showRemove(e) {
 function removeUnit(e) {
     var td_content = $(e).parents('tr').children('td');
     var unitCode = td_content.eq(0).text();
-    $.post('../php/master_list_engine.php', {
+    $.post('../php/master_list_unit_engine.php', {
         unitRemove: true,
         unitCode: unitCode
     }, function (data) {

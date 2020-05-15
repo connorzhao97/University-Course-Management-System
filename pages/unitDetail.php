@@ -6,7 +6,13 @@ if ($_SESSION['session_user'] != "") {
         $unitDetailQuery = "SELECT * FROM assignment_units_details WHERE unit_code='" . $_GET['code'] . "'";
         $unitDetailResult = $mysqli->query($unitDetailQuery);
         if ($unitDetailResult->num_rows > 0) {
-            $_GLOBALS['unit'] = $unitDetailResult->fetch_assoc();
+            $_GLOBALS['unit'] = $unitDetailResult->fetch_assoc();       
+            $unitCoordinatorNameQuery = "SELECT name FROM assignment_staffs WHERE st_id = '" . $_GLOBALS['unit']['unit_coordinator_id'] . "'";
+            $unitCoordinatorNameResult = $mysqli->query($unitCoordinatorNameQuery);
+            if ($unitCoordinatorNameResult->num_rows > 0) {
+                $row = $unitCoordinatorNameResult->fetch_assoc();
+                $_GLOBALS['unitCoordinatorName'] = $row['name'];
+            }
         } else {
             echo "<script>alert('Do not have record.'); window.location.href='../pages/unitDetail.php'</script>";
         }
@@ -145,20 +151,9 @@ if ($_SESSION['session_user'] != "") {
                 </div>
             </div>
             <div class="card mb-5 shadow-lg p-3 mb-5 bg-white rounded">
-                <h5 class="card-header">Unit coordinator and lecturer</h5>
+                <h5 class="card-header">Unit coordinator</h5>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered">
-                        <tbody>
-                            <tr>
-                                <th scope="col">Unit coordinator</th>
-                                <td>Mark</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Unit lecturer</th>
-                                <td>Jacob</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <p class="card-text">' . $_GLOBALS['unitCoordinatorName']  . '</p>
                 </div>
             </div>
             <div class="card mb-5 shadow-lg p-3 mb-5 bg-white rounded">
@@ -231,12 +226,11 @@ if ($_SESSION['session_user'] != "") {
         </div>
     </footer>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-    <script type="text/javascript" src="../JS/unitDetail.js"></script>
 </body>
 
 </html>

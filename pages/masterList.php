@@ -113,7 +113,7 @@ if ($_SESSION['session_user'] != "") {
         </div>
     </div>
     <!-- NOTE content -->
-    <div class="container">
+    <div class="container-fluid px-5">
         <div class="nav nav-pills flex-column flex-sm-row mb-2 shadow p-3 mb-5 bg-white rounded" id="pills-tab" role="tablist">
             <a class="flex-sm-fill text-sm-center nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">Staff Management</a>
             <a class="flex-sm-fill text-sm-center nav-link" id="pills-second-tab" data-toggle="pill" href="#pills-second" role="tab" aria-controls="pills-second" aria-selected="false">Unit Management</a>
@@ -129,24 +129,49 @@ if ($_SESSION['session_user'] != "") {
                             <th scope="col">Staff Name</th>
                             <th scope="col">Qualification</th>
                             <th scope="col">Expertise</th>
-                            <th scope="col">Preferred days of teaching</th>
-                            <th scope="col">Consultation hours</th>
+                            <th scope="col">Unavailability</th>
+                            <th scope="col">Role</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- NOTE one of staffs -->
-                        <tr>
-                            <td>123456</td>
-                            <td>Jack</td>
-                            <td>Master</td>
-                            <td>Human Computer Interaction</td>
-                            <td>Mon. Thu.</td>
-                            <td>Mon. 9:00 - 10:00</td>
-                        </tr>
+                        <?php
+                        $selectStaffQuery = "SELECT st_id, name, qualification, expertise, unavailability FROM assignment_staffs";
+                        $selectStaffResult = $mysqli->query($selectStaffQuery);
+                        if ($selectStaffResult->num_rows > 0) {
+                            while ($row = $selectStaffResult->fetch_assoc()) {
+                                echo "<tr>";
+                                foreach ($row as $key => $value) {
+                                    echo "<td class='align-middle'>$value</td>";
+                                }
+                                $selectAccessQuery = "SELECT access FROM assignment_users WHERE st_id ='" . $row['st_id'] . "' ORDER BY st_id ASC";
+                                $selctAccessResult = $mysqli->query($selectAccessQuery);
+                                $rowAccess = $selctAccessResult->fetch_assoc();
+                                switch ($rowAccess['access']) {
+                                    case '1':
+                                        echo "<td class='align-middle'>Staff</td>";
+                                        break;
+                                    case '2':
+                                        echo "<td class='align-middle'>Tutor</td>";
+                                        break;
+                                    case '3':
+                                        echo "<td class='align-middle'>Lecturer</td>";
+                                        break;
+                                    case '4':
+                                        echo "<td class='align-middle'>Unit Coordinator</td>";
+                                        break;
+                                    case '5':
+                                        echo "<td class='align-middle'>Degree Coordinator</td>";
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                echo "</tr>";
+                            }
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
-
             <!-- NOTE unit management -->
             <div class="tab-pane fade" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
                 <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
@@ -160,19 +185,34 @@ if ($_SESSION['session_user'] != "") {
                                     <th scope="col">Unit Name</th>
                                     <th scope="col">Semester</th>
                                     <th scope="col">Campus</th>
+                                    <th scope="col">UC ID</th>
+                                    <th scope="col">UC Name</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $quert = "SELECT unit_code, unit_name, semester, campus, description FROM assignment_units_details ORDER BY unit_code";
+                                $quert = "SELECT unit_code, unit_name, semester, campus, unit_coordinator_id, description FROM assignment_units_details ORDER BY unit_code";
                                 $result = $mysqli->query($quert);
-                                if ($result) {
+                                if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         echo "<tr>";
                                         foreach ($row as $key => $value) {
-                                            if ($key == "description") {
+                                            if ($key == "unit_coordinator_id") {
+                                                if (!empty($value)) {
+                                                    $selectNameQuery = "SELECT name FROM assignment_staffs WHERE st_id = '$value'";
+                                                    $selectNameResult = $mysqli->query($selectNameQuery);
+                                                    if ($selectNameResult->num_rows > 0) {
+                                                        $rowName = $selectNameResult->fetch_assoc();
+                                                        echo "<td class='align-middle'>" . $value . "</td>";
+                                                        echo "<td class='align-middle'>" . $rowName['name'] . "</td>";
+                                                    }
+                                                } else {
+                                                    echo "<td class='align-middle'></td>";
+                                                    echo "<td class='align-middle'></td>";
+                                                }
+                                            } else if ($key == "description") {
                                                 echo "<td class='align-middle text-truncate' style='max-width: 400px;'>$value</td>";
                                             } else {
                                                 echo "<td class='align-middle'>$value</td>";
@@ -191,17 +231,6 @@ if ($_SESSION['session_user'] != "") {
                                     }
                                 }
                                 ?>
-                                <!-- <tr id="KIT502">
-                                    <td scope="row" class="align-middle">KIT502</td>
-                                    <td class="align-middle">Web Development</td>
-                                    <td class="align-middle">Semester 1, Semester 2</td>
-                                    <td class="align-middle">Pandora, Neverland</td>
-                                    <td class="align-middle text-truncate" style="max-width: 400px;">This unit will explain the relationship between data, information and knowledge and introduce a number of different tools for managing, storing, securing, modelling, visualizing and analysing data.</td>
-                                    <td class="align-middle">
-                                        <button type="button" name="" id="" class="btn btn-primary btn-block" onclick="editUnit(this)">Edit</button>
-                                        <button type="button" name="" id="" class="btn btn-danger btn-block" onclick="removeUnit(this)">Remove</button>
-                                    </td>
-                                </tr> -->
                             </tbody>
                         </table>
                     </form>
@@ -222,65 +251,48 @@ if ($_SESSION['session_user'] != "") {
                         <form id="fCNSta" name="fCNSta" onsubmit="return createNewStaffForm(this);">
                             <div class="form-group">
                                 <label for="staNewID">Staff ID</label>
-                                <input type="text" class="form-control" name="staNewID" id="staNewID" placeholder="" required>
+                                <input type="text" class="form-control" name="staNewID" id="staNewID" placeholder="Staff ID" required>
                             </div>
                             <div class="form-group">
                                 <label for="staNewName">Staff Name</label>
-                                <input type="text" class="form-control" name="staNewName" id="staNewName" placeholder="" required>
+                                <input type="text" class="form-control" name="staNewName" id="staNewName" placeholder="Staff Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="staNewPassword">Password</label>
+                                <input type="password" id="staNewPassword" name="staNewPassword" class="form-control" placeholder="Set default password" aria-describedby="passwordHelpId" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
+                                <small id="passWordHelpId" class="text-muted"> Password must be 6-12 characters
+                                    long, contain at least 1 lowercase letter,1 uppercase letter,1 number and one of
+                                    following special characters ! @ # $ % ^</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="repassword">Re-enter Password</label>
+                                <input type="password" id="staRePassword" name="staRePassword" class="form-control" placeholder="Re-enter default password" required>
                             </div>
                             <div class="form-group">
                                 <label for="staNewQua">Qualification</label>
                                 <select class="custom-select" name="staNewQua" id="staNewQua" required>
                                     <option value="" selected>Select Qualification</option>
-                                    <option value="PhD">PhD</option>
+                                    <option value="Bachelor">Bachelor</option>
                                     <option value="Master">Master</option>
+                                    <option value="PhD">PhD</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="staNewExp">Expertise</label>
-                                <select class="custom-select" name="staNewExp" id="staNewExp" required>
-                                    <option value="" selected>Select Expertise</option>
-                                    <option value="Information Systems">Information Systems</option>
-                                    <option value="Human Computer Interaction">Human Computer Interaction</option>
-                                    <option value="Network Administration">Network Administration</option>
+                                <input type="text" id="staNewExp" name="staNewExp" class="form-control" placeholder="e.g. Information Systems" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="staNewRole">Role</label>
+                                <select class="custom-select" name="staNewRole" id="staNewRole" required>
+                                    <option value="" selected>Select Role</option>
+                                    <option value="1">Staff</option>
+                                    <option value="2">Tutor</option>
+                                    <option value="3">Lecturer</option>
+                                    <option value="4">Unit Coordinator</option>
+                                    <option value="5">Degree Coordinator</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <div class="column">
-                                    <label for="staPreDyas">Preferred days of teaching</label>
-                                    <div class="checkboxGroup" required>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="staNewPreMon" name="staNewPreMon" class="custom-control-input">
-                                            <label class="custom-control-label" for="staNewPreMon">Mon.</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="staNewPreTue" name="staNewPreTue" class="custom-control-input">
-                                            <label class="custom-control-label" for="staNewPreTue">Tue.</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="staNewPreWed" name="staNewPreWed" class="custom-control-input">
-                                            <label class="custom-control-label" for="staNewPreWed">Wed.</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="staNewPreThu" name="staNewPreThu" class="custom-control-input">
-                                            <label class="custom-control-label" for="staNewPreThu">Thu.</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="staNewPreFri" name="staNewPreFri" class="custom-control-input">
-                                            <label class="custom-control-label" for="staNewPreFri">Fri.</label>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please select one preferred of teaching day at least.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="staCon">Consultation hours</label>
-                                <input type="text" class="form-control" name="staNewCon" id="staNewCon" placeholder="" required>
-                            </div>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Create</button>
@@ -431,6 +443,10 @@ if ($_SESSION['session_user'] != "") {
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="unitCoordinatorID">Unit Coordinator ID</label>
+                                <input type="text" class="form-control" name="unitCoordinatorID" id="unitCoordinatorID" placeholder="Input Staff ID to allocate" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="description">Unit Description</label>
                                 <textarea class="form-control" name="unitDescription" id="unitDescription" rows="3" required></textarea>
                             </div>
@@ -503,20 +519,23 @@ if ($_SESSION['session_user'] != "") {
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="unitCoordinatorIDMan">Unit Coordinator ID</label>
+                                <input type="text" class="form-control" name="unitCoordinatorIDMan" id="unitCoordinatorIDMan" placeholder="Input Staff ID to allocate" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="description">Unit Description</label>
                                 <textarea class="form-control" name="unitDescription" id="unitDescriptionMan" rows="3" required></textarea>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Save</button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- NOTE footer -->
     <footer class="footer mt-auto py-3 bg-dark">
         <div class="container-fluid text-white d-flex align-center justify-content-center">
@@ -532,7 +551,7 @@ if ($_SESSION['session_user'] != "") {
         </div>
     </footer>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
