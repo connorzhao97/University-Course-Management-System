@@ -64,14 +64,3 @@ Lecturer:3,
 Tutor:2,
 Staff member:1,
 Student:0.
-
-//campuses
-Randora:0,
-Rivendell:1,
-Neverland:2
-
-//semester
-Semester 1:0,
-Semester 2:1,
-Winter School:3,
-Spring School:4

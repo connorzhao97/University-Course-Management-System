@@ -95,6 +95,7 @@ function createNewStaffForm(form) {
                 break;
             case "staNewRole":
                 sta.role = element.value.trim();
+                break;
             default:
                 break;
         }
@@ -425,6 +426,4 @@ function removeUnit(e) {
 //before submiting remove select disabled attr
 function unitManagementFormSubmit(unit) {
     console.log($(unit).serializeArray());
-
-    // return false;
 }

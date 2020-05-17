@@ -188,7 +188,7 @@ if ($_SESSION['session_user'] != "") {
                                     <th scope="col">UC ID</th>
                                     <th scope="col">UC Name</th>
                                     <th scope="col">Description</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -247,8 +247,8 @@ if ($_SESSION['session_user'] != "") {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form id="fCNSta" name="fCNSta" onsubmit="return createNewStaffForm(this);">
+                    <form id="fCNSta" name="fCNSta" onsubmit="return createNewStaffForm(this);">
+                        <div class="modal-body">
                             <div class="form-group">
                                 <label for="staNewID">Staff ID</label>
                                 <input type="text" class="form-control" name="staNewID" id="staNewID" placeholder="Staff ID" required>
@@ -292,11 +292,11 @@ if ($_SESSION['session_user'] != "") {
                                     <option value="5">Degree Coordinator</option>
                                 </select>
                             </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
                     </form>
                 </div>
             </div>

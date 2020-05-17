@@ -6,7 +6,7 @@ if ($_SESSION['session_user'] != "") {
         $unitDetailQuery = "SELECT * FROM assignment_units_details WHERE unit_code='" . $_GET['code'] . "'";
         $unitDetailResult = $mysqli->query($unitDetailQuery);
         if ($unitDetailResult->num_rows > 0) {
-            $_GLOBALS['unit'] = $unitDetailResult->fetch_assoc();       
+            $_GLOBALS['unit'] = $unitDetailResult->fetch_assoc();
             $unitCoordinatorNameQuery = "SELECT name FROM assignment_staffs WHERE st_id = '" . $_GLOBALS['unit']['unit_coordinator_id'] . "'";
             $unitCoordinatorNameResult = $mysqli->query($unitCoordinatorNameQuery);
             if ($unitCoordinatorNameResult->num_rows > 0) {
@@ -144,19 +144,19 @@ if ($_SESSION['session_user'] != "") {
             //unit details
             echo '
             <div>
-            <div class="card mb-5 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card mb-5 shadow-lg mb-5 bg-white rounded">
                 <h5 class="card-header">Description</h5>
                 <div class="card-body">
                     <p class="card-text">' . $_GLOBALS['unit']['description'] . '</p>
                 </div>
             </div>
-            <div class="card mb-5 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card mb-5 shadow-lg mb-5 bg-white rounded">
                 <h5 class="card-header">Unit coordinator</h5>
                 <div class="card-body">
                     <p class="card-text">' . $_GLOBALS['unitCoordinatorName']  . '</p>
                 </div>
             </div>
-            <div class="card mb-5 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card mb-5 shadow-lg mb-5 bg-white rounded">
                 <h5 class="card-header">Available campus and semester</h5>
                 <div class="card-body">
                     <table class="table table-striped table-bordered">
@@ -196,7 +196,7 @@ if ($_SESSION['session_user'] != "") {
                     foreach ($row as $key => $value) {
                         echo "<td>$value</td>";
                     }
-                    echo '<td><a name="' . $row['unit_code'] . '" id="' . $row['unit_code'] . '" class="btn btn-primary" href="../pages/unitDetail.php?code=' . $row['unit_code'] . '" role="button">View Details</a></td>';
+                    echo '<td class="d-flex justify-content-center"><a name="' . $row['unit_code'] . '" id="' . $row['unit_code'] . '" class="btn btn-primary" href="../pages/unitDetail.php?code=' . $row['unit_code'] . '" role="button">View Details</a></td>';
                     echo "</tr>";
                 }
             }
@@ -207,9 +207,6 @@ if ($_SESSION['session_user'] != "") {
             ';
         }
         ?>
-
-
-
     </div>
     <!-- NOTE footer -->
     <footer class="footer mt-auto py-3 bg-dark">
