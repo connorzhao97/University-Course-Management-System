@@ -128,7 +128,7 @@ if ($_SESSION['session_user'] != "") {
                     if ($selectEnrolmentResult->num_rows > 0) {
                         while ($row = $selectEnrolmentResult->fetch_assoc()) {
                             // echo print_r($row);
-                            $unitDetailQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id = '" . $row['unit_id'] . "'";
+                            $unitDetailQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id = '" . $row['details_id'] . "'";
                             $unitDetailResult = $mysqli->query($unitDetailQuery);
                             if ($unitDetailResult->num_rows > 0) {
                                 $rowDetails = $unitDetailResult->fetch_assoc();
@@ -176,7 +176,7 @@ if ($_SESSION['session_user'] != "") {
                         $rowList = $unitListResult->fetch_all(MYSQLI_ASSOC);
                         // echo print_r($rowList);
 
-                        $checkEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE unit_id = '" . $row['id'] . "'";
+                        $checkEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE details_id = '" . $row['id'] . "'";
                         $checkEnrolmentRusult = $mysqli->query($checkEnrolmentQuery);
                         if ($checkEnrolmentRusult->num_rows > 0) {
                             $output = "

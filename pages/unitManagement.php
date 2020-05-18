@@ -142,8 +142,8 @@ if ($_SESSION['session_user'] != "") {
             echo ' <div class="row">
             <div class="col-2">
                 <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="list-lecture-list" data-toggle="list" href="#list-lecture" role="tab" aria-controls="lecture">Lecture</a>
-                    <a class="list-group-item list-group-item-action" id="list-tutorial-list" data-toggle="list" href="#list-tutorial" role="tab" aria-controls="tutorial">Tutorial</a>
+                    <a class="d-inline-block text-truncate list-group-item list-group-item-action active" id="list-lecture-list" data-toggle="list" href="#list-lecture" role="tab" aria-controls="lecture">Lecture</a>
+                    <a class="d-inline-block text-truncate list-group-item list-group-item-action" id="list-tutorial-list" data-toggle="list" href="#list-tutorial" role="tab" aria-controls="tutorial">Tutorial</a>
                 </div>
             </div>
             <div class="col-10">
