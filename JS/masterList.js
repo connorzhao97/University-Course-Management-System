@@ -417,7 +417,7 @@ function removeUnit(e) {
         unitCode: unitCode
     }, function (data) {
         if (data.deleteDetail && data.deleteList) {
-            alert('Remove successfully.');
+            alert('Remove Unit Successfully.');
             $(e).parents('tr').remove();
         }
     }, 'json');

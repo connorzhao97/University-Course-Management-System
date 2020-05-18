@@ -159,6 +159,7 @@ if ($_SESSION['session_user'] != "") {
                                             <tr>
                                                 <th scope="col">Day</th>
                                                 <th scope="col">Start Time</th>
+                                                <th scope="col">Duration</th>
                                                 <th scope="col">Location</th>
                                                 <th scope="col">Semester and Campus</th>
                                                 <th scope="col">Lecturer ID</th>
@@ -174,6 +175,7 @@ if ($_SESSION['session_user'] != "") {
                     echo "<tr id='" . $row['id'] . "'>
                     <td class='align-middle'>" . $row['day'] . "</td>
                     <td class='align-middle'>" . $row['time'] . "</td>
+                    <td class='align-middle'>" . $row['duration'] . "</td>
                     <td class='align-middle'>" . $row['location'] . "</td>";
 
                     $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $row['units_lists_id'] . "'";
@@ -210,6 +212,7 @@ if ($_SESSION['session_user'] != "") {
                                     <tr>
                                         <th scope="col">Day</th>
                                         <th scope="col">Start Time</th>
+                                        <th scope="col">Duration</th>
                                         <th scope="col">Location</th>
                                         <th scope="col">Semester and Campus</th>
                                         <th scope="col">Tutor ID</th>
@@ -226,6 +229,7 @@ if ($_SESSION['session_user'] != "") {
                     echo "<tr id='" . $row['id'] . "'>
                     <td class='align-middle'>" . $row['day'] . "</td>
                     <td class='align-middle'>" . $row['time'] . "</td>
+                    <td class='align-middle'>" . $row['duration'] . "</td>
                     <td class='align-middle'>" . $row['location'] . "</td>";
                     $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $row['units_lists_id'] . "'";
                     $selectSCResult = $mysqli->query($selectSCQuery);
@@ -303,7 +307,7 @@ if ($_SESSION['session_user'] != "") {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="createLectureForm" name="createLectureForm" onsubmit="return createNewLectureForm(this,<?php echo $_GLOBALS['unitDetails']['id'] ?>);">
+                    <form id="createLectureForm" name="createLectureForm" onsubmit="return createNewLectureForm(this, '<?php echo $_GET['code']; ?>', <?php echo $_GLOBALS['unitDetails']['id']; ?>);">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="lecDay">Day</label>
@@ -317,7 +321,7 @@ if ($_SESSION['session_user'] != "") {
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="lecTime">Start Time</label>
+                                <label for="lecHour">Start Time</label>
                                 <div class="row d-flex justify-content-around">
                                     <select class="custom-select col-5" name="lecHour" id="lecHour" required>
                                         <option value="" selected>Select a Start Hour</option>
@@ -337,6 +341,10 @@ if ($_SESSION['session_user'] != "") {
                                         <option value="30">30</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lecDuration">Duration</label>
+                                <input type="number" class="form-control" name="lecDuration" id="lecDuration" placeholder="Input the number of duration hour(s)" min="1" max="10" required>
                             </div>
                             <div class="form-group">
                                 <label for="lecLocation">Location</label>
@@ -377,20 +385,105 @@ if ($_SESSION['session_user'] != "") {
             </div>
         </div>
 
-        <!-- NOTE manage Lecture Modal -->
-
+        <!-- NOTE Manage Lecture Modal -->
+        <div class="modal fade" id="manageLecture" tabindex="-1" role="dialog" aria-labelledby="manageLectureLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Manage Lecture</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="manageLectureForm" name="manageLectureForm" onsubmit="return manageNewLectureForm(this,'<?php echo $_GET['code']; ?>');">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="lecDayMan">Day</label>
+                                <select class="custom-select" name="lecDayMan" id="lecDayMan" required>
+                                    <option value="">Select a Day</option>
+                                    <option id="lecDayManMonday" value="Monday">Monday</option>
+                                    <option id="lecDayManTuesday" value="Tuesday">Tuesday</option>
+                                    <option id="lecDayManWednesday" value="Wednesday">Wednesday</option>
+                                    <option id="lecDayManThursday" value="Thursday">Thursday</option>
+                                    <option id="lecDayManFriday" value="Friday">Friday</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="lecHourMan">Start Time</label>
+                                <div class="row d-flex justify-content-around">
+                                    <select class="custom-select col-5" name="lecHourMan" id="lecHourMan" required>
+                                        <option value="">Select a Start Hour</option>
+                                        <option id="lecHourMan9" value="9">9</option>
+                                        <option id="lecHourMan10" value="10">10</option>
+                                        <option id="lecHourMan11" value="11">11</option>
+                                        <option id="lecHourMan12" value="12">12</option>
+                                        <option id="lecHourMan13" value="13">13</option>
+                                        <option id="lecHourMan14" value="14">14</option>
+                                        <option id="lecHourMan15" value="15">15</option>
+                                        <option id="lecHourMan16" value="16">16</option>
+                                    </select>
+                                    <span class="d-flex align-items-center">:</span>
+                                    <select class="custom-select col-5" name="lecMinuteMan" id="lecMinuteMan" required>
+                                        <option value="">Select a Start Minute</option>
+                                        <option id="lecMinuteMan00" value="00">00</option>
+                                        <option id="lecMinuteMan30" value="30">30</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lecDurationMan">Duration</label>
+                                <input type="number" class="form-control" name="lecDurationMan" id="lecDurationMan" placeholder="Input the number of duration hour(s)" min="1" max="10" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lecLocationMan">Location</label>
+                                <input type="text" class="form-control" name="lecLocationMan" id="lecLocationMan" placeholder="Location" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lecSCMan">Available semester and campus</label>
+                                <select class="custom-select" name="lecSCMan" id="lecSCMan" required>
+                                    <?php
+                                    $initSCQuery = "SELECT * FROM assignment_units_lists WHERE details_id = '" . $_GLOBALS['unitDetails']['id'] . "' AND availability = '1'";
+                                    $initSCResult = $mysqli->query($initSCQuery);
+                                    if ($initSCResult->num_rows > 0) {
+                                        echo '<option value="">Select a semester and campus</option>';
+                                        while ($row = $initSCResult->fetch_assoc()) {
+                                            echo '<option id="lecSCMan' . $row['id'] . '" value="' . $row['id'] . '">' . $row['semester'] . ', ' . $row['campus'] . '</option>';
+                                        }
+                                    } else {
+                                        echo '<option value="" selected>No available semester and campus</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="lecLecturerIDMan">Lecturer ID</label>
+                                <input type="text" class="form-control" name="lecLecturerIDMan" id="lecLecturerIDMan" placeholder="Lecturer ID" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lecConsulationMan">Consulation Time</label>
+                                <input type="text" class="form-control" name="lecConsulationMan" id="lecConsulationMan" placeholder="Lecturer Consulation Time" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <!-- NOTE Create Tutorial Modal -->
         <div class="modal fade" id="createTutorial" tabindex="-1" role="dialog" aria-labelledby="createTutorialLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Create New Lecture</h5>
+                        <h5 class="modal-title">Create New Tutorial</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="createTutorialForm" name="createTutorialForm" onsubmit="return createNewTutorialForm(this,<?php echo $_GLOBALS['unitDetails']['id'] ?>);">
+                    <form id="createTutorialForm" name="createTutorialForm" onsubmit="return createNewTutorialForm(this, '<?php echo $_GET['code']; ?>', <?php echo $_GLOBALS['unitDetails']['id']; ?>);">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="tutoDay">Day</label>
@@ -424,6 +517,10 @@ if ($_SESSION['session_user'] != "") {
                                         <option value="30">30</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tutoDuration">Duration</label>
+                                <input type="number" class="form-control" name="tutoDuration" id="tutoDuration" placeholder="Input the number of duration hour(s)" min="1" max="10" required>
                             </div>
                             <div class="form-group">
                                 <label for="tutoLocation">Location</label>
@@ -466,6 +563,102 @@ if ($_SESSION['session_user'] != "") {
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- NOTE Manage Tutorial Modal -->
+        <div class="modal fade" id="manageTutorial" tabindex="-1" role="dialog" aria-labelledby="manageTutorialLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Manage Tutorial</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="manageTutorialForm" name="manageTutorialForm" onsubmit="return manageNewTutorialForm(this,'<?php echo $_GET['code']; ?>');">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="tutoDayMan">Day</label>
+                                <select class="custom-select" name="tutoDayMan" id="tutoDayMan" required>
+                                    <option value="">Select a Day</option>
+                                    <option id="tutoDayManMonday" value="Monday">Monday</option>
+                                    <option id="tutoDayManTuesday" value="Tuesday">Tuesday</option>
+                                    <option id="tutoDayManWednesday" value="Wednesday">Wednesday</option>
+                                    <option id="tutoDayManThursday" value="Thursday">Thursday</option>
+                                    <option id="tutoDayManFriday" value="Friday">Friday</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tutoHourMan">Start Time</label>
+                                <div class="row d-flex justify-content-around">
+                                    <select class="custom-select col-5" name="tutoHourMan" id="tutoHourMan" required>
+                                        <option value="">Select a Start Hour</option>
+                                        <option id="tutoHourMan9" value="9">9</option>
+                                        <option id="tutoHourMan10" value="10">10</option>
+                                        <option id="tutoHourMan11" value="11">11</option>
+                                        <option id="tutoHourMan12" value="12">12</option>
+                                        <option id="tutoHourMan13" value="13">13</option>
+                                        <option id="tutoHourMan14" value="14">14</option>
+                                        <option id="tutoHourMan15" value="15">15</option>
+                                        <option id="tutoHourMan16" value="16">16</option>
+                                    </select>
+                                    <span class="d-flex align-items-center">:</span>
+                                    <select class="custom-select col-5" name="tutoMinuteMan" id="tutoMinuteMan" required>
+                                        <option value="" selected>Select a Start Minute</option>
+                                        <option id="tutoMinuteMan00" value="00">00</option>
+                                        <option id="tutoMinuteMan30" value="30">30</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tutoDurationMan">Duration</label>
+                                <input type="number" class="form-control" name="tutoDurationMan" id="tutoDurationMan" placeholder="Input the number of duration hour(s)" min="1" max="10" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tutoLocationMan">Location</label>
+                                <input type="text" class="form-control" name="tutoLocationMan" id="tutoLocationMan" placeholder="Location" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tutoSCMan">Available semester and campus</label>
+                                <select class="custom-select" name="tutoSCMan" id="tutoSCMan" required>
+                                    <?php
+                                    $initSCQuery = "SELECT * FROM assignment_units_lists WHERE details_id = '" . $_GLOBALS['unitDetails']['id'] . "' AND availability = '1'";
+                                    $initSCResult = $mysqli->query($initSCQuery);
+                                    if ($initSCResult->num_rows > 0) {
+                                        echo '<option value="">Select a semester and campus</option>';
+                                        while ($row = $initSCResult->fetch_assoc()) {
+                                            echo '<option id="tutoSCMan' . $row['id'] . '" value="' . $row['id'] . '">' . $row['semester'] . ', ' . $row['campus'] . '</option>';
+                                        }
+                                    } else {
+                                        echo '<option value="" selected>No available semester and campus</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tutoTutorIDMan">Tutor ID</label>
+                                <input type="text" class="form-control" name="tutoTutorIDMan" id="tutoTutorIDMan" placeholder="Tutor ID" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tutoCapacityMan">Capacity</label>
+                                <select class="custom-select" name="tutoCapacityMan" id="tutoCapacityMan" required>
+                                    <option value="">Select a Capacity</option>
+                                    <option id="tutoCapacityMan15" value="15">15</option>
+                                    <option id="tutoCapacityMan30" value="30">30</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tutoConsulationMan">Consulation Time</label>
+                                <input type="text" class="form-control" name="tutoConsulationMan" id="tutoConsulationMan" placeholder="Tutorial Consulation Time" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>
                 </div>
