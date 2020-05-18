@@ -302,7 +302,7 @@ if ($_SESSION['session_user'] != "") {
             </div>
         </div>
 
-        <!-- NOTE manage staff modal -->
+        <!-- NOTE manage staff modal
         <div class="modal fade" id="manageStaff" tabindex="-1" role="dialog" aria-labelledby="manageStaffLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -381,7 +381,7 @@ if ($_SESSION['session_user'] != "") {
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
         <!-- NOTE create unit modal -->

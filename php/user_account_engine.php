@@ -1,15 +1,15 @@
 <?php
 include("../php/db_conn.php");
 if ($_POST['student']) {
-    $name = $_POST['name'];
-    $stuID = $_POST['stuID'];
-    $email = $_POST['email'];
+    $name = $mysqli->real_escape_string($_POST['name']);
+    $stuID = $mysqli->real_escape_string($_POST['stuID']);
+    $email = $mysqli->real_escape_string($_POST['email']);
     if (!empty($_POST['password'])) {
-        $password = crypt($_POST['password']);
+        $password = crypt($mysqli->real_escape_string($_POST['password']));
     }
-    $address = $_POST['address'];
-    $birth = $_POST['birth'];
-    $phone = $_POST['phone'];
+    $address = $mysqli->real_escape_string($_POST['address']);
+    $birth = $mysqli->real_escape_string($_POST['birth']);
+    $phone = $mysqli->real_escape_string($_POST['phone']);
     $updateStuQuery = "UPDATE assignment_students SET name ='" . $name . "', email = '" . $email . "'";
     if (!empty($_POST['password'])) {
         $updateStuQuery .= ", password = '" . $password . "'";
@@ -23,16 +23,16 @@ if ($_POST['student']) {
         $res->update = false;
     }
 } else if ($_POST['staff']) {
-    $name = $_POST['name'];
-    $staID = $_POST['staID'];
-    $email = $_POST['email'];
+    $name = $mysqli->real_escape_string($_POST['name']);
+    $staID = $mysqli->real_escape_string($_POST['staID']);
+    $email = $mysqli->real_escape_string($_POST['email']);
     if (!empty($_POST['password'])) {
-        $password = crypt($_POST['password']);
+        $password = crypt($mysqli->real_escape_string($_POST['password']));
     }
-    $qualification = $_POST['qualification'];
-    $expertise = $_POST['expertise'];
-    $phone = $_POST['phone'];
-    $unavailability = $_POST['unavailability'];
+    $qualification = $mysqli->real_escape_string($_POST['qualification']);
+    $expertise = $mysqli->real_escape_string($_POST['expertise']);
+    $phone = $mysqli->real_escape_string($_POST['phone']);
+    $unavailability = $mysqli->real_escape_string($_POST['unavailability']);
 
     $updateStaQuery = "UPDATE assignment_staffs SET name='" . $name . "', email='" . $email . "'";
     if (!empty($_POST['password'])) {

@@ -4,9 +4,9 @@ $('#createNewStaff').on('hidden.bs.modal', function (e) {
 })
 
 //clear manage staff form
-$('#manageStaff').on('hidden.bs.modal', function (e) {
-    $('#fMSta')[0].reset();
-})
+// $('#manageStaff').on('hidden.bs.modal', function (e) {
+//     $('#fMSta')[0].reset();
+// })
 
 //clear creat unit form
 $('#createNewUnit').on('hidden.bs.modal', function (e) {
@@ -47,18 +47,18 @@ NOTE STAFF
 */
 
 //edit staff information
-function editStaff(e) {
-    $(e).parents('tr').find('td').each(function () {
-        console.log($(this).text().trim());
-    })
-    // console.log($(e).parents('tr').find('td'));
-}
+// function editStaff(e) {
+//     $(e).parents('tr').find('td').each(function () {
+//         console.log($(this).text().trim());
+//     })
+//     // console.log($(e).parents('tr').find('td'));
+// }
 
 
 //remove staff from database and tables
-function removeStaff(e) {
-    $(e).parents('tr').remove();
-}
+// function removeStaff(e) {
+//     $(e).parents('tr').remove();
+// }
 
 //create new staff
 function createNewStaffForm(form) {
@@ -250,7 +250,7 @@ function createNewUnitForm(form) {
                     }
 
                 } else {
-                    alert('Staff ID not exist or incorrect, Please check.');
+                    alert('Unit Coordinator ID not exist or incorrect, Please check.');
                 }
 
             }
@@ -423,7 +423,7 @@ function removeUnit(e) {
     }, 'json');
 }
 
-//before submiting remove select disabled attr
-function unitManagementFormSubmit(unit) {
-    console.log($(unit).serializeArray());
-}
+// //before submiting remove select disabled attr
+// function unitManagementFormSubmit(unit) {
+//     console.log($(unit).serializeArray());
+// }

@@ -3,8 +3,8 @@
 include('../php/db_conn.php');
 include('../php/session.php');
 
-$stID = $_POST['stID'];
-$password = $_POST['password'];
+$stID = $mysqli->real_escape_string($_POST['stID']);
+$password = $mysqli->real_escape_string($_POST['password']);
 
 $query = "SELECT * FROM assignment_users WHERE st_id='$stID'";
 $result = $mysqli->query($query);

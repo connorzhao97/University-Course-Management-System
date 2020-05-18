@@ -2,13 +2,13 @@
 
 include("../php/db_conn.php");
 if ($_POST['student']) {
-    $name = $_POST['name'];
-    $stuID = $_POST['stuID'];
-    $email = $_POST['email'];
-    $password = crypt($_POST['password']);
-    $address = $_POST['address'];
-    $birth = $_POST['birth'];
-    $phone = $_POST['phone'];
+    $name = $mysqli->real_escape_string($_POST['name']);
+    $stuID = $mysqli->real_escape_string($_POST['stuID']);
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $password = crypt($mysqli->real_escape_string($_POST['password']));
+    $address = $mysqli->real_escape_string($_POST['address']);
+    $birth = $mysqli->real_escape_string($_POST['birth']);
+    $phone = $mysqli->real_escape_string($_POST['phone']);
 
     $existQuery = "SELECT * FROM assignment_users WHERE st_id ='$stuID'";
     $existResult = $mysqli->query($existQuery);
@@ -36,13 +36,13 @@ if ($_POST['student']) {
     $existResult->close();
     $mysqli->close();
 } else if ($_POST['staff']) {
-    $name = $_POST['name'];
-    $staID = $_POST['staID'];
-    $email = $_POST['email'];
-    $password = crypt($_POST['password']);
-    $qualification = $_POST['qualification'];
-    $expertise = $_POST['expertise'];
-    $phone = $_POST['phone'];
+    $name = $mysqli->real_escape_string($_POST['name']);
+    $staID = $mysqli->real_escape_string($_POST['staID']);
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $password = crypt($mysqli->real_escape_string($_POST['password']));
+    $qualification = $mysqli->real_escape_string($_POST['qualification']);
+    $expertise = $mysqli->real_escape_string($_POST['expertise']);
+    $phone = $mysqli->real_escape_string($_POST['phone']);
     $existQuery = "SELECT * FROM assignment_users WHERE st_id ='$staID'";
     $existResult = $mysqli->query($existQuery);
     if ($existResult->num_rows > 0) {
@@ -51,10 +51,10 @@ if ($_POST['student']) {
     } else {
         //not exist
         $res->exist = false;
-        $quertUser = "INSERT INTO assignment_users (st_id, access) VALUES ('$staID','1')";
-        $resultUser = $mysqli->query($quertUser);
+        $queryUser = "INSERT INTO assignment_users (st_id, access) VALUES ('$staID','1')";
+        $resultUser = $mysqli->query($queryUser);
         if ($resultUser) {
-            $query = "INSERT INTO assignment_staffs (st_id, name, email, password, qualification, expertise, phone, availability) VALUES ('$staID','$name','$email','$password','$qualification','$expertise','$phone','')";
+            $query = "INSERT INTO assignment_staffs (st_id, name, email, password, qualification, expertise, phone, unavailability) VALUES ('$staID','$name','$email','$password','$qualification','$expertise','$phone','')";
             $result = $mysqli->query($query);
             if ($result) {
                 $res->insert = true;
