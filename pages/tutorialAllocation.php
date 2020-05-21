@@ -201,7 +201,7 @@ if ($_SESSION['session_user'] != "") {
         } else {
             echo ' <div class="card">
             <div class="card-body">
-                <h4 class="card-title">You do not have any enrolments</h4>
+                <h4 class="card-title">You do not have any enrolments yet.</h4>
             </div>
         </div>';
         }

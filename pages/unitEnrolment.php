@@ -19,7 +19,7 @@ if ($_SESSION['session_user'] != "") {
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/unitenrolment.css">
+    <link rel="stylesheet" href="../CSS/unitEnrolment.css">
     <title>Unit Enrolment - University of DoWell</title>
 </head>
 
@@ -133,7 +133,7 @@ if ($_SESSION['session_user'] != "") {
                             if ($unitDetailResult->num_rows > 0) {
                                 $rowDetails = $unitDetailResult->fetch_assoc();
 
-                                $unitListQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id = '" . $row['unit_list_id'] . "'";
+                                $unitListQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id = '" . $row['units_lists_id'] . "'";
                                 $unitListResult = $mysqli->query($unitListQuery);
                                 if ($unitListResult->num_rows > 0) {
                                     $rowUnitList = $unitListResult->fetch_assoc();
@@ -158,7 +158,7 @@ if ($_SESSION['session_user'] != "") {
                             }
                         }
                     } else {
-                        echo "You don't have any enrolments yet.";
+                        echo "You do not have any enrolments yet.";
                     }
                     ?>
                 </div>

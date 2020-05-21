@@ -111,14 +111,14 @@ if ($_SESSION['session_user'] != "") {
         <div class="container h-100">
             <h1 class="display-4 mb-5 text-white">Individual Timetable</h1>
             <div class="row justify-content-around">
-                <a id="enrolment" class="btn btn-info btn-lg col-md-4" href="../pages/unitEnrolment.html" role="button">Manage enrolled units</a>
-                <a id="allocation" class="btn btn-warning btn-lg col-md-4" href="../pages/tutorialAllocation.html" role="button">Tutorial allocation system</a>
+                <a id="enrolment" class="btn btn-info btn-lg col-md-4" href="../pages/unitEnrolment.php" role="button">Manage enrolled units</a>
+                <a id="allocation" class="btn btn-warning btn-lg col-md-4" href="../pages/tutorialAllocation.php" role="button">Tutorial allocation system</a>
             </div>
         </div>
     </div>
     <!-- NOTE content -->
     <div class="container">
-        <nav aria-label="Page navigation timetable">
+        <!-- <nav aria-label="Page navigation timetable">
             <ul class="pagination d-flex justify-content-between">
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
@@ -132,43 +132,88 @@ if ($_SESSION['session_user'] != "") {
                     </a>
                 </li>
             </ul>
-        </nav>
-        <table class="table table-striped table-bordered shadow-lg p-3 mb-5 bg-white rounded">
+        </nav> -->
+        <?php
+        $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id= '" . $_SESSION['session_user'] . "'";
+        $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
+        if ($selectEnrolmentResult->num_rows > 0) {
+            echo '<table class="table table-striped table-bordered table-responsive-xl shadow p-3 mb-5 bg-white rounded">
             <thead>
                 <tr>
                     <th scope="col">Unit Code</th>
                     <th scope="col">Unit Name</th>
-                    <th scope="col">Lecture Time</th>
-                    <th scope="col">Tutorial Time</th>
+                    <th scope="col">Group</th>
+                    <th scope="col">Day</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Semester</th>
+                    <th scope="col">Campus</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Duration</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td scope="row">KIT502</td>
-                    <td>Web Development</td>
-                    <td>Wednesday 09:00 - 10:50</td>
-                    <td>Tuesday 09:00 - 10:50</td>
-                </tr>
-                <tr>
-                    <td scope="row">KIT503</td>
-                    <td>ICT Professional Practices and Project Management</td>
-                    <td>Wednesday 16:00 - 16:50</td>
-                    <td>Tuesday 13:00 - 14:50</td>
-                </tr>
-                <tr>
-                    <td scope="row">KIT707</td>
-                    <td>Knowledge and Information Management</td>
-                    <td>Friday 13:00 - 14:50</td>
-                    <td>Wednesday 15:00 - 16:50</td>
-                </tr>
-                <tr>
-                    <td scope="row">KIT710</td>
-                    <td>eLogistics</td>
-                    <td>Friday 10:00 - 11:50</td>
-                    <td>Tuesday 16:00 - 16:50</td>
-                </tr>
-            </tbody>
-        </table>
+            <tbody>';
+            while ($rowSelectEnrolment = $selectEnrolmentResult->fetch_assoc()) {
+                // echo print_r($rowSelectEnrolment);
+                //get unit details
+                $selectDetailsQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id='" . $rowSelectEnrolment['details_id'] . "'";
+                $selectDetailsResult = $mysqli->query($selectDetailsQuery);
+                $rowSelectDetails = $selectDetailsResult->fetch_assoc();
+
+                //get lecture information
+                $selectLectureQuery = "SELECT * FROM assignment_lectures WHERE details_id='" . $rowSelectEnrolment['details_id'] . "'";
+                $selectLectureResult = $mysqli->query($selectLectureQuery);
+                $rowSelectLecture = $selectLectureResult->fetch_assoc();
+
+                //get semester and campus
+                $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $rowSelectEnrolment['units_lists_id'] . "'";
+                $selectSCResult = $mysqli->query($selectSCQuery);
+                $rowSelectSC = $selectSCResult->fetch_assoc();
+                // echo print_r($rowSelectSC);
+                echo '
+                    <tr id="lec' . $rowSelectLecture['id'] . '">
+                    <td class="align-middle">' . $rowSelectDetails['unit_code'] . '</td>
+                    <td class="align-middle">' . $rowSelectDetails['unit_name'] . '</td>
+                    <td class="align-middle">Lec</td>
+                    <td class="align-middle">' . $rowSelectLecture['day'] . '</td>
+                    <td class="align-middle">' . $rowSelectLecture['time'] . '</td>
+                    <td class="align-middle">' . $rowSelectSC['semester'] . '
+                    <td class="align-middle">' . $rowSelectSC['campus'] . '</td>
+                    <td class="align-middle">' . $rowSelectLecture['location'] . '</td>
+                    <td class="align-middle">' . $rowSelectLecture['duration'] . ' hour(s)</td>
+                    </tr>';
+
+                $selectTutorialIDQuery = "SELECT tutorial_id FROM assignment_students_timetable WHERE stu_id = '" . $_SESSION['session_user'] . "' AND details_id = '" . $rowSelectEnrolment['details_id'] . "'";
+                $selectTutorialIDResult = $mysqli->query($selectTutorialIDQuery);
+                if ($selectTutorialIDResult->num_rows > 0) {
+                    $rowSelectTutorialID = $selectTutorialIDResult->fetch_assoc();
+                    //get tutorial information
+                    $selectTutorialQuery = "SELECT * FROM assignment_tutorials WHERE id='" . $rowSelectTutorialID['tutorial_id'] . "'";
+                    $selectTutorialResult = $mysqli->query($selectTutorialQuery);
+                    $rowSelectTutorial = $selectTutorialResult->fetch_assoc();
+                    echo '
+                      <tr id="lec' . $rowSelectTutorial['id'] . '">
+                      <td class="align-middle">' . $rowSelectDetails['unit_code'] . '</td>
+                      <td class="align-middle">' . $rowSelectDetails['unit_name'] . '</td>
+                      <td class="align-middle">Tut</td>
+                      <td class="align-middle">' . $rowSelectTutorial['day'] . '</td>
+                      <td class="align-middle">' . $rowSelectTutorial['time'] . '</td>
+                      <td class="align-middle">' . $rowSelectSC['semester'] . '
+                      <td class="align-middle">' . $rowSelectSC['campus'] . '</td>
+                      <td class="align-middle">' . $rowSelectTutorial['location'] . '</td>
+                      <td class="align-middle">' . $rowSelectTutorial['duration'] . ' hour(s)</td>
+                      </tr>';
+                }
+            }
+            echo ' </tbody>
+            </table>';
+        } else {
+            echo '<div class="card">
+            <div class="card-body">
+                <p class="card-text">You do not have any enrolments yet.</p>
+            </div>
+         </div>';
+        }
+        ?>
     </div>
     <!-- NOTE footer -->
     <footer class="footer mt-auto py-3 bg-dark">

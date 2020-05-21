@@ -1,8 +1,10 @@
 <?php
-include('../php/session.php');
 include('../php/db_conn.php');
+include('../php/session.php');
 if ($_SESSION['session_user'] != "") {
-    //   header("Location:../pages/home.php");
+    if ($_SESSION['session_access'] == '0') {
+        echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
+    }
 } else {
     echo "<script>alert('Login is required'); window.location.href='../pages/login.php'</script>";
 }
@@ -17,7 +19,7 @@ if ($_SESSION['session_user'] != "") {
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="../CSS/enrolledDetails.css">
     <title>Enrolled Student Details - University of DoWell</title>
 </head>
 
@@ -104,11 +106,84 @@ if ($_SESSION['session_user'] != "") {
             </form>
         </div>
     </nav>
+     <!-- NOTE jumbotron -->
+     <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
+        <div class="container h-100">
+            <h1 class="display-4 mb-5 text-white">Enrolled Student Details</h1>
+        </div>
+    </div>
     <!-- NOTE content -->
     <div class="container">
-        
-    </div>
+        <div>
+            <?php
+            $selectDetailsQuery = "SELECT * FROM assignment_students_timetable ORDER BY stu_id";
+            $selectDetailsResult = $mysqli->query($selectDetailsQuery);
+            if ($selectDetailsResult->num_rows > 0) {
+                echo '
+                <table class="table table-striped table-bordered table-responsive-lg shadow p-3 mb-5 bg-white rounded">
+                <thead>
+                    <tr>
+                        <th scope="col">Student ID</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Unit Code</th>
+                        <th scope="col">Unit Name</th>
+                        <th scope="col">Day</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Semester</th>
+                        <th scope="col">Campus</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Duration</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                while ($rowSelectDetails = $selectDetailsResult->fetch_assoc()) {
+                    //get student information
+                    $selectStudentDetailsQuery = "SELECT st_id, name FROM assignment_students WHERE st_id = '" . $rowSelectDetails['stu_id'] . "'";
+                    $selectStudentDetailsResult = $mysqli->query($selectStudentDetailsQuery);
+                    $rowSelectStudentDetails = $selectStudentDetailsResult->fetch_assoc();
 
+                    //get unit information
+                    $selectUnitDetailsQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id='" . $rowSelectDetails['details_id'] . "'";
+                    $selectUnitDetailsResult = $mysqli->query($selectUnitDetailsQuery);
+                    $rowSelectUnitDetails = $selectUnitDetailsResult->fetch_assoc();
+
+                    // get tutorial information
+                    $selectTutorialDetailsQuery = "SELECT * FROM assignment_tutorials WHERE id = '" . $rowSelectDetails['tutorial_id'] . "'";
+                    $selectTutorialDetailsResult = $mysqli->query($selectTutorialDetailsQuery);
+                    $rowSelectTutorialDetails = $selectTutorialDetailsResult->fetch_assoc();
+
+                    //get smester and campus
+                    $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $rowSelectTutorialDetails['units_lists_id'] . "'";
+                    $selectSCResult = $mysqli->query($selectSCQuery);
+                    $rowSelectSC = $selectSCResult->fetch_assoc();
+
+                    echo '
+                <tr>
+                <td class="align-middle">' . $rowSelectStudentDetails['st_id'] . '</td>
+                <td class="align-middle">' . $rowSelectStudentDetails['name'] . '</td>
+                <td class="align-middle">' . $rowSelectUnitDetails['unit_code'] . '</td>
+                <td class="align-middle">' . $rowSelectUnitDetails['unit_name'] . '</td>
+                <td class="align-middle">' . $rowSelectTutorialDetails['day'] . '</td>
+                <td class="align-middle">' . $rowSelectTutorialDetails['time'] . '</td>
+                <td class="align-middle">' . $rowSelectSC['semester'] . '</td>
+                <td class="align-middle">' . $rowSelectSC['campus'] . '</td>
+                <td class="align-middle">' . $rowSelectTutorialDetails['location'] . '</td>
+                <td class="align-middle">' . $rowSelectTutorialDetails['duration'] . ' hour(s)</td>
+                </tr>
+                ';
+                }
+                echo ' </tbody>
+            </table>';
+            } else {
+                echo '<div class="card">
+        <div class="card-body">
+            <p class="card-text">Do not have any records.</p>
+        </div>
+     </div>';
+            }
+            ?>
+        </div>
+    </div>
     <!-- NOTE footer -->
     <footer class="footer mt-auto py-3 bg-dark">
         <div class="container-fluid text-white d-flex align-center justify-content-center">
