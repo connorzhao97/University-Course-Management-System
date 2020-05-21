@@ -176,7 +176,7 @@ if ($_SESSION['session_user'] != "") {
                         $rowList = $unitListResult->fetch_all(MYSQLI_ASSOC);
                         // echo print_r($rowList);
 
-                        $checkEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE details_id = '" . $row['id'] . "'";
+                        $checkEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE details_id = '" . $row['id'] . "' AND stu_id='".$_SESSION['session_user']."'";
                         $checkEnrolmentRusult = $mysqli->query($checkEnrolmentQuery);
                         if ($checkEnrolmentRusult->num_rows > 0) {
                             $output = "

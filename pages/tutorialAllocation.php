@@ -165,19 +165,31 @@ if ($_SESSION['session_user'] != "") {
                 $selectTutorialsResult = $mysqli->query($selectTutorialsQuery);
                 if ($selectTutorialsResult->num_rows > 0) {
                     while ($row = $selectTutorialsResult->fetch_assoc()) {
-                        $outputContent .= '<tr id="' . $row['id'] . '">';
+                        $selectTutorialsCapacityQuery = "SELECT count(id) FROM assignment_students_timetable WHERE tutorial_id='" . $row['id'] . "'";
+                        $selectTutorialsCapacityResult = $mysqli->query($selectTutorialsCapacityQuery);
+                        $rowCapacity = $selectTutorialsCapacityResult->fetch_array(MYSQLI_NUM);
+
+                        $outputContent .= '<tr id="' . $row['id'] . '">
+                        <td scope="row">';
                         //check time table
-                        $outputContent .= '
-                            <td scope="row">
-                            <button type="button" name="" id="" class="btn btn-success btn-block btn-sm">Allocated</button>
-                            </td>
+                        $selectAllocatedQuery = "SELECT * FROM assignment_students_timetable WHERE details_id = '" . $selectEnrolmentRow[$i]['details_id'] . "' AND stu_id = '" . $_SESSION['session_user'] . "' AND tutorial_id = '" . $row['id'] . "'";
+                        $selectAllocatedResult = $mysqli->query($selectAllocatedQuery);
+                        if ($selectAllocatedResult->num_rows > 0) {
+                            $outputContent .= '<button type="button" name="btn' . $row['id'] . '" id="btn' . $row['id'] . '" class="btn btn-success btn-block btn-sm" onclick="withdraw(this, ' . $selectEnrolmentRow[$i]['details_id'] . ')">Allocated</button>';
+                        } else {
+                            if ((int) $rowCapacity[0] < (int) $row['capacity']) {
+                                $outputContent .= '<button type="button" name="btn' . $row['id'] . '" id="btn' . $row['id'] . '" class="btn btn-primary btn-block btn-sm" onclick="allocateTutorial(this,' . $selectEnrolmentRow[$i]['details_id'] . ');">Select</button>';
+                            } else if ((int) $rowCapacity[0] = (int) $row['capacity']) {
+                                $outputContent .= '<button type="button" name="btn' . $row['id'] . '" id="btn' . $row['id'] . '" class="btn btn-danger btn-block btn-sm" disabled>Full</button>';
+                            }
+                        }
+                        $outputContent .= '</td>
                             <td>' . $row['day'] . '</td>
                             <td>' . $row['time'] . '</td>
                             <td>' . $row['duration'] . ' hr(s)</td>
                             <td>' . $row['location'] . '</td>
-                            <td>' . $row['capacity'] . '</td>
                             ';
-                        $outputContent .= '<tr>';
+                        $outputContent .= '<td>' . $rowCapacity[0] . ' / ' . $row['capacity'] . '</td><tr>';
                     }
                 }
                 $outputContent .= '</tbody>
@@ -193,7 +205,6 @@ if ($_SESSION['session_user'] != "") {
             </div>
         </div>';
         }
-        // $selectTutorialsQuery = "SELECT * FROM assignment_tutorials WHERE ";
         ?>
     </div>
     <!-- NOTE footer -->
