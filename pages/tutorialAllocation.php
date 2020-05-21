@@ -146,8 +146,13 @@ if ($_SESSION['session_user'] != "") {
                 if ($i == 0) {
                     $outputContent .= ' show active';
                 }
-                $outputContent .= '" id="pills-' . $selectUnitDetailsRow['unit_code'] . '" role="tabpanel" aria-labelledby="pills-' . $selectUnitDetailsRow['unit_code'] . '-tab">
-                    <h1 class="h3 mb-2 text-center">' . $selectUnitDetailsRow['unit_code'] . ' - ' . $selectUnitDetailsRow['unit_name'] . '</h1>
+                $outputContent .= '" id="pills-' . $selectUnitDetailsRow['unit_code'] . '" role="tabpanel" aria-labelledby="pills-' . $selectUnitDetailsRow['unit_code'] . '-tab">';
+
+
+                $selectTutorialsQuery = "SELECT * FROM assignment_tutorials WHERE units_lists_id = '" . $selectEnrolmentRow[$i]['units_lists_id'] . "'";
+                $selectTutorialsResult = $mysqli->query($selectTutorialsQuery);
+                if ($selectTutorialsResult->num_rows > 0) {
+                    $outputContent .= '<h1 class="h3 mb-2 text-center">' . $selectUnitDetailsRow['unit_code'] . ' - ' . $selectUnitDetailsRow['unit_name'] . '</h1>
                     <table class="table table-striped table-bordered table-responsive-md text-nowrap">
                     <thead>
                         <tr>
@@ -160,10 +165,6 @@ if ($_SESSION['session_user'] != "") {
                         </tr>
                     </thead>
                     <tbody>';
-
-                $selectTutorialsQuery = "SELECT * FROM assignment_tutorials WHERE details_id ='" . $selectEnrolmentRow[$i]['details_id'] . "'";
-                $selectTutorialsResult = $mysqli->query($selectTutorialsQuery);
-                if ($selectTutorialsResult->num_rows > 0) {
                     while ($row = $selectTutorialsResult->fetch_assoc()) {
                         $selectTutorialsCapacityQuery = "SELECT count(id) FROM assignment_students_timetable WHERE tutorial_id='" . $row['id'] . "'";
                         $selectTutorialsCapacityResult = $mysqli->query($selectTutorialsCapacityQuery);
@@ -191,10 +192,16 @@ if ($_SESSION['session_user'] != "") {
                             ';
                         $outputContent .= '<td>' . $rowCapacity[0] . ' / ' . $row['capacity'] . '</td><tr>';
                     }
+                    $outputContent .= '</tbody>
+                    </table>';
+                } else {
+                    $outputContent .= '<div class="card">
+                    <div class="card-body">
+                        <p class="card-text">Do not have record.</p>
+                    </div>
+                 </div>';
                 }
-                $outputContent .= '</tbody>
-                         </table>
-                    </div>';
+                $outputContent .= '</div>';
                 echo $outputContent;
             }
             echo '</div>';
