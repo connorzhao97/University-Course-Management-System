@@ -160,7 +160,7 @@ if ($_SESSION['session_user'] != "") {
                 $rowSelectDetails = $selectDetailsResult->fetch_assoc();
 
                 //get lecture information
-                $selectLectureQuery = "SELECT * FROM assignment_lectures WHERE details_id='" . $rowSelectEnrolment['details_id'] . "'";
+                $selectLectureQuery = "SELECT * FROM assignment_lectures WHERE units_lists_id='" . $rowSelectEnrolment['units_lists_id'] . "'";
                 $selectLectureResult = $mysqli->query($selectLectureQuery);
                 $rowSelectLecture = $selectLectureResult->fetch_assoc();
 
