@@ -115,7 +115,7 @@ if ($_SESSION['session_user'] != "") {
     <!-- NOTE content -->
     <div class="container">
         <?php
-        $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id = '" . $_SESSION['session_user'] . "'";
+        $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id = '" . $_SESSION['session_user'] . "' ORDER BY details_id";
         $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
         if ($selectEnrolmentResult->num_rows > 0) {
             //NOTE header

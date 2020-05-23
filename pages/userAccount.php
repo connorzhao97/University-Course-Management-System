@@ -2,7 +2,6 @@
 include('../php/db_conn.php');
 include('../php/session.php');
 if ($_SESSION['session_user'] != "") {
-    //   header("Location:../pages/home.php");
     $userProfileQuery = "SELECT * FROM assignment_users WHERE st_id = '" . $_SESSION['session_user'] . "'";
     $userProfileResult = $mysqli->query($userProfileQuery);
     $rowUserProfile = $userProfileResult->fetch_assoc();
@@ -92,7 +91,7 @@ if ($_SESSION['session_user'] != "") {
                 }
                 ?>
                 <?php
-                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "3") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/enrolledDetails.php'>Enrolled Student Details</a>
@@ -237,7 +236,7 @@ if ($_SESSION['session_user'] != "") {
                 </div>
                 <div class='form-group'>
                  <label for='staUnavailability'>Unavailability<span class='text-muted'>(Optional)</span></label>
-                    <input type='text' id='staUnavailability' name='staUnavailability' class='form-control' value='".$GLOBALS['user']['unavailability']."' placeholder='Your Unavailability Date or Time'>
+                    <input type='text' id='staUnavailability' name='staUnavailability' class='form-control' value='" . $GLOBALS['user']['unavailability'] . "' placeholder='Your Unavailability Date or Time'>
                 </div>
                 ";
             }
@@ -249,6 +248,169 @@ if ($_SESSION['session_user'] != "") {
                 Save changes</button>
             </form>
         </div>
+        <?php
+        //student timetable
+        if ($_SESSION['session_access'] == "0") {
+            $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id= '" . $_SESSION['session_user'] . "'";
+            $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
+
+            if ($selectEnrolmentResult->num_rows > 0) {
+                echo '<table class="table table-striped table-bordered table-responsive-xl shadow p-3 mb-5 bg-white rounded">
+                <thead>
+                    <tr>
+                        <th scope="col">Unit Code</th>
+                        <th scope="col">Unit Name</th>
+                        <th scope="col">Group</th>
+                        <th scope="col">Day</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Semester</th>
+                        <th scope="col">Campus</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Duration</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                while ($rowSelectEnrolment = $selectEnrolmentResult->fetch_assoc()) {
+                    //get unit details
+                    $selectDetailsQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id='" . $rowSelectEnrolment['details_id'] . "'";
+                    $selectDetailsResult = $mysqli->query($selectDetailsQuery);
+                    $rowSelectDetails = $selectDetailsResult->fetch_assoc();
+
+                    //get lecture information
+                    $selectLectureQuery = "SELECT * FROM assignment_lectures WHERE units_lists_id='" . $rowSelectEnrolment['units_lists_id'] . "'";
+                    $selectLectureResult = $mysqli->query($selectLectureQuery);
+                    $rowSelectLecture = $selectLectureResult->fetch_assoc();
+
+                    //get semester and campus
+                    $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $rowSelectEnrolment['units_lists_id'] . "'";
+                    $selectSCResult = $mysqli->query($selectSCQuery);
+                    $rowSelectSC = $selectSCResult->fetch_assoc();
+                    echo '
+                        <tr id="lec' . $rowSelectLecture['id'] . '">
+                        <td class="align-middle">' . $rowSelectDetails['unit_code'] . '</td>
+                        <td class="align-middle">' . $rowSelectDetails['unit_name'] . '</td>
+                        <td class="align-middle">Lec</td>
+                        <td class="align-middle">' . $rowSelectLecture['day'] . '</td>
+                        <td class="align-middle">' . $rowSelectLecture['time'] . '</td>
+                        <td class="align-middle">' . $rowSelectSC['semester'] . '
+                        <td class="align-middle">' . $rowSelectSC['campus'] . '</td>
+                        <td class="align-middle">' . $rowSelectLecture['location'] . '</td>
+                        <td class="align-middle">' . $rowSelectLecture['duration'] . ' hour(s)</td>
+                        </tr>';
+
+                    //get tutorial information
+                    $selectTutorialIDQuery = "SELECT tutorial_id FROM assignment_students_timetable WHERE stu_id = '" . $_SESSION['session_user'] . "' AND details_id = '" . $rowSelectEnrolment['details_id'] . "'";
+                    $selectTutorialIDResult = $mysqli->query($selectTutorialIDQuery);
+                    if ($selectTutorialIDResult->num_rows > 0) {
+                        $rowSelectTutorialID = $selectTutorialIDResult->fetch_assoc();
+                        //get tutorial information
+                        $selectTutorialQuery = "SELECT * FROM assignment_tutorials WHERE id='" . $rowSelectTutorialID['tutorial_id'] . "'";
+                        $selectTutorialResult = $mysqli->query($selectTutorialQuery);
+                        $rowSelectTutorial = $selectTutorialResult->fetch_assoc();
+                        echo '
+                          <tr id="lec' . $rowSelectTutorial['id'] . '">
+                          <td class="align-middle">' . $rowSelectDetails['unit_code'] . '</td>
+                          <td class="align-middle">' . $rowSelectDetails['unit_name'] . '</td>
+                          <td class="align-middle">Tut</td>
+                          <td class="align-middle">' . $rowSelectTutorial['day'] . '</td>
+                          <td class="align-middle">' . $rowSelectTutorial['time'] . '</td>
+                          <td class="align-middle">' . $rowSelectSC['semester'] . '
+                          <td class="align-middle">' . $rowSelectSC['campus'] . '</td>
+                          <td class="align-middle">' . $rowSelectTutorial['location'] . '</td>
+                          <td class="align-middle">' . $rowSelectTutorial['duration'] . ' hour(s)</td>
+                          </tr>';
+                    }
+                }
+                echo ' </tbody>
+                </table>';
+            }
+        } else {
+            //staff timetable
+
+            if ($_SESSION['session_access'] != '5') {
+                echo '<table class="table table-striped table-bordered table-responsive-xl shadow p-3 mb-5 bg-white rounded">
+            <thead>
+                <tr>
+                    <th scope="col">Unit Code</th>
+                    <th scope="col">Unit Name</th>
+                    <th scope="col">Group</th>
+                    <th scope="col">Day</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Semester</th>
+                    <th scope="col">Campus</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Duration</th>
+                </tr>
+            </thead>
+            <tbody>';
+            }
+            if ($_SESSION['session_access'] == '4' || $_SESSION['session_access'] == '3') {
+                $selectLectureQuery = "SELECT * FROM assignment_lectures WHERE sta_id= '" . $_SESSION['session_user'] . "' ORDER BY details_id";
+                $selectLectureResult = $mysqli->query($selectLectureQuery);
+
+                if ($selectLectureResult->num_rows > 0) {
+                    while ($rowSelectLecture = $selectLectureResult->fetch_assoc()) {
+                        //get unit details
+                        $selectDetailsQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id='" . $rowSelectLecture['details_id'] . "'";
+                        $selectDetailsResult = $mysqli->query($selectDetailsQuery);
+                        $rowSelectDetails = $selectDetailsResult->fetch_assoc();
+                        //get semester and campus
+                        $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $rowSelectLecture['units_lists_id'] . "'";
+                        $selectSCResult = $mysqli->query($selectSCQuery);
+                        $rowSelectSC = $selectSCResult->fetch_assoc();
+
+                        echo '
+                        <tr id="lec' . $rowSelectLecture['id'] . '">
+                        <td class="align-middle">' . $rowSelectDetails['unit_code'] . '</td>
+                        <td class="align-middle">' . $rowSelectDetails['unit_name'] . '</td>
+                        <td class="align-middle">Lec</td>
+                        <td class="align-middle">' . $rowSelectLecture['day'] . '</td>
+                        <td class="align-middle">' . $rowSelectLecture['time'] . '</td>
+                        <td class="align-middle">' . $rowSelectSC['semester'] . '
+                        <td class="align-middle">' . $rowSelectSC['campus'] . '</td>
+                        <td class="align-middle">' . $rowSelectLecture['location'] . '</td>
+                        <td class="align-middle">' . $rowSelectLecture['duration'] . ' hour(s)</td>
+                        </tr>';
+                    }
+                }
+            }
+            $selectTutorialQuery = "SELECT * FROM assignment_tutorials WHERE sta_id= '" . $_SESSION['session_user'] . "' ORDER BY details_id";
+            $selectTutorialResult = $mysqli->query($selectTutorialQuery);
+            if ($selectTutorialResult->num_rows > 0) {
+                while ($rowSelectTutorial = $selectTutorialResult->fetch_assoc()) {
+                    //get unit details
+                    $selectDetailsQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id='" . $rowSelectTutorial['details_id'] . "'";
+                    $selectDetailsResult = $mysqli->query($selectDetailsQuery);
+                    $rowSelectDetails = $selectDetailsResult->fetch_assoc();
+                    //get semester and campus
+                    $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $rowSelectTutorial['units_lists_id'] . "'";
+                    $selectSCResult = $mysqli->query($selectSCQuery);
+                    $rowSelectSC = $selectSCResult->fetch_assoc();
+
+                    echo '
+                    <tr id="lec' . $rowSelectTutorial['id'] . '">
+                    <td class="align-middle">' . $rowSelectDetails['unit_code'] . '</td>
+                    <td class="align-middle">' . $rowSelectDetails['unit_name'] . '</td>
+                    <td class="align-middle">Tut</td>
+                    <td class="align-middle">' . $rowSelectTutorial['day'] . '</td>
+                    <td class="align-middle">' . $rowSelectTutorial['time'] . '</td>
+                    <td class="align-middle">' . $rowSelectSC['semester'] . '
+                    <td class="align-middle">' . $rowSelectSC['campus'] . '</td>
+                    <td class="align-middle">' . $rowSelectTutorial['location'] . '</td>
+                    <td class="align-middle">' . $rowSelectTutorial['duration'] . ' hour(s)</td>
+                    </tr>';
+                }
+            }
+
+
+
+
+
+
+            echo ' </tbody>
+            </table>';
+        }
+        ?>
     </div>
     <!-- NOTE footer -->
     <footer class=" footer mt-auto py-3 bg-dark">

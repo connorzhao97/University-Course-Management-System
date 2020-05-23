@@ -3,7 +3,6 @@ include('../php/db_conn.php');
 include('../php/session.php');
 if ($_SESSION['session_user'] != "") {
     if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4") {
-        //TODO check uc units belonging
         if (!empty($_GET['code'])) {
             if ($_SESSION['session_access'] == "4") {
                 $checkUnitQuery = "SELECT unit_coordinator_id FROM assignment_units_details WHERE unit_code = '" . $_GET['code'] . "'";
@@ -101,7 +100,7 @@ if ($_SESSION['session_user'] != "") {
                 }
                 ?>
                 <?php
-                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "3") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/enrolledDetails.php'>Enrolled Student Details</a>

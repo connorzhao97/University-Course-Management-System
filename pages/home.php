@@ -2,7 +2,6 @@
 include('../php/session.php');
 include('../php/db_conn.php');
 if ($_SESSION['session_user'] != "") {
-    //   header("Location:../pages/home.php");
 } else {
     echo "<script>alert('Login is required'); window.location.href='../pages/login.php'</script>";
 }
@@ -81,7 +80,7 @@ if ($_SESSION['session_user'] != "") {
                 }
                 ?>
                 <?php
-                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "3") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/enrolledDetails.php'>Enrolled Student Details</a>

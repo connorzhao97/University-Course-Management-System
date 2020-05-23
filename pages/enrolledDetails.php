@@ -106,8 +106,8 @@ if ($_SESSION['session_user'] != "") {
             </form>
         </div>
     </nav>
-     <!-- NOTE jumbotron -->
-     <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
+    <!-- NOTE jumbotron -->
+    <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
         <div class="container h-100">
             <h1 class="display-4 mb-5 text-white">Enrolled Student Details</h1>
         </div>
@@ -116,8 +116,40 @@ if ($_SESSION['session_user'] != "") {
     <div class="container">
         <div>
             <?php
-            $selectDetailsQuery = "SELECT * FROM assignment_students_timetable ORDER BY stu_id";
-            $selectDetailsResult = $mysqli->query($selectDetailsQuery);
+            //NOTE DC can see each unit
+            $selectDetailsResult = null;
+            if ($_SESSION['session_access'] == "5") {
+                $selectDetailsQuery = "SELECT * FROM assignment_students_timetable ORDER BY details_id";
+                $selectDetailsResult = $mysqli->query($selectDetailsQuery);
+            } else if ($_SESSION['session_access'] == "4") {
+                $selectUnitQuery = "SELECT id FROM assignment_units_details WHERE unit_coordinator_id = '" . $_SESSION['session_user'] . "' ORDER BY id";
+                $selectUnitResult = $mysqli->query($selectUnitQuery);
+                $selectDetailsQuery = "SELECT * FROM assignment_students_timetable WHERE details_id IN (";
+                for ($i = 0; $i < $selectUnitResult->num_rows; $i++) {
+                    $rowSelectUnit = $selectUnitResult->fetch_assoc();
+                    if ($i == 0) {
+                        $selectDetailsQuery .= $rowSelectUnit['id'];
+                    } else {
+                        $selectDetailsQuery .= ", " . $rowSelectUnit['id'] . "";
+                    }
+                }
+                $selectDetailsQuery .= ") ORDER BY details_id";
+                $selectDetailsResult = $mysqli->query($selectDetailsQuery);
+            } else if ($_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2") {
+                $selectUnitQuery = "SELECT id FROM assignment_tutorials WHERE sta_id = '" . $_SESSION['session_user'] . "'";
+                $selectUnitResult = $mysqli->query($selectUnitQuery);
+                $selectDetailsQuery = "SELECT * FROM assignment_students_timetable WHERE details_id IN (";
+                for ($i = 0; $i < $selectUnitResult->num_rows; $i++) {
+                    $rowSelectUnit = $selectUnitResult->fetch_assoc();
+                    if ($i == 0) {
+                        $selectDetailsQuery .= $rowSelectUnit['id'];
+                    } else {
+                        $selectDetailsQuery .= ", " . $rowSelectUnit['id'] . "";
+                    }
+                }
+                $selectDetailsQuery .= ") ORDER BY details_id";
+                $selectDetailsResult = $mysqli->query($selectDetailsQuery);
+            }
             if ($selectDetailsResult->num_rows > 0) {
                 echo '
                 <table class="table table-striped table-bordered table-responsive-lg shadow p-3 mb-5 bg-white rounded">

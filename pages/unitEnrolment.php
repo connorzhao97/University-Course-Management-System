@@ -82,7 +82,7 @@ if ($_SESSION['session_user'] != "") {
                 }
                 ?>
                 <?php
-                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "3") {
+                if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2") {
                     echo "
                     <li class='nav-item'>
                     <a class='nav-link' href='../pages/enrolledDetails.php'>Enrolled Student Details</a>
@@ -123,7 +123,7 @@ if ($_SESSION['session_user'] != "") {
             <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
                 <div>
                     <?php
-                    $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id = '" . $_SESSION['session_user'] . "'";
+                    $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id = '" . $_SESSION['session_user'] . "' ORDER BY details_id";
                     $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
                     if ($selectEnrolmentResult->num_rows > 0) {
                         while ($row = $selectEnrolmentResult->fetch_assoc()) {

@@ -134,7 +134,7 @@ if ($_SESSION['session_user'] != "") {
             </ul>
         </nav> -->
         <?php
-        $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id= '" . $_SESSION['session_user'] . "'";
+        $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id= '" . $_SESSION['session_user'] . "' ORDER BY details_id";
         $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
         if ($selectEnrolmentResult->num_rows > 0) {
             echo '<table class="table table-striped table-bordered table-responsive-xl shadow p-3 mb-5 bg-white rounded">
