@@ -3,11 +3,6 @@ $('#createNewStaff').on('hidden.bs.modal', function (e) {
     $("#fCNSta")[0].reset();
 })
 
-//clear manage staff form
-// $('#manageStaff').on('hidden.bs.modal', function (e) {
-//     $('#fMSta')[0].reset();
-// })
-
 //clear creat unit form
 $('#createNewUnit').on('hidden.bs.modal', function (e) {
     $("#fCNUnit")[0].reset();
@@ -30,7 +25,7 @@ function getQuery(e) {
     }
     return false;
 }
-
+//set different content for tabs
 $(function () {
     if (getQuery("state") == "0") {
         $('#pills-first-tab').tab('show');
@@ -39,26 +34,9 @@ $(function () {
     }
 })
 
-
-
-
 /*
 NOTE STAFF
 */
-
-//edit staff information
-// function editStaff(e) {
-//     $(e).parents('tr').find('td').each(function () {
-//         console.log($(this).text().trim());
-//     })
-//     // console.log($(e).parents('tr').find('td'));
-// }
-
-
-//remove staff from database and tables
-// function removeStaff(e) {
-//     $(e).parents('tr').remove();
-// }
 
 //create new staff
 function createNewStaffForm(form) {
@@ -74,7 +52,6 @@ function createNewStaffForm(form) {
     sta.expertise = "";
     sta.role = "";
     var formdata = $(form).serializeArray();
-    console.log(formdata);
     for (let index = 0; index < formdata.length; index++) {
         const element = formdata[index];
         switch (element.name) {
@@ -100,7 +77,7 @@ function createNewStaffForm(form) {
                 break;
         }
     }
-    console.log(sta);
+    //Ajax
     $.post('../php/master_list_staff_engine.php', {
         insertStaff: true,
         staffID: sta.ID,
@@ -119,8 +96,6 @@ function createNewStaffForm(form) {
             }
         }
     }, 'json');
-
-    // $("#createNewStaff").modal('hide');
     return false;
 }
 
@@ -180,7 +155,6 @@ function createNewUnitForm(form) {
         return false;
     } else {
         var formdata = $(form).serializeArray();
-        console.log(formdata);
         unit = new Object();
         unit.code = "";
         unit.name = "";
@@ -229,7 +203,7 @@ function createNewUnitForm(form) {
             }
 
         }
-        console.log(unit);
+        //Ajax
         $.post('../php/master_list_unit_engine.php', {
             insertUnit: true,
             unitCode: unit.code,
@@ -239,7 +213,6 @@ function createNewUnitForm(form) {
             unitCoordinatorID: unit.unitCoordinatorID,
             unitDescription: unit.description
         }, function (data) {
-            console.log(data);
             if (data.exist) {
                 alert('Unit Exists.');
             } else {
@@ -248,11 +221,9 @@ function createNewUnitForm(form) {
                         alert('Add New Unit successfully.');
                         window.location.href = "../pages/masterList.php?state=1";
                     }
-
                 } else {
                     alert('Unit Coordinator ID not exist or incorrect, Please check.');
                 }
-
             }
         }, 'json');
     }
@@ -268,7 +239,6 @@ function editUnit(e) {
     var campuses = td_content.eq(3).text();
     var unitCoordinatorID = td_content.eq(4).text();
     var description = td_content.eq(6).text();
-    //  alert(unitCode + unitName + semesters + campuses + description);
     $("#unitCodeMan").val(unitCode);
     $("#unitNameMan").val(unitName);
     var semester = semesters.split(",");
@@ -323,7 +293,6 @@ function manageUnitForm(form) {
         return false;
     } else {
         var formdata = $(form).serializeArray();
-        console.log(formdata);
         unit = new Object();
         unit.code = "";
         unit.name = "";
@@ -370,9 +339,8 @@ function manageUnitForm(form) {
                 default:
                     break;
             }
-
         }
-        console.log(unit);
+        //Ajax
         $.post('../php/master_list_unit_engine.php', {
             editUnit: true,
             unitCode: unit.code,
@@ -392,7 +360,6 @@ function manageUnitForm(form) {
             } else {
                 alert('Staff ID not exist or incorrect, Please check.');
             }
-
         }, 'json');
 
     }
@@ -400,7 +367,6 @@ function manageUnitForm(form) {
 }
 //toggle remove button
 function showRemove(e) {
-    // $(e).button('toggle');
     var removeBtn = $(e).next();
     if (removeBtn.attr('class').includes('d-none')) {
         removeBtn.removeClass('d-none');
@@ -421,9 +387,4 @@ function removeUnit(e) {
             $(e).parents('tr').remove();
         }
     }, 'json');
-}
-
-// //before submiting remove select disabled attr
-// function unitManagementFormSubmit(unit) {
-//     console.log($(unit).serializeArray());
-// }
+}ß

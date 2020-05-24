@@ -60,6 +60,7 @@ if ($_POST['allocate']) {
         }
     }
 } else if ($_POST['withdraw']) {
+    //withdraw tutorials
     $deleteTimetableQuery = "DELETE FROM assignment_students_timetable WHERE stu_id= '" . $_SESSION['session_user'] . "' AND details_id='$details_id' AND tutorial_id = '$id'";
     $deleteTimetableResult = $mysqli->query($deleteTimetableQuery);
 

@@ -3,8 +3,10 @@ include('../php/db_conn.php');
 include('../php/session.php');
 if ($_SESSION['session_user'] != "") {
     if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4") {
+        //NOTE only DC and UC can access this page
         if (!empty($_GET['code'])) {
             if ($_SESSION['session_access'] == "4") {
+                //NOTE UC can only manage their units
                 $checkUnitQuery = "SELECT unit_coordinator_id FROM assignment_units_details WHERE unit_code = '" . $_GET['code'] . "'";
                 $checkUnitResult = $mysqli->query($checkUnitQuery);
                 $rowCheckUnit = $checkUnitResult->fetch_assoc();
@@ -16,7 +18,6 @@ if ($_SESSION['session_user'] != "") {
             $selectUnitDetailsResult = $mysqli->query($selectUnitDetailsQuery);
             if ($selectUnitDetailsResult->num_rows > 0) {
                 $_GLOBALS['unitDetails'] = $selectUnitDetailsResult->fetch_assoc();
-                // echo print_r($_GLOBALS['unitDetails']);
             }
         }
     } else {
@@ -115,9 +116,7 @@ if ($_SESSION['session_user'] != "") {
             <form class="form-inline mb-0">
                 <?php
                 if ($session_user != "") {
-                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
-                } else {
-                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
+                    echo "<a class='btn btn-warning' href='../php/session_out.php' role='button'>Logout</a>";
                 }
                 ?>
             </form>
@@ -137,6 +136,7 @@ if ($_SESSION['session_user'] != "") {
     <!-- NOTE content -->
     <div class="container">
         <?php
+        //dynamic generate content
         if (!empty($_GET['code'])) {
             echo ' <div class="row">
             <div class="col-2">
@@ -153,7 +153,6 @@ if ($_SESSION['session_user'] != "") {
                                 <button type="button" class="btn btn-primary mb-3" id="btnCreateLecture" data-toggle="modal" data-target="#createLecture">Create New Lecture</button>
                                 <form id="lectureManagementForm" name="lectureManagementForm" onsubmit="lectureManagementFormSubmit(this)">
                                     <table class="table table-striped table-bordered table-responsive-xl">
-                                        <!-- NOTE if no unit alert -->
                                         <thead>
                                             <tr>
                                                 <th scope="col">Day</th>
@@ -167,6 +166,7 @@ if ($_SESSION['session_user'] != "") {
                                             </tr>
                                         </thead>
                                         <tbody>';
+            //get lectures information
             $lecQuery = "SELECT * FROM assignment_lectures WHERE details_id='" . $_GLOBALS['unitDetails']['id'] . "'";
             $lecResult = $mysqli->query($lecQuery);
             if ($lecResult->num_rows > 0) {
@@ -176,7 +176,7 @@ if ($_SESSION['session_user'] != "") {
                     <td class='align-middle'>" . $row['time'] . "</td>
                     <td class='align-middle'>" . $row['duration'] . "</td>
                     <td class='align-middle'>" . $row['location'] . "</td>";
-
+                    //get semester and campus
                     $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $row['units_lists_id'] . "'";
                     $selectSCResult = $mysqli->query($selectSCQuery);
                     $rowSC = $selectSCResult->fetch_assoc();
@@ -206,7 +206,6 @@ if ($_SESSION['session_user'] != "") {
                         <button type="button" class="btn btn-primary mb-3" id="btnCreateTutorial" data-toggle="modal" data-target="#createTutorial">Create New Tutorial</button>
                         <form id="tutorialManagementForm" name="tutorialManagementForm" onsubmit="tutorialManagementFormSubmit(this)">
                             <table class="table table-striped table-bordered table-responsive-xl">
-                                <!-- NOTE if no unit alert -->
                                 <thead>
                                     <tr>
                                         <th scope="col">Day</th>
@@ -221,6 +220,7 @@ if ($_SESSION['session_user'] != "") {
                                     </tr>
                                 </thead>
                                 <tbody>';
+            //get tutorial information
             $tutoQuery = "SELECT * FROM assignment_tutorials WHERE details_id='" . $_GLOBALS['unitDetails']['id'] . "'";
             $tutoResult = $mysqli->query($tutoQuery);
             if ($tutoResult->num_rows > 0) {
@@ -230,6 +230,7 @@ if ($_SESSION['session_user'] != "") {
                     <td class='align-middle'>" . $row['time'] . "</td>
                     <td class='align-middle'>" . $row['duration'] . "</td>
                     <td class='align-middle'>" . $row['location'] . "</td>";
+                    //get semester and campus
                     $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $row['units_lists_id'] . "'";
                     $selectSCResult = $mysqli->query($selectSCQuery);
                     $rowSC = $selectSCResult->fetch_assoc();
@@ -465,7 +466,7 @@ if ($_SESSION['session_user'] != "") {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-success">Save</button>
                         </div>
                     </form>
                 </div>
@@ -657,7 +658,7 @@ if ($_SESSION['session_user'] != "") {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-success">Save</button>
                         </div>
                     </form>
                 </div>

@@ -3,6 +3,7 @@ include('../php/session.php');
 include('../php/db_conn.php');
 if ($_SESSION['session_user'] != "") {
     if ($_SESSION['session_access'] != '0') {
+        //NOTE students cannot access
         echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
     }
 } else {
@@ -98,9 +99,7 @@ if ($_SESSION['session_user'] != "") {
             <form class="form-inline mb-0">
                 <?php
                 if ($session_user != "") {
-                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
-                } else {
-                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
+                    echo "<a class='btn btn-warning' href='../php/session_out.php' role='button'>Logout</a>";
                 }
                 ?>
             </form>
@@ -118,22 +117,8 @@ if ($_SESSION['session_user'] != "") {
     </div>
     <!-- NOTE content -->
     <div class="container">
-        <!-- <nav aria-label="Page navigation timetable">
-            <ul class="pagination d-flex justify-content-between">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <span class="timeRanges h3">13/04/2020 - 19/04/2020</span>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav> -->
         <?php
+        //get enrolled units
         $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id= '" . $_SESSION['session_user'] . "' ORDER BY details_id";
         $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
         if ($selectEnrolmentResult->num_rows > 0) {
@@ -153,7 +138,6 @@ if ($_SESSION['session_user'] != "") {
             </thead>
             <tbody>';
             while ($rowSelectEnrolment = $selectEnrolmentResult->fetch_assoc()) {
-                // echo print_r($rowSelectEnrolment);
                 //get unit details
                 $selectDetailsQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id='" . $rowSelectEnrolment['details_id'] . "'";
                 $selectDetailsResult = $mysqli->query($selectDetailsQuery);
@@ -168,7 +152,7 @@ if ($_SESSION['session_user'] != "") {
                 $selectSCQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id='" . $rowSelectEnrolment['units_lists_id'] . "'";
                 $selectSCResult = $mysqli->query($selectSCQuery);
                 $rowSelectSC = $selectSCResult->fetch_assoc();
-                // echo print_r($rowSelectSC);
+
                 echo '
                     <tr id="lec' . $rowSelectLecture['id'] . '">
                     <td class="align-middle">' . $rowSelectDetails['unit_code'] . '</td>
@@ -181,7 +165,7 @@ if ($_SESSION['session_user'] != "") {
                     <td class="align-middle">' . $rowSelectLecture['location'] . '</td>
                     <td class="align-middle">' . $rowSelectLecture['duration'] . ' hour(s)</td>
                     </tr>';
-
+                //get tutorial id
                 $selectTutorialIDQuery = "SELECT tutorial_id FROM assignment_students_timetable WHERE stu_id = '" . $_SESSION['session_user'] . "' AND details_id = '" . $rowSelectEnrolment['details_id'] . "'";
                 $selectTutorialIDResult = $mysqli->query($selectTutorialIDQuery);
                 if ($selectTutorialIDResult->num_rows > 0) {
@@ -208,10 +192,10 @@ if ($_SESSION['session_user'] != "") {
             </table>';
         } else {
             echo '<div class="card">
-            <div class="card-body">
-                <p class="card-text">You do not have any enrolments yet.</p>
-            </div>
-         </div>';
+                      <div class="card-body">
+                        <p class="card-text">You do not have any enrolments yet.</p>
+                      </div>
+                  </div>';
         }
         ?>
     </div>

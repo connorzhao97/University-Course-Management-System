@@ -106,9 +106,7 @@ if ($_SESSION['session_user'] != "") {
             <form class="form-inline mb-0">
                 <?php
                 if ($session_user != "") {
-                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
-                } else {
-                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
+                    echo "<a class='btn btn-warning' href='../php/session_out.php' role='button'>Logout</a>";
                 }
                 ?>
             </form>
@@ -243,7 +241,7 @@ if ($_SESSION['session_user'] != "") {
             echo $output;
             ?>
             <hr class="mb-4">
-            <button type="submit" id="submitBtn" class="btn btn-primary btn-lg btn-block mb-5 d-flex align-items-center justify-content-center">
+            <button type="submit" id="submitBtn" class="btn btn-success btn-lg btn-block mb-5 d-flex align-items-center justify-content-center">
                 <span id="stSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                 Save changes</button>
             </form>
@@ -326,7 +324,6 @@ if ($_SESSION['session_user'] != "") {
             }
         } else {
             //staff timetable
-
             if ($_SESSION['session_access'] != '5') {
                 echo '<table class="table table-striped table-bordered table-responsive-xl shadow p-3 mb-5 bg-white rounded">
             <thead>
@@ -401,12 +398,6 @@ if ($_SESSION['session_user'] != "") {
                     </tr>';
                 }
             }
-
-
-
-
-
-
             echo ' </tbody>
             </table>';
         }

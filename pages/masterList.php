@@ -3,6 +3,7 @@ include("../php/db_conn.php");
 include("../php/session.php");
 if ($_SESSION['session_user'] != "") {
     if ($_SESSION['session_access'] != '5') {
+        //NOTE only DC can access this page
         echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
     }
 } else {
@@ -98,9 +99,7 @@ if ($_SESSION['session_user'] != "") {
             <form class="form-inline mb-0">
                 <?php
                 if ($session_user != "") {
-                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
-                } else {
-                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
+                    echo "<a class='btn btn-warning' href='../php/session_out.php' role='button'>Logout</a>";
                 }
                 ?>
             </form>
@@ -135,6 +134,7 @@ if ($_SESSION['session_user'] != "") {
                     </thead>
                     <tbody>
                         <?php
+                        //get staffs information
                         $selectStaffQuery = "SELECT st_id, name, qualification, expertise, unavailability FROM assignment_staffs";
                         $selectStaffResult = $mysqli->query($selectStaffQuery);
                         if ($selectStaffResult->num_rows > 0) {
@@ -193,6 +193,7 @@ if ($_SESSION['session_user'] != "") {
                             </thead>
                             <tbody>
                                 <?php
+                                //get unit information
                                 $quert = "SELECT unit_code, unit_name, semester, campus, unit_coordinator_id, description FROM assignment_units_details ORDER BY unit_code";
                                 $result = $mysqli->query($quert);
                                 if ($result->num_rows > 0) {
@@ -301,88 +302,6 @@ if ($_SESSION['session_user'] != "") {
                 </div>
             </div>
         </div>
-
-        <!-- NOTE manage staff modal
-        <div class="modal fade" id="manageStaff" tabindex="-1" role="dialog" aria-labelledby="manageStaffLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Manage Staff</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="fMSta" onsubmit="return validate();">
-                            <div class="form-group">
-                                <label for="staID">Staff ID</label>
-                                <input type="text" class="form-control" name="" id="" placeholder="" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="staName">Staff Name</label>
-                                <input type="text" class="form-control" name="" id="" placeholder="" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="staQua">Qualification</label>
-                                <select class="custom-select" name="" id="" required>
-                                    <option value="" selected>Select Qualification</option>
-                                    <option value="PhD">PhD</option>
-                                    <option value="Master">Master</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="staExp">Expertise</label>
-                                <select class="custom-select" name="" id="" required>
-                                    <option value="" selected>Select Expertise</option>
-                                    <option value="informationSystems">Information Systems</option>
-                                    <option value="humanComputerInteraction">Human Computer Interaction</option>
-                                    <option value="networkAdministration">Network Administration</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <div class="column">
-                                    <label for="staPreDyas">Preferred days of teaching</label>
-                                    <div class="checkboxGroup" required>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="customCheckboxInlineMon" name="customCheckboxInlineMon" class="custom-control-input">
-                                            <label class="custom-control-label" for="customCheckboxInlineMon">Mon.</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="customCheckboxInlineTue" name="customCheckboxInlineTue" class="custom-control-input">
-                                            <label class="custom-control-label" for="customCheckboxInlineTue">Tue.</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="customCheckboxInlineWed" name="customCheckboxInlineWed" class="custom-control-input">
-                                            <label class="custom-control-label" for="customCheckboxInlineWed">Wed.</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="customCheckboxInlineThu" name="customCheckboxInlineThu" class="custom-control-input">
-                                            <label class="custom-control-label" for="customCheckboxInlineThu">Thu.</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" id="customCheckboxInlineFri" name="customCheckboxInlineFri" class="custom-control-input">
-                                            <label class="custom-control-label" for="customCheckboxInlineFri">Fri.</label>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please select one preferred of teaching day at least.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="staCon">Consultation hours</label>
-                                <input type="text" class="form-control" name="" id="" placeholder="" required>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" onsubmit="manageStaff()">Save</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div> -->
-
 
         <!-- NOTE create unit modal -->
         <div class="modal fade" id="createNewUnit" tabindex="-1" role="dialog" aria-labelledby="createNewUnitLabel" aria-hidden="true">

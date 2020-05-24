@@ -11,8 +11,6 @@ $('#createTutorial').on('hidden.bs.modal', function (e) {
     $("#createTutorialForm")[0].reset();
 })
 
-
-
 //get parameter from url
 function getQuery(e) {
     var query = window.location.search.substring(1);
@@ -25,7 +23,7 @@ function getQuery(e) {
     }
     return false;
 }
-
+//set list content
 $(function () {
     if (getQuery("state") == "0") {
         $('#list-lecture-list').tab('show');
@@ -46,7 +44,13 @@ function showRemove(e) {
 }
 
 /* NOTE lecture */
-//create new lecture
+/**
+ * @description: create a new lecture
+ * @param form get form information
+ * @param unit_code get unit code
+ * @param details_id get unit id
+ * @return: false
+ */
 function createNewLectureForm(form, unit_code, details_id) {
     lec = new Object();
     lec.details_id = details_id;
@@ -58,7 +62,6 @@ function createNewLectureForm(form, unit_code, details_id) {
     lec.lecturerID = "";
     lec.consulation = "";
     var formdata = $(form).serializeArray();
-    console.log(formdata);
     for (let index = 0; index < formdata.length; index++) {
         const element = formdata[index];
         switch (element.name) {
@@ -90,7 +93,6 @@ function createNewLectureForm(form, unit_code, details_id) {
                 break;
         }
     }
-    console.log(lec);
     $.post('../php/unit_management_engine.php', {
         insertLecture: true,
         details_id: lec.details_id,
@@ -117,8 +119,11 @@ function createNewLectureForm(form, unit_code, details_id) {
     }, 'json');
     return false;
 }
-
-//init edit lecture information
+/**
+ * @description: init edit lecture information
+ * @param e DOM for getting information from table and put the information into the edit lecture modal
+ * @return: null
+ */
 function editLecture(e) {
     lecID = $(e).parents('tr').attr('id');
     var td_content = $(e).parents('tr').children('td');
@@ -129,7 +134,6 @@ function editLecture(e) {
     var sc = td_content.eq(4).data('lists-id');
     var lectureID = td_content.eq(5).text();
     var consulation = td_content.eq(6).text();
-    // console.log(day + "," + time + "," + duration + "," + location + "," + sc + "," + lectureID + "," + consulation);
     $("#lecDayMan" + day).prop("selected", true);
     var HM = time.split(":");
     $("#lecHourMan" + HM[0]).prop("selected", true);
@@ -142,7 +146,12 @@ function editLecture(e) {
     $("#manageLecture").modal("show");
 }
 
-//update lecture
+/**
+ * @description: update lecture
+ * @param form get form information
+ * @param unit_code get unit code
+ * @return: false
+ */
 function manageNewLectureForm(form, unit_code) {
     lec = new Object();
     lec.id = lecID;
@@ -154,7 +163,6 @@ function manageNewLectureForm(form, unit_code) {
     lec.lecturerID = "";
     lec.consulation = "";
     var formdata = $(form).serializeArray();
-    console.log(formdata);
     for (let index = 0; index < formdata.length; index++) {
         const element = formdata[index];
         switch (element.name) {
@@ -186,7 +194,6 @@ function manageNewLectureForm(form, unit_code) {
                 break;
         }
     }
-    console.log(lec);
     $.post('../php/unit_management_engine.php', {
         updateLecture: true,
         id: lec.id,
@@ -217,6 +224,11 @@ function manageNewLectureForm(form, unit_code) {
     return false;
 }
 
+/**
+ * @description: remove lecture
+ * @param e DOM for getting lecture id
+ * @return: null
+ */
 //remove lecture
 function removeLecture(e) {
     var id = $(e).parents('tr').attr('id');
@@ -233,7 +245,13 @@ function removeLecture(e) {
 
 
 /*NOTE tutorial */
-//create new tutorial
+/**
+ * @description: create new tutorial
+ * @param form get form information
+ * @param unit_code get unit code
+ * @param details_id get unit id
+ * @return: false
+ */
 function createNewTutorialForm(form, unit_code, details_id) {
     tuto = new Object();
     tuto.details_id = details_id;
@@ -246,8 +264,6 @@ function createNewTutorialForm(form, unit_code, details_id) {
     tuto.capacity = "";
     tuto.consulation = "";
     var formdata = $(form).serializeArray();
-    console.log(formdata);
-
     for (let index = 0; index < formdata.length; index++) {
         const element = formdata[index];
         switch (element.name) {
@@ -282,8 +298,6 @@ function createNewTutorialForm(form, unit_code, details_id) {
                 break;
         }
     }
-    console.log(tuto);
-
     $.post('../php/unit_management_engine.php', {
         insertTutorial: true,
         details_id: tuto.details_id,
@@ -307,8 +321,11 @@ function createNewTutorialForm(form, unit_code, details_id) {
     }, 'json');
     return false;
 }
-
-//init edit tutorial information
+/**
+ * @description: init edit tutorial information
+ * @param e DOM for getting information from table and put the information into the edit tutorial modal
+ * @return: null
+ */
 function editTutorial(e) {
     tutoID = $(e).parents('tr').attr('id');
     var td_content = $(e).parents('tr').children('td');
@@ -334,7 +351,12 @@ function editTutorial(e) {
     $("#manageTutorial").modal("show");
 }
 
-//edit tutorial
+/**
+ * @description: update tutorial
+ * @param form get form information
+ * @param unit_code get unit code
+ * @return: false
+ */
 function manageNewTutorialForm(form, unit_code) {
     tuto = new Object();
     tuto.id = tutoID;
@@ -415,7 +437,11 @@ function manageNewTutorialForm(form, unit_code) {
 
 
 
-//remore tutorial
+/**
+ * @description: remove tutorial
+ * @param e DOM for getting tutorial id
+ * @return: false
+ */
 function removeTutorial(e) {
     var id = $(e).parents('tr').attr('id');
     $.post('../php/unit_management_engine.php', {

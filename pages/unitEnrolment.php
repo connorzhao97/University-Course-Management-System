@@ -3,6 +3,7 @@ include("../php/db_conn.php");
 include("../php/session.php");
 if ($_SESSION['session_user'] != "") {
     if ($_SESSION['session_access'] != '0') {
+        //NOTE only students can access this page
         echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
     }
 } else {
@@ -97,9 +98,7 @@ if ($_SESSION['session_user'] != "") {
             <form class="form-inline mb-0">
                 <?php
                 if ($session_user != "") {
-                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
-                } else {
-                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
+                    echo "<a class='btn btn-warning' href='../php/session_out.php' role='button'>Logout</a>";
                 }
                 ?>
             </form>
@@ -123,16 +122,17 @@ if ($_SESSION['session_user'] != "") {
             <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
                 <div>
                     <?php
+                    //get student's enrolment
                     $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id = '" . $_SESSION['session_user'] . "' ORDER BY details_id";
                     $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
                     if ($selectEnrolmentResult->num_rows > 0) {
                         while ($row = $selectEnrolmentResult->fetch_assoc()) {
-                            // echo print_r($row);
+                            //get unit details
                             $unitDetailQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id = '" . $row['details_id'] . "'";
                             $unitDetailResult = $mysqli->query($unitDetailQuery);
                             if ($unitDetailResult->num_rows > 0) {
                                 $rowDetails = $unitDetailResult->fetch_assoc();
-
+                                //get unit list which DC set
                                 $unitListQuery = "SELECT semester, campus FROM assignment_units_lists WHERE id = '" . $row['units_lists_id'] . "'";
                                 $unitListResult = $mysqli->query($unitListQuery);
                                 if ($unitListResult->num_rows > 0) {
@@ -166,17 +166,17 @@ if ($_SESSION['session_user'] != "") {
             <div class="tab-pane fade" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
                 <!-- NOTE method="POST"  -->
                 <?php
+                //get unit details
                 $availableUnitsQuery = "SELECT id, unit_code, unit_name FROM assignment_units_details ORDER BY unit_code";
                 $availableUnitsResult = $mysqli->query($availableUnitsQuery);
                 if ($availableUnitsResult->num_rows > 0) {
                     while ($row = $availableUnitsResult->fetch_assoc()) {
-                        // echo print_r($row);
+                        //get unit lists which DC set
                         $unitListQuery = "SELECT * FROM assignment_units_lists WHERE details_id = '" . $row['id'] . "' and availability = '1'";
                         $unitListResult = $mysqli->query($unitListQuery);
                         $rowList = $unitListResult->fetch_all(MYSQLI_ASSOC);
-                        // echo print_r($rowList);
-
-                        $checkEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE details_id = '" . $row['id'] . "' AND stu_id='".$_SESSION['session_user']."'";
+                        //check if the unit has been enrolled
+                        $checkEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE details_id = '" . $row['id'] . "' AND stu_id='" . $_SESSION['session_user'] . "'";
                         $checkEnrolmentRusult = $mysqli->query($checkEnrolmentQuery);
                         if ($checkEnrolmentRusult->num_rows > 0) {
                             $output = "
@@ -225,29 +225,6 @@ if ($_SESSION['session_user'] != "") {
                     }
                 }
                 ?>
-
-                <!-- <div class="card">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">".$row['unit_code']." - Web Development </h5>
-                                <select name="".$row['unit_code']."EnrolTime" id="".$row['unit_code']."EnrolTime" class="custom-select">
-                                    <option value="" selected>Please select</option>
-                                    <option value="Semester1, Pandora">Semester1, Pandora</option>
-                                    <option value="Winter School, Rivendell">Winter School, Rivendell</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4 d-flex justify-content-center align-self-center">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="checked" name="".$row['unit_code']."EnrolCheck" id="".$row['unit_code']."EnrolCheck">
-                                <label class="form-check-label" for="".$row['unit_code']."EnrolCheck">
-                                    Enrol
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -266,8 +243,6 @@ if ($_SESSION['session_user'] != "") {
             </div>
         </div>
     </footer>
-    <!-- Optional JavaScript -->
-
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">

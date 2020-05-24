@@ -1,8 +1,5 @@
 <?php
 include('../php/session.php');
-if ($session_user != "") {
-    // header("Location:../pages/home.php");
-}
 ?>
 <!doctype html>
 <html lang="en" class="h-100">
@@ -36,13 +33,6 @@ if ($session_user != "") {
             </div>
             <div class="form-group">
                 <input type="password" id="password" name="password" class="form-control" placeholder="password" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^]).{6,12}" required>
-            </div>
-
-            <div class="form-check mb-3">
-                <label class="form-check-label">
-                    <input type="checkbox" name="remember" id="remember" class="form-check-input" id="checkbox" value="checked">
-                    Remember me
-                </label>
             </div>
             <button type="submit" id="btnLogin" class="btn btn-primary btn-lg btn-block mb-2" value="submit">Login</button>
             <a id="btnRegister" class="btn btn-secondary btn-lg btn-block" href="../pages/registration.php" role="button">Register</a>

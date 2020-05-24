@@ -98,9 +98,7 @@ if ($_SESSION['session_user'] != "") {
             <form class="form-inline mb-0">
                 <?php
                 if ($session_user != "") {
-                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
-                } else {
-                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
+                    echo "<a class='btn btn-warning' href='../php/session_out.php' role='button'>Logout</a>";
                 }
                 ?>
             </form>
@@ -116,12 +114,13 @@ if ($_SESSION['session_user'] != "") {
     <div class="container">
         <div>
             <?php
-            //NOTE DC can see each unit
             $selectDetailsResult = null;
             if ($_SESSION['session_access'] == "5") {
+                //NOTE DC can see each unit
                 $selectDetailsQuery = "SELECT * FROM assignment_students_timetable ORDER BY details_id";
                 $selectDetailsResult = $mysqli->query($selectDetailsQuery);
             } else if ($_SESSION['session_access'] == "4") {
+                //NOTE UC can see their units
                 $selectUnitQuery = "SELECT id FROM assignment_units_details WHERE unit_coordinator_id = '" . $_SESSION['session_user'] . "' ORDER BY id";
                 $selectUnitResult = $mysqli->query($selectUnitQuery);
                 $selectDetailsQuery = "SELECT * FROM assignment_students_timetable WHERE details_id IN (";
@@ -136,6 +135,7 @@ if ($_SESSION['session_user'] != "") {
                 $selectDetailsQuery .= ") ORDER BY details_id";
                 $selectDetailsResult = $mysqli->query($selectDetailsQuery);
             } else if ($_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2") {
+                //NOTE lecture and tutor can see their lectures and tutorials
                 $selectUnitQuery = "SELECT id FROM assignment_tutorials WHERE sta_id = '" . $_SESSION['session_user'] . "'";
                 $selectUnitResult = $mysqli->query($selectUnitQuery);
                 $selectDetailsQuery = "SELECT * FROM assignment_students_timetable WHERE details_id IN (";
@@ -208,10 +208,10 @@ if ($_SESSION['session_user'] != "") {
             </table>';
             } else {
                 echo '<div class="card">
-        <div class="card-body">
-            <p class="card-text">Do not have any records.</p>
-        </div>
-     </div>';
+                        <div class="card-body">
+                            <p class="card-text">Do not have any records.</p>
+                        </div>
+                      </div>';
             }
             ?>
         </div>

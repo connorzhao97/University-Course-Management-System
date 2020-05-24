@@ -14,6 +14,7 @@ function stuFormSubmit() {
     }
     $("#stuSubmitBtn").attr('disabled', 'true');
     $("#stuSpinner").removeClass('d-none');
+    //Ajax
     $.post("../php/registration_engine.php", {
         student: true,
         name: $("#stuName").val().trim(),

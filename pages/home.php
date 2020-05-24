@@ -1,10 +1,6 @@
 <?php
-include('../php/session.php');
 include('../php/db_conn.php');
-if ($_SESSION['session_user'] != "") {
-} else {
-    echo "<script>alert('Login is required'); window.location.href='../pages/login.php'</script>";
-}
+include('../php/session.php');
 ?>
 <!doctype html>
 <html lang="en" class="h-100">
@@ -92,111 +88,38 @@ if ($_SESSION['session_user'] != "") {
                     <a class='nav-link' href='../pages/userAccount.php'>User Account</a>
                 </li>
             </ul>
-            <form class="form-inline mb-0">
-                <?php
-                if ($session_user != "") {
-                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
-                } else {
-                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
-                }
-                ?>
-            </form>
         </div>
     </nav>
+    <div class="bg-cover"></div>
+    <div class="bg-overlay"></div>
     <!-- NOTE content -->
-    <div class="container">
-        <div class="row">
-            <!-- NOTE left content -->
-            <div class="col-md-6">
-                <div class="column shadow-lg p-3 mb-5 bg-white rounded mt-5">
-                    <h1 class="h3">My units</h1>
-                    <hr class="mb-3">
-                    <div class="row row-cols-1 row-cols-lg-2">
-                        <div class="col mb-4">
-                            <div class="card h-100">
-                                <!-- NOTE  img could be differnet because of different units. -->
-                                <img src="../imgs/502.jpg" class="card-img-top">
-                                <!-- NOTE link to different units e.g. ../pages/unitDetail.html?kit502 -->
-                                <a class="unitLink" href="../pages/unitDetail.html"></a>
-                                <div class="card-body">
-                                    <!-- NOTE different information according to different units -->
-                                    <h5 class="card-title">KIT502 Web Development</h5>
-                                    <p class="card-text text-muted">2020 Sem1</p>
-                                    <p class="card-text text-muted">Ends July 31,2020 at 00:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card h-100">
-                                <img src="../imgs/503.jpg" class="card-img-top">
-                                <a class="unitLink" href="../pages/unitDetail.html"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title">KIT503 ICT Professional Practices and Project Management</h5>
-                                    <p class="card-text text-muted">2020 Sem1</p>
-                                    <p class="card-text text-muted">Ends July 31,2020 at 00:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card h-100">
-                                <img src="../imgs/707.jpg" class="card-img-top">
-                                <a class="unitLink" href="../pages/unitDetail.html"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title">KIT707 Knowledge and Information Management</h5>
-                                    <p class="card-text text-muted">2020 Sem1</p>
-                                    <p class="card-text text-muted">Ends July 31,2020 at 00:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card h-100">
-                                <img src="../imgs/710.jpg" class="card-img-top">
-                                <a class="unitLink" href="../pages/unitDetail.html"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title">KIT710 eLogistics</h5>
-                                    <p class="card-text text-muted">2020 Sem1</p>
-                                    <p class="card-text text-muted">Ends July 31,2020 at 00:00</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- NOTE right content -->
-            <div class="col-md-6 mt-5">
-                <div class="column">
-                    <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                        <h1 class="h3">My Timetable</h1>
-                        <hr class="mb-3">
-                        <div class="d-flex justify-content-center">
-                            <a name="" id="" class="btn btn-primary" href="../pages/individualTimetable.html" role="button">View My Timetable</a></div>
-                    </div>
-                    <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                        <h1 class="h3">Unit Enrolment</h1>
-                        <hr class="mb-3">
-                        <div class="d-flex justify-content-center">
-                            <a name="" id="" class="btn btn-primary" href="../pages/unitEnrolment.html" role="button">View My Enrolment</a></div>
-                    </div>
-                </div>
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-md-10 text-light pb-5">
+                <p class="d-flex justify-content-center align-items-center display-3 mb-3">University of DoWell</p>
+                <p class="d-flex justify-content-center align-items-center h1 mb-3">Course Management System</p>
+                <?php
+                if ($_SESSION['session_user'] != '') {
+                    //get information from different tables
+                    if ($_SESSION['session_access'] == '0') {
+                        $selectUserQuery = "SELECT name FROM assignment_students WHERE st_id = '" . $_SESSION['session_user'] . "'";
+                    } else {
+                        $selectUserQuery = "SELECT name FROM assignment_staffs WHERE st_id = '" . $_SESSION['session_user'] . "'";
+                    }
+                    $selectUserResult = $mysqli->query($selectUserQuery);
+                    if ($selectUserResult->num_rows > 0) {
+                        $row = $selectUserResult->fetch_assoc();
+                        echo '<p class="d-flex justify-content-center align-items-center h3 mb-3">Welcome, ' . $row['name'] . '</p>
+                        ';
+                    }
+                    echo "<div class='d-flex justify-content-center align-items-center'><a class='btn btn-outline-warning w-25' href='../php/session_out.php' role='button'>Logout</a></div>";
+                } else {
+                    echo "<div class='d-flex justify-content-center align-items-center'><a class='btn btn-outline-success' href='../pages/login.php' role='button'>Login / Register</a></div>";
+                }
+                ?>
             </div>
         </div>
     </div>
-
-    <!-- NOTE footer -->
-    <footer class="footer mt-auto py-3 bg-dark">
-        <div class="container-fluid text-white d-flex align-center justify-content-center">
-            <div class="column">
-                <div class="d-flex justify-content-center">
-                    <img class="py-6" src="../imgs/logo.png">
-                </div>
-                <div class="mt-2">
-                    <p class="text-muted">The University of DoWell in Wonderland (UDW) has started to build a Course
-                        Management System including a new tutorial allocation system.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>

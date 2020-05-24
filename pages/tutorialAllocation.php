@@ -3,6 +3,7 @@ include('../php/session.php');
 include('../php/db_conn.php');
 if ($_SESSION['session_user'] != "") {
     if ($_SESSION['session_access'] != '0') {
+        //NOTE only students can access this page
         echo "<script>alert('You do not have access to this page'); window.location.href='../pages/home.php'</script>";
     }
 } else {
@@ -98,9 +99,7 @@ if ($_SESSION['session_user'] != "") {
             <form class="form-inline mb-0">
                 <?php
                 if ($session_user != "") {
-                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
-                } else {
-                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
+                    echo "<a class='btn btn-warning' href='../php/session_out.php' role='button'>Logout</a>";
                 }
                 ?>
             </form>
@@ -115,6 +114,7 @@ if ($_SESSION['session_user'] != "") {
     <!-- NOTE content -->
     <div class="container">
         <?php
+        //get enrolled units information
         $selectEnrolmentQuery = "SELECT * FROM assignment_students_enrolments WHERE stu_id = '" . $_SESSION['session_user'] . "' ORDER BY details_id";
         $selectEnrolmentResult = $mysqli->query($selectEnrolmentQuery);
         if ($selectEnrolmentResult->num_rows > 0) {
@@ -122,6 +122,7 @@ if ($_SESSION['session_user'] != "") {
             echo '<div class="nav nav-pills flex-column flex-sm-row mb-2 shadow p-3 mb-5 bg-white rounded" id="pills-tab" role="tablist">';
             $selectEnrolmentRow = $selectEnrolmentResult->fetch_all(MYSQLI_ASSOC);
             for ($i = 0; $i < count($selectEnrolmentRow); $i++) {
+                //get unit details
                 $selectUnitDetailsQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id='" . $selectEnrolmentRow[$i]['details_id'] . "'";
                 $selectUnitDetailsResult = $mysqli->query($selectUnitDetailsQuery);
                 $selectUnitDetailsRow = $selectUnitDetailsResult->fetch_assoc();
@@ -138,6 +139,7 @@ if ($_SESSION['session_user'] != "") {
             //NOTE content
             echo '<div class="tab-content shadow p-3 mb-5 bg-white rounded" id="pills-tabContent">';
             for ($i = 0; $i < count($selectEnrolmentRow); $i++) {
+                //get unit details
                 $selectUnitDetailsQuery = "SELECT unit_code, unit_name FROM assignment_units_details WHERE id='" . $selectEnrolmentRow[$i]['details_id'] . "'";
                 $selectUnitDetailsResult = $mysqli->query($selectUnitDetailsQuery);
                 $selectUnitDetailsRow = $selectUnitDetailsResult->fetch_assoc();
@@ -148,7 +150,7 @@ if ($_SESSION['session_user'] != "") {
                 }
                 $outputContent .= '" id="pills-' . $selectUnitDetailsRow['unit_code'] . '" role="tabpanel" aria-labelledby="pills-' . $selectUnitDetailsRow['unit_code'] . '-tab">';
 
-
+                //get tutorials information
                 $selectTutorialsQuery = "SELECT * FROM assignment_tutorials WHERE units_lists_id = '" . $selectEnrolmentRow[$i]['units_lists_id'] . "'";
                 $selectTutorialsResult = $mysqli->query($selectTutorialsQuery);
                 if ($selectTutorialsResult->num_rows > 0) {
@@ -166,6 +168,7 @@ if ($_SESSION['session_user'] != "") {
                     </thead>
                     <tbody>';
                     while ($row = $selectTutorialsResult->fetch_assoc()) {
+                        //calculate how many students enrolled this tutorial
                         $selectTutorialsCapacityQuery = "SELECT count(id) FROM assignment_students_timetable WHERE tutorial_id='" . $row['id'] . "'";
                         $selectTutorialsCapacityResult = $mysqli->query($selectTutorialsCapacityQuery);
                         $rowCapacity = $selectTutorialsCapacityResult->fetch_array(MYSQLI_NUM);
@@ -206,11 +209,11 @@ if ($_SESSION['session_user'] != "") {
             }
             echo '</div>';
         } else {
-            echo ' <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">You do not have any enrolments yet.</h4>
-            </div>
-        </div>';
+            echo '<div class="card">
+                      <div class="card-body">
+                          <h4 class="card-title">You do not have any enrolments yet.</h4>
+                      </div>
+                  </div>';
         }
         ?>
     </div>

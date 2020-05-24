@@ -1,3 +1,8 @@
+/**
+ * @description: submit student form
+ * @param null
+ * @return: false
+ */
 function stuFormSubmit() {
     if ($("#stuPassword").val().trim() != "") {
         if ($("#stuRePassword").val().trim() != $("#stuPassword").val().trim()) {
@@ -30,7 +35,11 @@ function stuFormSubmit() {
 }
 
 
-
+/**
+ * @description: submit staff form
+ * @param null
+ * @return: false
+ */
 function staFormSubmit() {
     if ($("#staPassword").val().trim() != "") {
         if ($("#staRePassword").val().trim() != $("#staPassword").val().trim()) {
@@ -40,8 +49,6 @@ function staFormSubmit() {
     }
     $("#submitBtn").attr('disabled', 'true');
     $("#stSpinner").removeClass('d-none');
-
-
     $.post('../php/user_account_engine.php', {
         staff: true,
         name: $("#staName").val().trim(),

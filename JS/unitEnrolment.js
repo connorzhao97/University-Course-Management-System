@@ -1,9 +1,11 @@
-//get unit enrollment information
+/**
+ * @description: get unit enrollment information
+ * @param form get form information 
+ * @param stID student ID
+ * @return: false
+ */
 function enrolUnit(form, stID) {
     var formdata = $(form).serializeArray();
-    // console.log($(form).parents('div .card').attr('id'));
-    // console.log(formdata);
-    //data-
     $.post('../php/unit_enrolment_engine.php', {
         enrol: true,
         stID: stID,
@@ -12,8 +14,6 @@ function enrolUnit(form, stID) {
     }, function (data) {
         if (data.insert) {
             alert('Enrol ' + formdata[0].name + ' successfully');
-            // $(form).find("select").replaceWith("Enrolled");
-            // $(form).find("button").remove();
             window.location.href = "../pages/unitEnrolment.php?state=1";
         }
     }, 'json');

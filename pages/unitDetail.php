@@ -3,6 +3,7 @@ include('../php/db_conn.php');
 include('../php/session.php');
 if ($_SESSION['session_user'] != "") {
     if (!empty($_GET['code'])) {
+        //get unit details depends on unit code from url
         $unitDetailQuery = "SELECT * FROM assignment_units_details WHERE unit_code='" . $_GET['code'] . "'";
         $unitDetailResult = $mysqli->query($unitDetailQuery);
         if ($unitDetailResult->num_rows > 0) {
@@ -109,9 +110,7 @@ if ($_SESSION['session_user'] != "") {
             <form class="form-inline mb-0">
                 <?php
                 if ($session_user != "") {
-                    echo "<a class='btn btn-success' href='../php/session_out.php' role='button'>Logout</a>";
-                } else {
-                    echo "<a class='btn btn-success' href='../pages/login.php' role='button'>Login / Register</a>";
+                    echo "<a class='btn btn-warning' href='../php/session_out.php' role='button'>Logout</a>";
                 }
                 ?>
             </form>
@@ -120,8 +119,8 @@ if ($_SESSION['session_user'] != "") {
     <!-- NOTE jumbotron -->
     <div class="jumbotron jumbotron-fluid img-fluid text-center bg">
         <div class="container h-100">
-            <!-- NOTE different information according to different units -->
             <?php
+            //students page will show enrol button
             if (!empty($_GLOBALS['unit'])) {
                 echo '<h1 class="display-4 mb-5 text-white">' . $_GLOBALS['unit']['unit_code'] . '</h1>';
                 echo '<p class="display-4  text-white">' . $_GLOBALS['unit']['unit_name'] . '</p>';
@@ -133,12 +132,10 @@ if ($_SESSION['session_user'] != "") {
                 echo '<a id="enrolment" class="btn btn-danger btn-lg btn-block" href="../pages/unitEnrolment.php" role="button">Enrol units</a>';
             }
             ?>
-
         </div>
     </div>
     <!-- NOTE  content -->
     <div class="container">
-
         <?php
         if (!empty($_GLOBALS['unit'])) {
             //unit details
@@ -203,7 +200,7 @@ if ($_SESSION['session_user'] != "") {
             echo '
             </tbody>
             </table>
-        </div>
+         </div>
             ';
         }
         ?>
