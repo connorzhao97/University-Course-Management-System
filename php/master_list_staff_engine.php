@@ -31,6 +31,7 @@ if ($_POST['insertStaff']) {
         }
     }
 } else {
+    //jquery.tabledit.min.js
     $input = filter_input_array(INPUT_POST);
     $staffID = $mysqli->real_escape_string($input['staffID']);
     $name  = $mysqli->real_escape_string($input['name']);

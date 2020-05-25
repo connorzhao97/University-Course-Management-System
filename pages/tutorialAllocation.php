@@ -44,8 +44,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-                ?>
-                <?php
+              
                 if ($_SESSION['session_access'] == "0") {
                     echo "
                     <li class='nav-item'>
@@ -53,8 +52,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-                ?>
-                <?php
+             
                 if ($_SESSION['session_access'] == "0") {
                     echo "
                     <li class='nav-item active'>
@@ -62,9 +60,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-                ?>
-
-                <?php
+               
                 if ($_SESSION['session_access'] == "5") {
                     echo "
                     <li class='nav-item'>
@@ -72,9 +68,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-                ?>
-
-                <?php
+               
                 if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4") {
                     echo "
                     <li class='nav-item'>
@@ -82,8 +76,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-                ?>
-                <?php
+               
                 if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2") {
                     echo "
                     <li class='nav-item'>

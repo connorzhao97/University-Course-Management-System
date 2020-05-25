@@ -58,7 +58,7 @@ if ($_POST['insertLecture']) {
 
     $checkTutorQuery = "SELECT * FROM assignment_users WHERE st_id ='$sta_id'";
     $checkTutorResult = $mysqli->query($checkTutorQuery);
-    // echo print_r($checkTutorResult);
+
     if ($checkTutorResult->num_rows > 0) {
         $rowCheckTutor = $checkTutorResult->fetch_assoc();
         if ($rowCheckTutor['access'] == '2') {
@@ -89,9 +89,10 @@ if ($_POST['insertLecture']) {
 } else if ($_POST['removeTutorial']) {
     $id = $mysqli->real_escape_string($_POST['id']);
 
+    //delete data from related tables
     $removeFromTimetableQuery = "DELETE FROM assignment_students_timetable WHERE tutorial_id='" . $id . "'";
     $removeFromTimetableResult = $mysqli->query($removeFromTimetableQuery);
-
+    //delete tutorial data
     $removeTutorialQuery = "DELETE FROM assignment_tutorials WHERE id = '$id'";
     $removeTutorialResult = $mysqli->query($removeTutorialQuery);
     if ($removeTutorialResult) {
@@ -115,6 +116,7 @@ if ($_POST['insertLecture']) {
         $rowCheckLecturer = $checkLecturerResult->fetch_assoc();
         if ($rowCheckLecturer['access'] == '3' || $rowCheckLecturer['access'] == '4') {
             $res->lecturer = true;
+
             $checkSCQuery = "SELECT * FROM assignment_lectures WHERE id !='$id' AND units_lists_id='$units_lists_id'";
             $checkSCResult = $mysqli->query($checkSCQuery);
             if ($checkSCResult->num_rows > 0) {

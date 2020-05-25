@@ -33,7 +33,6 @@ if ($_POST['insertUnit']) {
         }
         if ($canInsert) {
             $insertDetailQuery = "INSERT INTO assignment_units_details (unit_code, unit_name, unit_coordinator_id, semester, campus, description) VALUES ('$unitCode', '$unitName','$unitCoordinatorID','$unitSemesters','$unitCampuses', '$unitDescription')";
-            // $res->insertDetailQuery = $insertDetailQuery;
             $insertDetailResult = $mysqli->query($insertDetailQuery);
             if ($insertDetailResult) {
                 $res->insertDetail = true;
@@ -41,12 +40,14 @@ if ($_POST['insertUnit']) {
                 $campuses = explode(',', $unitCampuses);
                 array_pop($semesters);
                 array_pop($campuses);
+
                 $detailsIDQuery = "SELECT id FROM assignment_units_details WHERE unit_code = '$unitCode'";
                 $detailsIDResult = $mysqli->query($detailsIDQuery);
                 $rowDetails = $detailsIDResult->fetch_array();
                 $insertListQuery = "INSERT INTO assignment_units_lists (details_id, semester, campus, availability) VALUES ";
                 $semestersTemp = ['Semester 1', 'Semester 2', 'Winter School', 'Spring School'];
                 $campusesTemp = ['Pandora', 'Rivendell', 'Neverland'];
+                //insert available units into assignment_units_lists
                 for ($i = 0; $i < count($semestersTemp); $i++) {
                     for ($j = 0; $j < count($campusesTemp); $j++) {
                         if (in_array($semestersTemp[$i], $semesters)) {
@@ -100,7 +101,7 @@ if ($_POST['insertUnit']) {
     $newCampuses = explode(',', $unitCampuses);
     array_pop($newSemesters);
     array_pop($newCampuses);
-
+    //get unit details information
     $selectQuery = "SELECT * FROM assignment_units_details WHERE unit_code = '$unitCode'";
     $selectResult = $mysqli->query($selectQuery);
     $selectRow = $selectResult->fetch_assoc();

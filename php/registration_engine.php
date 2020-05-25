@@ -1,6 +1,6 @@
 <?php
-
 include("../php/db_conn.php");
+
 if ($_POST['student']) {
     $name = $mysqli->real_escape_string($_POST['name']);
     $stuID = $mysqli->real_escape_string($_POST['stuID']);
@@ -43,6 +43,7 @@ if ($_POST['student']) {
     $qualification = $mysqli->real_escape_string($_POST['qualification']);
     $expertise = $mysqli->real_escape_string($_POST['expertise']);
     $phone = $mysqli->real_escape_string($_POST['phone']);
+    
     $existQuery = "SELECT * FROM assignment_users WHERE st_id ='$staID'";
     $existResult = $mysqli->query($existQuery);
     if ($existResult->num_rows > 0) {

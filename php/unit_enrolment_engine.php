@@ -20,7 +20,7 @@ if ($_POST['enrol']) {
     $selectUnitQuery = "SELECT * FROM assignment_students_enrolments WHERE id='$unitEnrolID'";
     $selectUnitResult = $mysqli->query($selectUnitQuery);
     $row = $selectUnitResult->fetch_assoc();
-
+    //delete data from related tables
     $withdrawTutorialQuery = "DELETE FROM assignment_students_timetable WHERE details_id = '" . $row['details_id'] . "' AND stu_id = '" . $_SESSION['session_user'] . "'";
     $withdrawTutorialResult = $mysqli->query($withdrawTutorialQuery);
     $withdrawQuery = "DELETE FROM assignment_students_enrolments WHERE id='$unitEnrolID'";
