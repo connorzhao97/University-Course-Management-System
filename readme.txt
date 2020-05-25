@@ -3,10 +3,8 @@ timetableBg.jpg Photo by Curtis MacNewton on Unsplash.
 allocationBg.jpg Photo by Harry cao on Unsplash.
 masterBg.jpg Photo by Drew Beamer on Unsplash.
 detailBg.jpg Photo by Cole Keister on Unsplash.
-502.jpg Photo by Ilya Pavlov on Unsplash.
-503.jpg Photo by Marvin Meyer on Unsplash.
-710.jpg Photo by Axel Ahoi on Unsplash.
-707.jpg Photo by Helloquence on Unsplash.
+home.jpg Photo by Marvin Meyer on Unsplash.
+
 
 Because we don't use a database in assignment 1, I put all page links in the navbar.
 Because we cannot log in, every role can access all the pages and show all functions in the pages.

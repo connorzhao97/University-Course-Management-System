@@ -181,7 +181,7 @@ if ($_SESSION['session_user'] != "") {
                         if ($checkEnrolmentRusult->num_rows > 0) {
                             $output = "
                         <div class='card' id=" . $row["id"] . ">
-                        <form onsubmit='return enrolUnit(this," . $_SESSION['session_user'] . ");'>
+                        <form onsubmit='return enrolUnit(this);'>
                             <div class='row'>
                                 <div class='col-md-8'>
                                     <div class='card-body'>
@@ -198,7 +198,7 @@ if ($_SESSION['session_user'] != "") {
                         } else {
                             $output = "
                      <div class='card' id=" . $row["id"] . ">
-                        <form onsubmit='return enrolUnit(this," . $_SESSION['session_user'] . ");'>
+                        <form onsubmit='return enrolUnit(this);'>
                             <div class='row'>
                                 <div class='col-md-8'>
                                     <div class='card-body'>
@@ -223,6 +223,8 @@ if ($_SESSION['session_user'] != "") {
                         }
                         echo $output;
                     }
+                } else {
+                    echo "No available units.";
                 }
                 ?>
             </div>

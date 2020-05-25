@@ -382,9 +382,9 @@ function removeUnit(e) {
         unitRemove: true,
         unitCode: unitCode
     }, function (data) {
-        if (data.deleteDetail && data.deleteList) {
+        if (data.deleteDetail) {
             alert('Remove Unit Successfully.');
             $(e).parents('tr').remove();
         }
     }, 'json');
-}ß
+}

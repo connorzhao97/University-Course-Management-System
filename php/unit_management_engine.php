@@ -1,8 +1,6 @@
 <?php
 include("../php/db_conn.php");
 
-// echo print_r(filter_input_array($INPUT_POST));
-
 if ($_POST['insertLecture']) {
     //create new lecture
     $details_id = $mysqli->real_escape_string($_POST['details_id']);
@@ -15,6 +13,7 @@ if ($_POST['insertLecture']) {
     $consulation = $mysqli->real_escape_string($_POST['consulation']);
 
     $canInsert = false;
+    //check lecture exist or not
     $checkLectureQuery = "SELECT * FROM assignment_lectures WHERE units_lists_id = '$units_lists_id'";
     $checkLectureResult = $mysqli->query($checkLectureQuery);
     if ($checkLectureResult->num_rows > 0) {
@@ -32,7 +31,6 @@ if ($_POST['insertLecture']) {
             if ($rowCheckLecturer['access'] == '3' || $rowCheckLecturer['access'] == '4') {
                 $res->lecturer = true;
                 $insertLectureQuery = "INSERT INTO assignment_lectures (details_id, units_lists_id, day, time, duration, location, sta_id, consulation) VALUES ('$details_id', '$units_lists_id', '$day', '$time', '$duration','$location', '$sta_id','$consulation')";
-                // echo $insertLectureQuery;
                 $insertLectureResult = $mysqli->query($insertLectureQuery);
                 if ($insertLectureResult) {
                     $res->insert = true;
@@ -90,6 +88,9 @@ if ($_POST['insertLecture']) {
     }
 } else if ($_POST['removeTutorial']) {
     $id = $mysqli->real_escape_string($_POST['id']);
+
+    $removeFromTimetableQuery = "DELETE FROM assignment_students_timetable WHERE tutorial_id='" . $id . "'";
+    $removeFromTimetableResult = $mysqli->query($removeFromTimetableQuery);
 
     $removeTutorialQuery = "DELETE FROM assignment_tutorials WHERE id = '$id'";
     $removeTutorialResult = $mysqli->query($removeTutorialQuery);

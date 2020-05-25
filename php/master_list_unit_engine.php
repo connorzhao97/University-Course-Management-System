@@ -104,11 +104,6 @@ if ($_POST['insertUnit']) {
     $selectQuery = "SELECT * FROM assignment_units_details WHERE unit_code = '$unitCode'";
     $selectResult = $mysqli->query($selectQuery);
     $selectRow = $selectResult->fetch_assoc();
-    // echo var_dump($selectRow);
-    // $oldSemesters = explode(',', $selectRow['semester']);
-    // $oldCampuses = explode(',', $selectRow['campus']);
-    // array_pop($oldSemesters);
-    // array_pop($oldCampuses);
 
     $canUpdate = false;
     $checkAccessQuery = "SELECT access FROM assignment_users WHERE st_id = '$unitCoordinatorID'";
@@ -155,20 +150,20 @@ if ($_POST['insertUnit']) {
     $selectQueryResult = $mysqli->query($selectQuery);
     $rowSelect = $selectQueryResult->fetch_array();
     $unitID = $rowSelect[0];
-    $deleteListQuery = "DELETE FROM assignment_units_lists WHERE details_id = '$unitID'";
-    $deleteListResult = $mysqli->query($deleteListQuery);
-    if ($deleteListResult) {
-        $res->deleteList = true;
-        $deleteDetailsQuery = "DELETE FROM assignment_units_details WHERE id = '$unitID'";
-        $deleteDetailResult = $mysqli->query($deleteDetailsQuery);
-        if ($deleteDetailResult) {
-            $res->deleteDetail = true;
-        } else {
-            $res->deleteDetail = false;
-        }
-    } else {
-        $res->deleteList = false;
+    //delete related tables
+    $deleteQuery = "DELETE FROM assignment_lectures WHERE details_id = '$unitID'; DELETE FROM assignment_tutorials WHERE details_id = '$unitID'; DELETE FROM assignment_students_timetable WHERE details_id = '$unitID'; DELETE FROM assignment_units_lists WHERE details_id = '$unitID'; DELETE FROM assignment_students_enrolments WHERE details_id = '$unitID';";
+    $deleteQuery_e = explode(';', $deleteQuery);
+    foreach ($deleteQuery_e as $key => $value) {
+        $deleteResult = $mysqli->query($deleteQuery_e[$key]);
     }
+    $deleteDetailsQuery = "DELETE FROM assignment_units_details WHERE id = '$unitID'";
+    $deleteDetailResult = $mysqli->query($deleteDetailsQuery);
+    if ($deleteDetailResult) {
+        $res->deleteDetail = true;
+    } else {
+        $res->deleteDetail = false;
+    }
+
     $mysqli->close();
     echo json_encode($res);
 }

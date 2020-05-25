@@ -134,11 +134,11 @@ if ($_SESSION['session_user'] != "") {
         </div>
     </div>
     <!-- NOTE content -->
-    <div class="container">
+    <div class="container-fulid px-5">
         <?php
         //dynamic generate content
         if (!empty($_GET['code'])) {
-            echo ' <div class="row">
+            echo ' <div class="row mb-5">
             <div class="col-2">
                 <div class="list-group" id="list-tab" role="tablist">
                     <a class="d-inline-block text-truncate list-group-item list-group-item-action active" id="list-lecture-list" data-toggle="list" href="#list-lecture" role="tab" aria-controls="lecture">Lecture</a>
@@ -162,7 +162,7 @@ if ($_SESSION['session_user'] != "") {
                                                 <th scope="col">Semester and Campus</th>
                                                 <th scope="col">Lecturer ID</th>
                                                 <th scope="col">Consulation</th>
-                                                <th scope="col"></th>
+                                                <th scope="col" style="width:1%"></th>
                                             </tr>
                                         </thead>
                                         <tbody>';
@@ -216,7 +216,7 @@ if ($_SESSION['session_user'] != "") {
                                         <th scope="col">Tutor ID</th>
                                         <th scope="col">Capacity</th>
                                         <th scope="col">Consulation</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" style="width:1%"></th>
                                     </tr>
                                 </thead>
                                 <tbody>';

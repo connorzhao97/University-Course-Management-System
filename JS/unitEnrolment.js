@@ -1,14 +1,13 @@
+
 /**
  * @description: get unit enrollment information
  * @param form get form information 
- * @param stID student ID
  * @return: false
  */
-function enrolUnit(form, stID) {
+function enrolUnit(form) {
     var formdata = $(form).serializeArray();
     $.post('../php/unit_enrolment_engine.php', {
         enrol: true,
-        stID: stID,
         unitID: $(form).parents('div .card').attr('id'),
         unitListID: formdata[0].value,
     }, function (data) {
