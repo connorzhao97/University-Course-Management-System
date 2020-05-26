@@ -56,7 +56,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-               
+
                 if ($_SESSION['session_access'] == "0") {
                     echo "
                     <li class='nav-item'>
@@ -64,7 +64,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-              
+
                 if ($_SESSION['session_access'] == "0") {
                     echo "
                     <li class='nav-item'>
@@ -72,7 +72,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-            
+
                 if ($_SESSION['session_access'] == "5") {
                     echo "
                     <li class='nav-item'>
@@ -80,7 +80,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-              
+
                 if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4") {
                     echo "
                     <li class='nav-item'>
@@ -88,7 +88,7 @@ if ($_SESSION['session_user'] != "") {
                     </li>
                     ";
                 }
-                
+
                 if ($_SESSION['session_access'] == "5" || $_SESSION['session_access'] == "4" || $_SESSION['session_access'] == "3" || $_SESSION['session_access'] == "2") {
                     echo "
                     <li class='nav-item'>
@@ -168,20 +168,21 @@ if ($_SESSION['session_user'] != "") {
             ';
         } else {
             //unit lists
-            echo '
-            <div>
-            <table class="table table-striped table-bordered table-responsive-md shadow">
-                <thead>
-                    <tr>
-                        <th scope="col">Unit Code</th>
-                        <th scope="col">Unit Name</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>';
+
             $query = "SELECT unit_code, unit_name FROM assignment_units_details ORDER BY unit_code ASC";
             $result = $mysqli->query($query);
             if ($result->num_rows > 0) {
+                echo '
+                <div>
+                <table class="table table-striped table-bordered table-responsive-md shadow">
+                    <thead>
+                        <tr>
+                            <th scope="col">Unit Code</th>
+                            <th scope="col">Unit Name</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>';
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     foreach ($row as $key => $value) {
@@ -190,12 +191,18 @@ if ($_SESSION['session_user'] != "") {
                     echo '<td class="d-flex justify-content-center"><a name="' . $row['unit_code'] . '" id="' . $row['unit_code'] . '" class="btn btn-primary" href="../pages/unitDetail.php?code=' . $row['unit_code'] . '" role="button">View Details</a></td>';
                     echo "</tr>";
                 }
+                echo '
+                </tbody>
+                </table>
+             </div>
+                ';
+            }else{
+                echo '<div class="card">
+                <div class="card-body">
+                <p class="card-text">Do not have any records.</p>
+                </div>
+            </div>';
             }
-            echo '
-            </tbody>
-            </table>
-         </div>
-            ';
         }
         ?>
     </div>

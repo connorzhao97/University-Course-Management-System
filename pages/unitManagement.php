@@ -287,6 +287,12 @@ if ($_SESSION['session_user'] != "") {
                  </tbody>
                   </table>
                </div>';
+            }else{
+                echo '<div class="card">
+                <div class="card-body">
+                <p class="card-text">Do not have any records.</p>
+                </div>
+            </div>';
             }
         }
         ?>
