@@ -18,10 +18,12 @@ function enrolUnit(form) {
     }, 'json');
     return false;
 }
-
+/**
+ * @description: withdraw unit
+ * @param form get form information 
+ * @return: false
+ */
 function withdrawUnit(form) {
-    console.log($(form).parents('div .card').attr('id'));
-
     $.post('../php/unit_enrolment_engine.php', {
         withdraw: true,
         unitEnrolID: $(form).parents('div .card').attr('id')
@@ -32,11 +34,7 @@ function withdrawUnit(form) {
         }
     }, 'json');
     return false;
-
 }
-
-
-
 
 //get parameter from url
 function getQuery(e) {

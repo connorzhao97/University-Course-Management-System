@@ -16,6 +16,10 @@ Tutor:2,
 Staff member:1,
 Student:0.
 
+//Database
+Accout: yucongz
+Password: 518264
+
 //Current Account: 
 DC ID:1 PASSWORDS:Qwe123!
 UC1 ID:2 PASSWORDS:Qwe123!
@@ -71,7 +75,7 @@ Select Button: the capacity of the tutorial is not full, click this button will 
 Allocated Button: The tutorial which the student has already enrolled, if the student clicks on the allocated button, the students will withdraw the tutorial.
 Full Button: The student cannot click on the button because the capacity of the tutorial has already been full.
 Even if the student click the select button, but there might be several students enroll one tutorial at the same time, so in the backend will check the capacity, it might reject because the tutorial has been full.
-
+Because I set the capacity of tutorial is 15 and 30, so if you want to see the full state, you can change the database capacity to 1.
 //individualTimetable.php
 Only students can access this page.
 If students do not login, the page will redirect to login.php automatically.
